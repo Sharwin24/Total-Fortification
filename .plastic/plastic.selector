@@ -1,4 +1,0 @@
-repository "Final_Project@Loafing_Su@cloud"
-  path "/"
-    br "/main"
-    co "/main"
