@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class BasicSoldier : TroopBase
 {
-    public override void Attack(ISoldier target)
+    public override void Attack(ITroop target)
     {
         Debug.Log("BasicSoldier attacking with power: " + AttackPower);
         // Implement attack logic, for example:
-        target.TakeDamage(attackPower, 0); // Assuming physical damage only for simplicity
+        target.TakeDamage(AttackPower, 0); 
     }
 
-    // Optionally override other methods if specific behavior is needed
-    protected override void Die()
+    public override void MoveTo(Vector3 position)
     {
-        base.Die();
-        // Additional behavior specific to BasicSoldier's death, if necessary
+        Debug.Log("BasicSoldier moving to position: " + position);
+        // Implement movement logic, for example:
+        transform.position = position;
     }
 }

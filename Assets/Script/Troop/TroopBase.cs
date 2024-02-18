@@ -3,32 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class TroopBase : MonoBehaviour, ISoldier
+public abstract class TroopBase : MonoBehaviour, ITroop
 {
-    protected int health = 100;
-    protected int attackPower = 10;
+    // Implementing the ITroop interface
+    public int Health { get; set; }
 
-    public int Health
+    // Assuming speed doesn't change, hence no setter.
+    public float speed => 5.0f;
+
+    public int Move => 3;
+
+    public bool IsRange => false; // Example: This could be a melee troop
+
+    public int AttackRange { get; set; } = 1; // Melee default
+
+    public int AttackPower { get; set; } = 10; // Example attack power
+
+    public virtual void Attack(ITroop target)
     {
-        get => health;
-        set => health = value;
+        target.TakeDamage(AttackPower, 0); 
     }
 
-    public int AttackPower => attackPower;
-
-    public abstract void Attack(ISoldier target);
-
-    public void TakeDamage(int physicalDamage, int magicalDamage)
+    public virtual void MoveTo(Vector3 position)
     {
-        // Example damage calculation, could be more sophisticated
-        int totalDamage = physicalDamage + magicalDamage; // Simplified for demonstration
-        health -= totalDamage;
-        if (health <= 0) Die();
+
+        transform.position = position;
     }
 
-    protected virtual void Die()
+    public virtual void TakeDamage(int physicalDamage, int magicalDamage)
     {
-        Debug.Log("Soldier died.");
-        // Additional death logic here, like playing animations or removing the soldier from the game.
+        Health -= physicalDamage + magicalDamage;
+
+        if (Health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
+
+    // Additional methods for the armory system could be added here
 }
