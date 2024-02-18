@@ -19,6 +19,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public int AttackPower { get; set; } = 10; // Example attack power
 
+    //The health bar of the troop(in prefab canvas)
+     public HealthBar healthBar;
+
     public virtual void Attack(ITroop target)
     {
         target.TakeDamage(AttackPower, 0); 
@@ -33,6 +36,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public virtual void TakeDamage(int physicalDamage, int magicalDamage)
     {
         Health -= physicalDamage + magicalDamage;
+        healthBar.SetHealth(Health);
 
         if (Health <= 0)
         {
