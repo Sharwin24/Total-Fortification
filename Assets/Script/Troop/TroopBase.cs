@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class TroopBase : MonoBehaviour, ITroop
 {
     // Implementing the ITroop interface
-    public int Health { get; set; }
+    public virtual int Health { get; set; }
 
     // Assuming speed doesn't change, hence no setter.
     public float speed => 5.0f;
@@ -15,7 +15,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public bool IsRange => false; // Example: This could be a melee troop
 
-    public int AttackRange { get; set; } = 1; // Melee default
+    public int AttackRange { get; set; } = 3; // Melee default
 
     public int AttackPower { get; set; } = 10; // Example attack power
 
@@ -24,7 +24,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual void Attack(ITroop target)
     {
-        target.TakeDamage(AttackPower, 0); 
+        target.TakeDamage(AttackPower); 
     }
 
     public virtual void MoveTo(Vector3 position)
@@ -33,14 +33,16 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         transform.position = position;
     }
 
-    public virtual void TakeDamage(int physicalDamage, int magicalDamage)
+    public virtual void TakeDamage(int physicalDamage)
     {
-        Health -= physicalDamage + magicalDamage;
+        Health -= physicalDamage;
         healthBar.SetHealth(Health);
 
         if (Health <= 0)
         {
-            gameObject.SetActive(false);
+            Debug.Log("Die");
+            // gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
