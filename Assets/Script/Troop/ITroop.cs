@@ -19,7 +19,7 @@ public interface ITroop
     void Attack(ITroop target);
 
     void MoveTo(Vector3 position);
-    void TakeDamage(int physicalDamage, int magicalDamage);
+    void TakeDamage(int physicalDamage);
 
     //We also needs the armory system below
 }

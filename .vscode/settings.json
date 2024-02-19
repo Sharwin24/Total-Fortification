@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Final_Project.sln"
+    "dotnet.defaultSolution": "Total-Fortification.sln"
 }
