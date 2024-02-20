@@ -15,7 +15,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public bool IsRange => false; // Example: This could be a melee troop
 
-    public int AttackRange { get; set; } = 3; // Melee default
+    public int AttackRange { get; set; } = 100; // Melee default
 
     public int AttackPower { get; set; } = 10; // Example attack power
 

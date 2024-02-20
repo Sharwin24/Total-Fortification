@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Selector : MonoBehaviour {
-    public float rayDistance = 10000.0f;
+    public float rayDistance = 1000.0f;
     public Material selectedMaterial;
 
     Material originalMaterial;
@@ -32,8 +32,6 @@ public class Selector : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
         // Get Ray from mouse position on screen
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //Debug.Log(ray);
