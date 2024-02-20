@@ -4,3 +4,8 @@
 *.sin
 .DS_Store
 
+.vscode/settings.json
+*.backup
+*.csproj
+/Temp
+*.cache

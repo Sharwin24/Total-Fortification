@@ -19,10 +19,10 @@ public class BasicSoldier : TroopBase
         
         Debug.Log("Health " + Health);
 
-        InvokeRepeating("LaunchAttack", 0f, 2f);
+       // InvokeRepeating("LaunchAttack", 0f, 2f);
     }
 
-    void LaunchAttack() {
+    public void LaunchAttack() {
 
         Debug.Log("Launch Attack");
 
