@@ -3,9 +3,10 @@
 /UserSettings/
 *.sin
 .DS_Store
-
+.vscode/
 .vscode/settings.json
 *.backup
 *.csproj
 /Temp
 *.cache
+*.sln
