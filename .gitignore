@@ -11,3 +11,5 @@
 *.cache
 *.sln
 .vs/
+obj/
+*.csproj
