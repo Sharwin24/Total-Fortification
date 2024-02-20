@@ -10,3 +10,5 @@
 /Temp
 *.cache
 *.sln
+.vs/
+*.cache
