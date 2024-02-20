@@ -26,6 +26,7 @@ public class PlayerUIInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             GetUiElementsClicked();
