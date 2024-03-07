@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,11 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public float speed => 5.0f;
 
     public int Move => 3;
+
+    [SerializeField]
+    private bool _isEnemy;
+
+    public virtual bool isEnemy => _isEnemy;
 
     public bool IsRange => false; // Example: This could be a melee troop
 
@@ -40,8 +46,8 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         if (Health <= 0)
         {
-            Debug.Log("Die");
-            // gameObject.SetActive(false);
+            if (isEnemy) LevelManager.enemyCount--;
+            
             Destroy(gameObject);
         }
     }
