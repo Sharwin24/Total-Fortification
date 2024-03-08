@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Selector : MonoBehaviour {
-    public float rayDistance = 1000.0f;
     public Material selectedMaterial;
 
     Material originalMaterial;
@@ -35,7 +34,7 @@ public class Selector : MonoBehaviour {
         // Get Ray from mouse position on screen
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //Debug.Log(ray);
-        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance)) {
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) {
             GameObject hitObject = hit.collider.gameObject;
             SelectObject(hitObject);
             Debug.Log(hitObject.name);
