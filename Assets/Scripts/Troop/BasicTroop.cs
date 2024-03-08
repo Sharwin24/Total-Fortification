@@ -11,13 +11,16 @@ public class BasicSoldier : TroopBase
     Transform self;
 
 
-
     void Start() {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         self = gameObject.transform;
         Health = 100;
         
         Debug.Log("Health " + Health);
+
+        if (isEnemy) {
+            LevelManager.enemyCount++;
+        }
 
        // InvokeRepeating("LaunchAttack", 0f, 2f);
     }

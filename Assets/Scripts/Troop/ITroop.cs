@@ -9,6 +9,8 @@ public interface ITroop
     //The number of tiles the troop can move in one turn
     int Move {  get; }
 
+    public bool isEnemy { get; }
+
     //Is the troop a ranged troop(arrow, magic, etc)
     bool IsRange { get; }
     //The attack range of the troop,(melee should be 1)
