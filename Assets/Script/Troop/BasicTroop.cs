@@ -18,9 +18,6 @@ public class BasicSoldier : TroopBase
         
         Debug.Log("Health " + Health);
 
-        if (isEnemy) {
-            LevelManager.enemyCount++;
-        }
 
        // InvokeRepeating("LaunchAttack", 0f, 2f);
     }
