@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379c977a1df4ae3409ea69d4782a2d40, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
-  healthModifier: 0
-  armorModifier: 0
-  attackPowerModifier: 0
-  attackRangeModifier: 0
-  moveRangeModifier: 0
-  speedModifier: 0
-  equipmentIcon: {fileID: 0}
+  healthModifier: 12
+  armorModifier: 1
+  attackPowerModifier: 3
+  attackRangeModifier: 5
+  moveRangeModifier: 4
+  speedModifier: 3
+  equipmentIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   equipmentType: 2
   equipmentName: test
   equipmentDescription: test

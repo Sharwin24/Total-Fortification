@@ -817,7 +817,7 @@ GameObject:
   - component: {fileID: 9567428}
   - component: {fileID: 3702933708287030915}
   m_Layer: 0
-  m_Name: TroopBase
+  m_Name: BasicTroop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
