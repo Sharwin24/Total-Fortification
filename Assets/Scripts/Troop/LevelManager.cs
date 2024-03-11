@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {   
-        Debug.Log(enemyCount);
+        //Debug.Log(enemyCount);
         if (enemyCount == 0) {
             levelStatus.text = "Level Beat!";
         }
