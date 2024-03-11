@@ -13,6 +13,7 @@ public interface IEquipment
     bool IsArmor { get; }
 
     Sprite EquipmentIcon { get; }
+    EquipmentType EquipmentType { get; }
     string EquipmentName { get; }
     string EquipmentDescription { get; }
 

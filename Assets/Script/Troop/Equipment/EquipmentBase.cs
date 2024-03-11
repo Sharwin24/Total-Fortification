@@ -10,9 +10,11 @@ public abstract class EquipmentBase : ScriptableObject, IEquipment
     [SerializeField] private float moveRangeModifier = 0;
     [SerializeField] private float speedModifier = 0;
     [SerializeField] private Sprite equipmentIcon;
+    [SerializeField] private EquipmentType equipmentType;
+
     [SerializeField] private string equipmentName = "";
     [SerializeField] private string equipmentDescription = "";
-    
+
     public float HealthModifier => healthModifier;
     public float ArmorModifier => armorModifier;
     public float AttackPowerModifier => attackPowerModifier;
@@ -20,6 +22,7 @@ public abstract class EquipmentBase : ScriptableObject, IEquipment
     public float MoveRangeModifier => moveRangeModifier;
     public float SpeedModifier => speedModifier;
     public Sprite EquipmentIcon => equipmentIcon;
+    public EquipmentType EquipmentType => equipmentType;
     public string EquipmentName => equipmentName;
     public string EquipmentDescription => equipmentDescription;
 
