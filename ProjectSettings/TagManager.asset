@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - MainCrosshair
+  - Ally
   layers:
   - Default
   - TransparentFX
