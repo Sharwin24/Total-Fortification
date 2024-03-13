@@ -6,6 +6,14 @@ TagManager:
   tags:
   - Enemy
   - MainCrosshair
+  - RightHandSword
+  - LeftHandShield
+  - HeavyArmorMelee
+  - HeavyArmorRange
+  - LightArmorMelee
+  - LightArmorRange
+  - LightArmorTroop
+  - TwoHandsBow
   - Ally
   layers:
   - Default
