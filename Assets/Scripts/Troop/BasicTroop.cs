@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,9 @@ public class BasicSoldier : TroopBase
     public RuntimeAnimatorController meleeController;
     public RuntimeAnimatorController rangeController;
 
-    private string[] TroopPrefabTags = { "HeavyArmorRange", "HeavyArmorMelee", "LightArmorRange", "LightArmorMelee" };
+    private List<string> TroopPrefabTags = new List<string> { "HeavyArmorRange", "HeavyArmorMelee", "LightArmorRange", "LightArmorMelee" };
+
+    private List<string> TroopEquipmentAppearanceTags = new List<string> { "Sword", "Shield", "Bow" };
     private Animator animator;
 
     void Start()
@@ -26,35 +29,63 @@ public class BasicSoldier : TroopBase
     {
         if (IsRange && Armor > HeavyArmorMinimum)
         {
-            SetActiveByTag("HeavyArmorRange");
+            SetActiveByTags(new List<string> { "HeavyArmorRange"}, TroopPrefabTags);
         }
         else if (IsRange && Armor <= HeavyArmorMinimum)
         {
-            SetActiveByTag("LightArmorRange");
+            SetActiveByTags(new List<string> { "LightArmorRange" }, TroopPrefabTags);
+
         }
         else if (!IsRange && Armor > HeavyArmorMinimum)
         {
-            SetActiveByTag("HeavyArmorMelee");
+            SetActiveByTags(new List<string> { "HeavyArmorMelee" }, TroopPrefabTags);
+
         }
         else if (!IsRange && Armor <= HeavyArmorMinimum)
         {
-            SetActiveByTag("LightArmorMelee");
+            SetActiveByTags(new List<string> { "LightArmorMelee" }, TroopPrefabTags);
 
         }
     }
 
-    private void SetActiveByTag(string activeTag)
+    private void SetActiveByTags(List<string> activeTags, List<string> totalTags)
     {
-        if (System.Array.IndexOf(TroopPrefabTags, activeTag) < 0)
+        foreach (var activeTag in activeTags)
         {
-            Debug.LogError("SetActiveByTag called with unrecognized tag: " + activeTag);
-            return;
+            if (!totalTags.Contains(activeTag))
+            {
+                Debug.LogError("SetActiveByTags called with unrecognized tag: " + activeTag);
+                return;
+            }
         }
+
+        // Iterate through all children of this GameObject
         foreach (Transform child in transform)
         {
-            if (System.Array.Exists(TroopPrefabTags, tag => child.CompareTag(tag)))
+            // Check if the child has one of the total tags
+            bool hasTotalTag = false;
+            foreach (var totalTag in totalTags)
             {
-                child.gameObject.SetActive(child.CompareTag(activeTag));
+                if (child.CompareTag(totalTag))
+                {
+                    hasTotalTag = true;
+                    break;
+                }
+            }
+
+            if (hasTotalTag)
+            {
+                // Activate the child if it has any of the active tags, otherwise deactivate it
+                bool shouldBeActive = false;
+                foreach (var activeTag in activeTags)
+                {
+                    if (child.CompareTag(activeTag))
+                    {
+                        shouldBeActive = true;
+                        break;
+                    }
+                }
+                child.gameObject.SetActive(shouldBeActive);
             }
         }
     }
