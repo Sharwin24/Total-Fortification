@@ -10,9 +10,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     // Currently the weapons only increase the status, with no effect.
     [SerializeField] private float health = 100.0f;
     [SerializeField] private float armor = 0.0f;
-    [SerializeField] private float moveRange = 3;
+    [SerializeField] private float moveRange = 5;
     [SerializeField] private float speed = 1;
-    [SerializeField] private float attackRange = 1;
+    [SerializeField] private float attackRange = 3;
     [SerializeField] private float attackPower = 10;
     [SerializeField] private bool isRange = false;
 
