@@ -17,6 +17,7 @@ public class SelectionIndicator : MonoBehaviour {
         GameObject gameObject = mouseSelector.GetSelectedObject();
         if (gameObject != null) {
             // this.transform.position = gameObject.transform.position;
+            Debug.Log(gameObject.name);
             for (int i = 0; i < this.transform.childCount; i++) {
                 this.transform.GetChild(i).gameObject.SetActive(true);
             }
