@@ -910,7 +910,7 @@ MonoBehaviour:
   speed: 1
   attackRange: 1
   attackPower: 10
-  isRange: 1
+  isRange: 0
   healthBar: {fileID: 0}
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
