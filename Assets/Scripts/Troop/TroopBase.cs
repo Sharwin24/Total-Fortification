@@ -25,6 +25,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public float AttackPower { get => attackPower; set => attackPower = value; }
     public bool IsRange { get => isRange; set => isRange = value; }
 
+    public EquipmentBase[] equipments;
     public Dictionary<EquipmentType, BodyPart> BodyParts { get; } = new Dictionary<EquipmentType, BodyPart>();
 
     public HealthBar healthBar;
@@ -42,11 +43,19 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         healthBar = GetComponentInChildren<HealthBar>();
         animator = GetComponent<Animator>();
+        EquipItemInList();
     }
 
-
+    //Only called for enemy troops.
+    private void EquipItemInList(){
+        foreach (var equipment in equipments)
+        {
+            EquipItem(equipment);
+        }
+    }
     public virtual void Attack(ITroop target)
     {
+        transform.LookAt(((TroopBase)target).transform);
         animator.SetInteger("animState", 2);
         target.TakeDamage(AttackPower);
         Invoke(nameof(SetAnimationIdle), 2f);
@@ -56,6 +65,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     {
         float elapsedTime = 0;
         Vector3 startingPosition = transform.position;
+        transform.LookAt(transform);
         animator.SetInteger("animState", 1);
         while (elapsedTime < 2)
         {
@@ -69,6 +79,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual void TakeDamage(float physicalDamage)
     {
+        transform.LookAt(transform);
         Health -= physicalDamage;
         healthBar.SetHealth(Health);
 

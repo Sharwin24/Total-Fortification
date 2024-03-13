@@ -17,6 +17,7 @@ public class BasicSoldier : TroopBase
     public RuntimeAnimatorController rangeController;
     public RigBuilder rigBuilder;
 
+
     private bool hasShield = false;
     private bool hasSword = false;
 
@@ -29,6 +30,7 @@ public class BasicSoldier : TroopBase
 
     protected override void Awake()
     {
+        
         TroopAppearanceTags = new List<string>();
         TroopAppearanceTags.AddRange(TroopPrefabTags);
         TroopAppearanceTags.AddRange(TroopEquipmentAppearanceTags);
