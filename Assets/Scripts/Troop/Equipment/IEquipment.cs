@@ -9,8 +9,10 @@ public interface IEquipment
     float MoveRangeModifier { get; }
     float SpeedModifier { get; }
 
-    bool IsWeapon { get; }
-    bool IsArmor { get; }
+    bool IsWeapon { get;}
+    bool IsArmor { get;}
+
+    bool IsRangeWeapon { get;}
 
     Sprite EquipmentIcon { get; }
     EquipmentType EquipmentType { get; }

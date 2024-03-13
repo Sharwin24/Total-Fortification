@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Enemy
   - MainCrosshair
+  - RightHandSword
+  - LeftHandShield
+  - HeavyArmorMelee
+  - HeavyArmorRange
+  - LightArmorMelee
+  - LightArmorRange
   layers:
   - Default
   - TransparentFX

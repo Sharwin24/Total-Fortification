@@ -70,22 +70,32 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual bool EquipItem(IEquipment item)
     {
+        bool equipped = false;
         if (item.EquipmentType == EquipmentType.TwoHanded)
         {
             RemoveItem(EquipmentType.LeftArm);
             RemoveItem(EquipmentType.RightArm);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
-            ApplyEquipmentModifiers(item);
-            return true;
+            
+            equipped = true;
         }
-        Debug.Log(BodyParts[EquipmentType.LeftArm].equipmentType);
         if (BodyParts.TryGetValue(item.EquipmentType, out BodyPart bodyPartToEquip) && bodyPartToEquip.equipmentType == item.EquipmentType)
         {
-            Debug.Log("Equipping " + item.EquipmentType);
+            
             RemoveItem(item.EquipmentType);
             bodyPartToEquip.equippedItem = item;
+            
+            equipped = true;
+        }
+
+        if(equipped)
+        {
+            Debug.Log("Equipping " + item.EquipmentType);
             ApplyEquipmentModifiers(item);
+            IsRange = item.IsRangeWeapon;
+            UpdateAppearance();
+            UpdateAnimation();
             return true;
         }
         return false;
@@ -93,23 +103,34 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual bool RemoveItem(EquipmentType equipmentType)
     {
+        bool removed = false;
         BodyPart bodyPartToUnEquip = FindBodyPart(equipmentType);
         if (bodyPartToUnEquip != null && bodyPartToUnEquip.equippedItem != null)
         {
+            RemoveEquipmentModifiers(bodyPartToUnEquip.equippedItem);
+            if(bodyPartToUnEquip.equippedItem.IsRangeWeapon)
+            {
+                IsRange = false;
+            }
             if (bodyPartToUnEquip.equipmentType == EquipmentType.TwoHanded)
             {
-                RemoveEquipmentModifiers(bodyPartToUnEquip.equippedItem);
                 BodyParts[EquipmentType.LeftArm].equippedItem = null;
                 BodyParts[EquipmentType.RightArm].equippedItem = null;
-                return true;
+                removed = true;
             }
             else
             {
-                RemoveEquipmentModifiers(bodyPartToUnEquip.equippedItem);
                 bodyPartToUnEquip.equippedItem = null;
-                return true;
+                removed = true;
             }
 
+        }
+
+        if(removed)
+        {
+            UpdateAnimation();
+            UpdateAppearance();
+            return true;
         }
 
         return false;
