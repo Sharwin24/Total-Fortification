@@ -12,6 +12,8 @@ TagManager:
   - HeavyArmorRange
   - LightArmorMelee
   - LightArmorRange
+  - LightArmorTroop
+  - TwoHandsBow
   layers:
   - Default
   - TransparentFX

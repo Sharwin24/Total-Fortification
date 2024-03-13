@@ -29,7 +29,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public HealthBar healthBar;
 
-    void Awake()
+    protected Animator animator;
+
+    protected virtual void Awake()
     {
         // Initialize each body part and add it to the dictionary
         BodyParts.Add(EquipmentType.Head, new BodyPart(EquipmentType.Head));
@@ -39,20 +41,30 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         BodyParts.Add(EquipmentType.Legs, new BodyPart(EquipmentType.Legs));
 
         healthBar = GetComponentInChildren<HealthBar>();
+        animator = GetComponent<Animator>();
     }
-
-    //The health bar of the troop(in prefab canvas)
 
 
     public virtual void Attack(ITroop target)
     {
+        animator.SetInteger("animState", 2);
         target.TakeDamage(AttackPower);
+        Invoke(nameof(SetAnimationIdle), 2f);
     }
 
     public virtual void MoveTo(Vector3 position)
     {
-
+        float elapsedTime = 0;
+        Vector3 startingPosition = transform.position;
+        animator.SetInteger("animState", 1);
+        while (elapsedTime < 2)
+        {
+            transform.position = Vector3.Lerp(startingPosition, position, elapsedTime / 2);
+            elapsedTime += Time.deltaTime;
+        }
+        
         transform.position = position;
+        Invoke(nameof(SetAnimationIdle), 2f);
     }
 
     public virtual void TakeDamage(float physicalDamage)
@@ -62,8 +74,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         if (Health <= 0)
         {
-            Destroy(gameObject);
+            animator.SetInteger("animState", 3);
+            Destroy(gameObject, 3f);
         }
+    }
+
+    private void SetAnimationIdle()
+    {
+        animator.SetInteger("animState", 0);
     }
 
 
@@ -77,21 +95,20 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             RemoveItem(EquipmentType.RightArm);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
-            
+
             equipped = true;
         }
-        if (BodyParts.TryGetValue(item.EquipmentType, out BodyPart bodyPartToEquip) && bodyPartToEquip.equipmentType == item.EquipmentType)
+        BodyParts.TryGetValue(item.EquipmentType, out BodyPart a);
+        if (BodyParts.TryGetValue(item.EquipmentType, out BodyPart bodyPartToEquip))
         {
-            
+
             RemoveItem(item.EquipmentType);
             bodyPartToEquip.equippedItem = item;
-            
+
             equipped = true;
         }
-
-        if(equipped)
+        if (equipped)
         {
-            Debug.Log("Equipping " + item.EquipmentType);
             ApplyEquipmentModifiers(item);
             IsRange = item.IsRangeWeapon;
             UpdateAppearance();
@@ -108,7 +125,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         if (bodyPartToUnEquip != null && bodyPartToUnEquip.equippedItem != null)
         {
             RemoveEquipmentModifiers(bodyPartToUnEquip.equippedItem);
-            if(bodyPartToUnEquip.equippedItem.IsRangeWeapon)
+            if (bodyPartToUnEquip.equippedItem.IsRangeWeapon)
             {
                 IsRange = false;
             }
@@ -126,7 +143,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         }
 
-        if(removed)
+        if (removed)
         {
             UpdateAnimation();
             UpdateAppearance();
@@ -137,7 +154,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     }
 
     // Helper method to find the body part object by type
-    private BodyPart FindBodyPart(EquipmentType type)
+    protected BodyPart FindBodyPart(EquipmentType type)
     {
         BodyPart bodyPart;
         if (BodyParts.TryGetValue(type, out bodyPart))

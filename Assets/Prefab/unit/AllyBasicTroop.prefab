@@ -916,6 +916,7 @@ MonoBehaviour:
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
   rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
+  rigBuilder: {fileID: 0}
 --- !u!114 &3552007900814545109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,9 +931,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RigLayers:
   - m_Rig: {fileID: 3223851544701655172}
-    m_Active: 0
-  - m_Rig: {fileID: 6527806506044697075}
     m_Active: 1
+  - m_Rig: {fileID: 6527806506044697075}
+    m_Active: 0
   m_Effectors: []
 --- !u!1 &118138
 GameObject:
@@ -3251,7 +3252,7 @@ GameObject:
   - component: {fileID: 241509666254839037}
   - component: {fileID: 3223851544701655172}
   m_Layer: 0
-  m_Name: RigLayer Sword and Shield
+  m_Name: MeleeRigLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3442,7 +3443,7 @@ GameObject:
   - component: {fileID: 4773635114015414893}
   - component: {fileID: 6527806506044697075}
   m_Layer: 0
-  m_Name: RigLayer Arrow
+  m_Name: RangeRigLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3632,7 +3633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 995601439571736341}
   m_Layer: 0
-  m_Name: right-hand-rf-shield
+  m_Name: right-hand-rf-sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3664,6 +3665,14 @@ PrefabInstance:
     - target: {fileID: 466318824962825654, guid: 061a427ff28b1fa46a332eebb74a856e, type: 3}
       propertyPath: m_Name
       value: Bow
+      objectReference: {fileID: 0}
+    - target: {fileID: 466318824962825654, guid: 061a427ff28b1fa46a332eebb74a856e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 466318824962825654, guid: 061a427ff28b1fa46a332eebb74a856e, type: 3}
+      propertyPath: m_TagString
+      value: TwoHandsBow
       objectReference: {fileID: 0}
     - target: {fileID: 951211890431543052, guid: 061a427ff28b1fa46a332eebb74a856e, type: 3}
       propertyPath: m_LocalScale.x

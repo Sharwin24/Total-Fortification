@@ -19,9 +19,9 @@ MonoBehaviour:
   moveRangeModifier: 4
   speedModifier: 3
   equipmentIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  equipmentType: 2
+  equipmentType: 3
   equipmentName: test
   equipmentDescription: test
   isWeapon: 1
   isArmor: 0
-  isRangeWeapon: 1
+  isRangeWeapon: 0

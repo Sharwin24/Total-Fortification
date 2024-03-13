@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class BasicSoldier : TroopBase
 {
@@ -13,41 +15,76 @@ public class BasicSoldier : TroopBase
     //Drag and Drop the controller from the project window
     public RuntimeAnimatorController meleeController;
     public RuntimeAnimatorController rangeController;
+    public RigBuilder rigBuilder;
 
-    private List<string> TroopPrefabTags = new List<string> { "HeavyArmorRange", "HeavyArmorMelee", "LightArmorRange", "LightArmorMelee" };
+    private bool hasShield = false;
+    private bool hasSword = false;
 
-    private List<string> TroopEquipmentAppearanceTags = new List<string> { "Sword", "Shield", "Bow" };
-    private Animator animator;
+    private List<string> TroopPrefabTags = new() { "HeavyArmorRange", "HeavyArmorMelee", "LightArmorRange", "LightArmorMelee" };
 
-    void Start()
+    private List<string> TroopEquipmentAppearanceTags = new() { "RightHandSword", "LeftHandShield", "TwoHandsBow" };
+    private List<string> TroopAppearanceTags;
+
+    private List<string> currentAppearanceTags = new();
+
+    protected override void Awake()
     {
+        TroopAppearanceTags = new List<string>();
+        TroopAppearanceTags.AddRange(TroopPrefabTags);
+        TroopAppearanceTags.AddRange(TroopEquipmentAppearanceTags);
+
         animator = GetComponent<Animator>();
+        rigBuilder = GetComponent<RigBuilder>();
+        base.Awake();
+    }
+
+    public override bool EquipItem(IEquipment item)
+    {
+        //show shield if the troop has some armor
+        hasShield = item.IsArmor;
+        hasSword = item.IsWeapon;
+
+        return base.EquipItem(item);
+    }
+
+    public override bool RemoveItem(EquipmentType equipmentType)
+    {
+        var equipment = FindBodyPart(equipmentType).equippedItem;
+        if (equipment != null)
+        {
+            hasShield = equipment.IsArmor ? false : hasShield;
+            hasSword = equipment.IsWeapon ? false : hasSword;
+        }
+        return base.RemoveItem(equipmentType);
     }
 
 
     public override void UpdateAppearance()
     {
-        if (IsRange && Armor > HeavyArmorMinimum)
-        {
-            SetActiveByTags(new List<string> { "HeavyArmorRange"}, TroopPrefabTags);
-        }
-        else if (IsRange && Armor <= HeavyArmorMinimum)
-        {
-            SetActiveByTags(new List<string> { "LightArmorRange" }, TroopPrefabTags);
 
-        }
-        else if (!IsRange && Armor > HeavyArmorMinimum)
+        List<string> tagsToActive = new();
+        if (IsRange)
         {
-            SetActiveByTags(new List<string> { "HeavyArmorMelee" }, TroopPrefabTags);
-
+            tagsToActive.Add("TwoHandsBow");
+            tagsToActive.Add(Armor > HeavyArmorMinimum ? "HeavyArmorRange" : "LightArmorRange");
         }
-        else if (!IsRange && Armor <= HeavyArmorMinimum)
+        else
         {
-            SetActiveByTags(new List<string> { "LightArmorMelee" }, TroopPrefabTags);
 
+            if (hasShield)
+            {
+                tagsToActive.Add("LeftHandShield");
+            }
+            if (hasSword)
+            {
+                tagsToActive.Add("RightHandSword");
+            }
+            tagsToActive.Add(Armor > HeavyArmorMinimum ? "HeavyArmorMelee" : "LightArmorMelee");
         }
+        SetActiveByTags(tagsToActive, TroopAppearanceTags);
     }
 
+    //For the given list of tags, activate the game objects with those tags and deactivate the rest
     private void SetActiveByTags(List<string> activeTags, List<string> totalTags)
     {
         foreach (var activeTag in activeTags)
@@ -60,7 +97,7 @@ public class BasicSoldier : TroopBase
         }
 
         // Iterate through all children of this GameObject
-        foreach (Transform child in transform)
+        foreach (Transform child in GetComponentsInChildren<Transform>(true))
         {
             // Check if the child has one of the total tags
             bool hasTotalTag = false;
@@ -92,6 +129,24 @@ public class BasicSoldier : TroopBase
 
     public override void UpdateAnimation()
     {
-          animator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
+        animator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
+        animator = GetComponent<Animator>();
+        SetRigLayerActiveByName(IsRange ? "MeleeRigLayer" : "RangeRigLayer", false);
+        SetRigLayerActiveByName(IsRange ? "RangeRigLayer" : "MeleeRigLayer", true);
+    }
+
+
+    // Enable a Rig Layer by name
+    private void SetRigLayerActiveByName(string name, bool isActive)
+    {
+        foreach (var layer in rigBuilder.layers)
+        {
+            if (layer.name == name)
+            {
+                layer.active = isActive;
+                rigBuilder.Build();
+                return;
+            }
+        }
     }
 }
