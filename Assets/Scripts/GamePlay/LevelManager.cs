@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
@@ -12,6 +13,7 @@ public class LevelManager : MonoBehaviour {
     public GameState gameState;
     public string nextLevel;
     public GameObject enemyManagement;
+    public Button enterBattleButton;
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
@@ -21,6 +23,10 @@ public class LevelManager : MonoBehaviour {
     void Start() {
         actionDone = false;
         gameState = GameState.COMBAT; // Initial setup for demonstration purposes
+        if (enterBattleButton == null) {
+            enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
+        }
+        enterBattleButton.onClick.AddListener(TaskOnClick);
         InitializeTroops();
         StartCoroutine(TakeTurnsCoroutine());
     }
@@ -36,6 +42,16 @@ public class LevelManager : MonoBehaviour {
 
     IEnumerator TakeTurnsCoroutine() {
         print("TakeTurnsCoroutine triggered");
+
+        // Start in Deployment Phase and when button is triggered, switch to Combat Phase
+        DisplayUI(gameState);
+        while (gameState == GameState.DEPLOYMENT) {
+
+            // Allow Deployment Phase to run
+            // Squares can be clicked and troops can be selected from inventory
+
+            yield return new WaitForSeconds(2);
+        }
 
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         DisplayUI(gameState);
@@ -88,6 +104,10 @@ public class LevelManager : MonoBehaviour {
             deploymentUI.SetActive(false);
             combatUI.SetActive(true);
         }
+    }
+
+    public void TaskOnClick() {
+        gameState = GameState.COMBAT;
     }
 
 
