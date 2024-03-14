@@ -1469,6 +1469,8 @@ MonoBehaviour:
   enterBattleButton: {fileID: 1710388306}
   levelMessage: {fileID: 1619577448}
   turnMessage: {fileID: 1778647552}
+  deploymentUI: {fileID: 940068316}
+  combatUI: {fileID: 1338914948}
 --- !u!4 &617538752
 Transform:
   m_ObjectHideFlags: 0
@@ -1496,7 +1498,7 @@ GameObject:
   - component: {fileID: 628341101}
   - component: {fileID: 628341100}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Count3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2108,7 +2110,7 @@ GameObject:
   - component: {fileID: 951522280}
   - component: {fileID: 951522279}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Count1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3573,7 +3575,7 @@ GameObject:
   - component: {fileID: 1599841438}
   - component: {fileID: 1599841437}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Count2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5007,6 +5009,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  troopCountTexts:
+  - {fileID: 951522279}
+  - {fileID: 1599841437}
+  - {fileID: 628341100}
+  - {fileID: 2119281348}
+  troopButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1991391028
 Transform:
   m_ObjectHideFlags: 0
@@ -5115,7 +5127,7 @@ GameObject:
   - component: {fileID: 2119281349}
   - component: {fileID: 2119281348}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Count4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ public class DeploymentManager : MonoBehaviour {
     };
 
     private int[] troopCounts = new int[numTroops];
-    public Text[] troopCountTexts = new Text[numTroops];
+    public TextMeshProUGUI[] troopCountTexts = new TextMeshProUGUI[numTroops];
     public Button[] troopButtons = new Button[numTroops];
 
     private void Awake() {
@@ -29,8 +30,8 @@ public class DeploymentManager : MonoBehaviour {
     void Start() {
         foreach (var icon in troopIcons) {
             int index = tagToTroopIndex[icon.tag];
-            troopButtons[index] = icon.GetComponent<Button>();
-            troopCountTexts[index] = icon.GetComponentInChildren<Text>();
+            if (troopButtons[index] == null) troopButtons[index] = icon.GetComponent<Button>();
+            if (troopCountTexts[index] == null) troopCountTexts[index] = icon.GetComponentInChildren<TextMeshProUGUI>();
             troopButtons[index].onClick.AddListener(() => OnTroopButtonClicked(index));
         }
     }
