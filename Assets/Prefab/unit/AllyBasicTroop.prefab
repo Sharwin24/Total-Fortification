@@ -890,11 +890,11 @@ MonoBehaviour:
   attackPower: 10
   isRange: 0
   equipments: []
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 5375754419733436611}
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
   rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
-  rigBuilder: {fileID: 0}
+  rigBuilders: []
 --- !u!114 &3552007900814545109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3755,6 +3755,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 479756}
     m_Modifications:
+    - target: {fileID: 1705849764449878032, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3857,6 +3861,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
   m_PrefabInstance: {fileID: 3700741350553674090}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5375754419733436611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8773338143985990057, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
+  m_PrefabInstance: {fileID: 3700741350553674090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3edc0092709af474d9209fddf0b03fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6592190962132794309
 PrefabInstance:
   m_ObjectHideFlags: 0

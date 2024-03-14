@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+
+
     public Slider healthSlider;
 
     public Color enemyColor = Color.red;
@@ -22,7 +24,7 @@ public class HealthBar : MonoBehaviour
     {
         healthSlider.fillRect.GetComponent<Image>().color = enemyColor;
     }
-    else if (parentGameObject.tag == "Player")
+    else if (parentGameObject.tag == "Ally")
     {
         healthSlider.fillRect.GetComponent<Image>().color = playerColor;
     }
