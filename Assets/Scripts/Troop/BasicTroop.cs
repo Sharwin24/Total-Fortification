@@ -1,77 +1,191 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class BasicSoldier : TroopBase
 {
+    //The minimum armor for a heavy armor soldier
+    public int HeavyArmorMinimum = 5;
+    //Reference to the animator controller for the melee attack
+    //Drag and Drop the controller from the project window
+    public RuntimeAnimatorController meleeController;
+    public RuntimeAnimatorController rangeController;
+    public RigBuilder[] rigBuilders;
 
-    public GameObject[] enemies;
-    Transform self;
 
+    private bool hasShield = false;
+    private bool hasSword = false;
 
-    void Start() {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        self = gameObject.transform;
-        Health = 100;
-        
-        Debug.Log("Health " + Health);
+    private List<string> TroopPrefabTags = new() { "HeavyArmorRange", "HeavyArmorMelee", "LightArmorRange", "LightArmorMelee" };
 
-        if (isEnemy) {
-            LevelManager.enemyCount++;
+    private List<string> TroopEquipmentAppearanceTags = new() { "RightHandSword", "LeftHandShield", "TwoHandsBow" };
+    private List<string> TroopAppearanceTags;
+
+    private List<string> currentAppearanceTags = new();
+
+    protected override void Awake()
+    {
+
+        TroopAppearanceTags = new List<string>();
+        TroopAppearanceTags.AddRange(TroopPrefabTags);
+        TroopAppearanceTags.AddRange(TroopEquipmentAppearanceTags);
+        rigBuilders = GetComponentsInChildren<RigBuilder>(true);
+        base.Awake();
+    }
+
+    public override bool EquipItem(IEquipment item)
+    {
+        //show shield if the troop has some armor
+        hasShield = item.IsArmor;
+        hasSword = item.IsWeapon;
+
+        return base.EquipItem(item);
+    }
+
+    public override bool RemoveItem(EquipmentType equipmentType)
+    {
+        var equipment = FindBodyPart(equipmentType).equippedItem;
+        if (equipment != null)
+        {
+            hasShield = equipment.IsArmor ? false : hasShield;
+            hasSword = equipment.IsWeapon ? false : hasSword;
         }
-
-       // InvokeRepeating("LaunchAttack", 0f, 2f);
+        return base.RemoveItem(equipmentType);
     }
 
-    public void LaunchAttack() {
 
-        Debug.Log("Launch Attack");
+    public override void UpdateAppearance()
+    {
 
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        List<string> tagsToActive = new();
+        if (IsRange)
+        {
+            tagsToActive.Add("TwoHandsBow");
+            tagsToActive.Add(Armor > HeavyArmorMinimum ? "HeavyArmorRange" : "LightArmorRange");
+        }
+        else
+        {
 
-        List<GameObject> enemiesInRange = GetInRangeEnemies();
-
-        AttackEnemies(enemiesInRange);
-
+            if (hasShield)
+            {
+                tagsToActive.Add("LeftHandShield");
+            }
+            if (hasSword)
+            {
+                tagsToActive.Add("RightHandSword");
+            }
+            tagsToActive.Add(Armor > HeavyArmorMinimum ? "HeavyArmorMelee" : "LightArmorMelee");
+        }
+        SetActiveByTags(tagsToActive, TroopAppearanceTags);
     }
 
-    private List<GameObject> GetInRangeEnemies() {
-
-        List<GameObject> inRangeEnemies = new List<GameObject>();
-        foreach (GameObject enemy in enemies) {
-            float distance = Vector3.Distance(self.position, enemy.transform.position);
-            if (distance <= AttackRange) {
-                inRangeEnemies.Add(enemy);
+    //For the given list of tags, activate the game objects with those tags and deactivate the rest
+    private void SetActiveByTags(List<string> activeTags, List<string> totalTags)
+    {
+        foreach (var activeTag in activeTags)
+        {
+            if (!totalTags.Contains(activeTag))
+            {
+                Debug.LogError("SetActiveByTags called with unrecognized tag: " + activeTag);
+                return;
             }
         }
-        return inRangeEnemies;
-    }
 
-    private void AttackEnemies(List<GameObject> enemies) {
-    foreach (GameObject enemy in enemies) {
-        ITroop troopComponent = enemy.GetComponent<ITroop>();
-        if (troopComponent != null) {
-            Attack(troopComponent);
-            Debug.Log("Attacking");
+        // Iterate through all children of this GameObject
+        foreach (Transform child in GetComponentsInChildren<Transform>(true))
+        {
+            // Check if the child has one of the total tags
+            bool hasTotalTag = false;
+            foreach (var totalTag in totalTags)
+            {
+                if (child.CompareTag(totalTag))
+                {
+                    hasTotalTag = true;
+                    break;
+                }
+            }
+
+            if (hasTotalTag)
+            {
+                // Activate the child if it has any of the active tags, otherwise deactivate it
+                bool shouldBeActive = false;
+                foreach (var activeTag in activeTags)
+                {
+                    if (child.CompareTag(activeTag))
+                    {
+                        shouldBeActive = true;
+                        break;
+                    }
+                }
+                child.gameObject.SetActive(shouldBeActive);
+            }
         }
     }
-}
-
-   
-    public override void Attack(ITroop target)
+    public override void UpdateAnimation()
     {
-        Debug.Log("BasicSoldier attacking with power: " + AttackPower);
-        // Implement attack logic, for example:
-        target.TakeDamage(AttackPower); 
-        
+        UpdateChildAnimators();
+        UpdateRigLayers(IsRange ? "RangeRigLayer" : "MeleeRigLayer");
     }
 
-    public override void MoveTo(Vector3 position)
+    private void UpdateChildAnimators()
     {
-        Debug.Log("BasicSoldier moving to position: " + position);
-        // Implement movement logic, for example:
-        transform.position = position;
+        Animator[] childAnimators = GetComponentsInChildren<Animator>(true);
+        foreach (Animator childAnimator in childAnimators)
+        {
+            childAnimator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
+        }
+        animators = childAnimators;
     }
+
+    private void UpdateRigLayers(string activeLayerName)
+    {
+        foreach (RigBuilder rigBuilder in rigBuilders)
+        {
+            bool found = false;
+            foreach (RigLayer layer in rigBuilder.layers)
+            {
+                bool isActive = layer.name == activeLayerName;
+                layer.active = isActive;
+                if (isActive) found = true;
+            }
+            if (found) rigBuilder.Build();
+        }
+    }
+    // public override void UpdateAnimation()
+    // {
+    //     Animator[] childAnimators = GetComponentsInChildren<Animator>(true);
+
+    //     foreach (var childAnimator in childAnimators)
+    //     {
+    //         childAnimator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
+    //     }
+    //     animator = childAnimators;
+
+    //     SetRigLayerActiveByName(IsRange ? "MeleeRigLayer" : "RangeRigLayer", false);
+    //     SetRigLayerActiveByName(IsRange ? "RangeRigLayer" : "MeleeRigLayer", true);
+
+    // }
+
+
+    // // Enable a Rig Layer by name
+    // private void SetRigLayerActiveByName(string name, bool isActive)
+    // {
+    //     foreach (var rigBuilder in rigBuilders)
+    //     {
+    //         foreach (var layer in rigBuilder.layers)
+    //         {
+    //             if (layer.name == name)
+    //             {
+    //                 layer.active = isActive;
+    //                 rigBuilder.Build();
+    //                 return;
+    //             }
+    //         }
+    //     }
+    // }
 }

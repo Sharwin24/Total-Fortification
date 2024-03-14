@@ -6,6 +6,22 @@ TagManager:
   tags:
   - Enemy
   - MainCrosshair
+  - RightHandSword
+  - LeftHandShield
+  - HeavyArmorMelee
+  - HeavyArmorRange
+  - LightArmorMelee
+  - LightArmorRange
+  - LightArmorTroop
+  - TwoHandsBow
+  - Ally
+  - DeploymentUI
+  - CombatUI
+  - EnterBattleButton
+  - TroopBtn1
+  - TroopBtn2
+  - TroopBtn3
+  - TroopBtn4
   layers:
   - Default
   - TransparentFX
