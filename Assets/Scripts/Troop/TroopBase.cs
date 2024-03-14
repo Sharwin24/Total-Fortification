@@ -24,7 +24,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public float AttackRange { get => attackRange; set => attackRange = value; }
     public float AttackPower { get => attackPower; set => attackPower = value; }
     public bool IsRange { get => isRange; set => isRange = value; }
-
+    //The default equipments a troop has, used for enemy troops.
     public EquipmentBase[] equipments;
     public Dictionary<EquipmentType, BodyPart> BodyParts { get; } = new Dictionary<EquipmentType, BodyPart>();
 

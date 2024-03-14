@@ -6076,7 +6076,7 @@ GameObject:
   - component: {fileID: 7073876416793483341}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (2)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8855,7 +8855,7 @@ GameObject:
   - component: {fileID: 6241233862558999294}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (3)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11593,7 +11593,7 @@ GameObject:
   - component: {fileID: 141984379252112664}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (5)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13924,7 +13924,7 @@ GameObject:
   - component: {fileID: 5262162280673735046}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (4)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14938,7 +14938,7 @@ GameObject:
   - component: {fileID: 3827083355939354776}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (1)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
