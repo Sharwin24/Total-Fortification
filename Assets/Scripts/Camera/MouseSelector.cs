@@ -46,7 +46,6 @@ public class MouseSelector : MonoBehaviour {
 
     void ClearSelectedObject() {
         if (selectedObject == null) return;
-
         //SetObjectColor(previouslySelectedObjectColor);
         selectedObject = null;
     }
