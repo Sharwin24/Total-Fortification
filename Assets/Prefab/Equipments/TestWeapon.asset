@@ -23,5 +23,5 @@ MonoBehaviour:
   equipmentName: Shield
   equipmentDescription: test
   isWeapon: 1
-  isArmor: 1
+  isArmor: 0
   isRangeWeapon: 0

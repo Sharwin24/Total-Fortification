@@ -32,8 +32,16 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     protected Animator[] animators;
 
+    public int AppearanceRange = 2;
+    public float MinimumContactDistance;
+
     protected virtual void Awake()
     {
+        //Increase the move and attack range by the appearance range
+        //So that army won't collide with each other
+        // MoveRange += AppearanceRange;
+        // AttackRange += AppearanceRange;
+        // MinimumContactDistance = AppearanceRange + 1;
         // Initialize each body part and add it to the dictionary
         BodyParts.Add(EquipmentType.Head, new BodyPart(EquipmentType.Head));
         BodyParts.Add(EquipmentType.Chest, new BodyPart(EquipmentType.Chest));
@@ -43,45 +51,55 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);
-        EquipItemInList();
+        
+    }
+    void Start()
+    {
+       EquipItemInList();
     }
 
     //Only called for enemy troops.
-    private void EquipItemInList(){
+    private void EquipItemInList()
+    {
         foreach (var equipment in equipments)
         {
             EquipItem(equipment);
         }
     }
-    public virtual void Attack(ITroop target)
+    public virtual IEnumerator Attack(ITroop target)
     {
         if (target == null)
         {
             Debug.Log("No target to attack");
-            return;
+            yield return null;
         }
         // Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        transform.LookAt(((TroopBase) target).transform);
+        Vector3 position = ((TroopBase)target).transform.position;
+        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+
         UpdateAnimationState(2, false);
         target.TakeDamage(AttackPower);
-        // transform.position = position;
-        Invoke(nameof(SetAnimationIdle), 2.5f);
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Attacking");
+
+        UpdateAnimationState(0);
     }
 
     public virtual IEnumerator MoveTo(Vector3 position)
     {
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-        UpdateAnimationState(1); // Start walking/running animation
+        UpdateAnimationState(1,false); // Start walking/running animation
 
-        while (Vector3.Distance(transform.position, position) > 0.35) {
-            transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-            // If using root motion, the actual movement might be driven by the animation.
-            // Otherwise, include code here to move towards the target position.
-            yield return null;
+        while (Vector3.Distance(transform.position, position) > 0.35f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, position, Speed * Time.deltaTime);
+            // yield return null;
+             yield return new WaitForSeconds(0f);
         }
 
         UpdateAnimationState(0);// Switch to idle animation
-        
+
+        yield return new WaitForSeconds(0f);
     }
 
     public virtual void TakeDamage(float physicalDamage)
@@ -96,17 +114,13 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             Destroy(gameObject, 3f);
         }
     }
-
-    private void SetAnimationIdle()
+    private void UpdateAnimationState(int state = 0, bool applyRootMotion = true)
     {
-        UpdateAnimationState(0);
-    }
-
-    private void UpdateAnimationState(int state, bool applyRootMotion = true){
+        Debug.Log("UpdateAnimationState" + state);
         foreach (var childAnimator in animators)
         {
-             childAnimator.SetInteger("animState", state);
-             childAnimator.applyRootMotion = applyRootMotion;
+            childAnimator.SetInteger("animState", state);
+            childAnimator.applyRootMotion = applyRootMotion;
         }
     }
 
