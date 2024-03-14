@@ -33,6 +33,7 @@ public class SelectionIndicator : MonoBehaviour {
             }
         }
     }
+
     static Rect RendererBoundsInScreenSpace(Renderer r) {
         // This is the space occupied by the object's visuals
         // in WORLD space.

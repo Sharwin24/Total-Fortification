@@ -7,7 +7,7 @@ public class MouseSelector : MonoBehaviour {
     public Color selectedObjectColor = Color.green;
 
     GameObject selectedObject;
-    Color previouslySelectedObjectColor;
+    //Color previouslySelectedObjectColor;
 
     // Start is called before the first frame update
     void Start() {
@@ -19,9 +19,8 @@ public class MouseSelector : MonoBehaviour {
         // Get Ray from mouse position on screen
         Vector3 cameraPosition = Camera.main.transform.position;
         Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 directionToWorldPoint = worldPoint - cameraPosition;
-        //Ray ray = Camera.main.ScreenToWorldPoint(mousePosition);
-        //Debug.Log(ray);
+        Vector3 directionToWorldPoint = Vector3.Normalize(worldPoint - cameraPosition);
+        Debug.DrawRay(cameraPosition, directionToWorldPoint, Color.red);
         if (Physics.Raycast(cameraPosition, directionToWorldPoint, out RaycastHit hitInfo, Mathf.Infinity)) {
             GameObject hitObject = hitInfo.transform.root.gameObject;
             Debug.Log(hitObject.name);
@@ -48,7 +47,7 @@ public class MouseSelector : MonoBehaviour {
     void ClearSelectedObject() {
         if (selectedObject == null) return;
 
-        SetObjectColor(previouslySelectedObjectColor);
+        //SetObjectColor(previouslySelectedObjectColor);
         selectedObject = null;
     }
 
@@ -57,9 +56,9 @@ public class MouseSelector : MonoBehaviour {
             if (obj == selectedObject) return;
             ClearSelectedObject();
         }
-        previouslySelectedObjectColor = obj.GetComponent<Renderer>().material.color;
+        //previouslySelectedObjectColor = obj.GetComponent<Renderer>().material.color;
         selectedObject = obj;
-
+        Debug.Log("Selected Object: " + selectedObject.name);
         SetObjectColor(selectedObjectColor);
     }
 }
