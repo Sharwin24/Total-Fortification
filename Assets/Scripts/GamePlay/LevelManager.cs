@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
@@ -12,10 +13,14 @@ public class LevelManager : MonoBehaviour {
     public GameState gameState;
     public string nextLevel;
     public GameObject enemyManagement;
+    public TextMeshProUGUI levelMessage;
+    public TextMeshProUGUI turnMessage;
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
     void Start() {
+        levelMessage.text = "";
+        turnMessage.text = "";
         actionDone = false;
         gameState = GameState.COMBAT; // Initial setup for demonstration purposes
         InitializeTroops();
@@ -35,15 +40,21 @@ public class LevelManager : MonoBehaviour {
         print("TakeTurnsCoroutine triggered");
 
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
+        int turnCount = 1;
+        int troopsInTurn = troopQueue.Count;
+        turnMessage.text = "Turn: " + turnCount;
 
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
-            
+                        
             print("Loop entered");
+
+            // Add Game End Logic Here
 
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
             if (troopGameObject == null) {
+                troopsInTurn--;
                 continue;
             }
             
@@ -68,6 +79,13 @@ public class LevelManager : MonoBehaviour {
             actionDone = false;
 
             troopQueue.Enqueue(troopGameObject, currentTroop.Speed);
+
+            troopsInTurn--;
+            if (troopsInTurn <= 0) {
+                turnCount++;
+                turnMessage.text = "Turn: " + turnCount;
+                troopsInTurn = troopQueue.Count; // Reset the counter for the next cycle of turns
+            }
             
         }
 
