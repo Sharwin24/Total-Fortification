@@ -15,7 +15,7 @@ public class BasicSoldier : TroopBase
     //Drag and Drop the controller from the project window
     public RuntimeAnimatorController meleeController;
     public RuntimeAnimatorController rangeController;
-    public RigBuilder rigBuilder;
+    public RigBuilder[] rigBuilders;
 
 
     private bool hasShield = false;
@@ -30,13 +30,11 @@ public class BasicSoldier : TroopBase
 
     protected override void Awake()
     {
-        
+
         TroopAppearanceTags = new List<string>();
         TroopAppearanceTags.AddRange(TroopPrefabTags);
         TroopAppearanceTags.AddRange(TroopEquipmentAppearanceTags);
-
-        animator = GetComponent<Animator>();
-        rigBuilder = GetComponent<RigBuilder>();
+        rigBuilders = GetComponentsInChildren<RigBuilder>(true);
         base.Awake();
     }
 
@@ -128,27 +126,66 @@ public class BasicSoldier : TroopBase
             }
         }
     }
-
     public override void UpdateAnimation()
     {
-        animator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
-        animator = GetComponent<Animator>();
-        SetRigLayerActiveByName(IsRange ? "MeleeRigLayer" : "RangeRigLayer", false);
-        SetRigLayerActiveByName(IsRange ? "RangeRigLayer" : "MeleeRigLayer", true);
+        UpdateChildAnimators();
+        UpdateRigLayers(IsRange ? "RangeRigLayer" : "MeleeRigLayer");
     }
 
-
-    // Enable a Rig Layer by name
-    private void SetRigLayerActiveByName(string name, bool isActive)
+    private void UpdateChildAnimators()
     {
-        foreach (var layer in rigBuilder.layers)
+        Animator[] childAnimators = GetComponentsInChildren<Animator>(true);
+        foreach (Animator childAnimator in childAnimators)
         {
-            if (layer.name == name)
+            childAnimator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
+        }
+        animators = childAnimators;
+    }
+
+    private void UpdateRigLayers(string activeLayerName)
+    {
+        foreach (RigBuilder rigBuilder in rigBuilders)
+        {
+            bool found = false;
+            foreach (RigLayer layer in rigBuilder.layers)
             {
+                bool isActive = layer.name == activeLayerName;
                 layer.active = isActive;
-                rigBuilder.Build();
-                return;
+                if (isActive) found = true;
             }
+            if (found) rigBuilder.Build();
         }
     }
+    // public override void UpdateAnimation()
+    // {
+    //     Animator[] childAnimators = GetComponentsInChildren<Animator>(true);
+
+    //     foreach (var childAnimator in childAnimators)
+    //     {
+    //         childAnimator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
+    //     }
+    //     animator = childAnimators;
+
+    //     SetRigLayerActiveByName(IsRange ? "MeleeRigLayer" : "RangeRigLayer", false);
+    //     SetRigLayerActiveByName(IsRange ? "RangeRigLayer" : "MeleeRigLayer", true);
+
+    // }
+
+
+    // // Enable a Rig Layer by name
+    // private void SetRigLayerActiveByName(string name, bool isActive)
+    // {
+    //     foreach (var rigBuilder in rigBuilders)
+    //     {
+    //         foreach (var layer in rigBuilder.layers)
+    //         {
+    //             if (layer.name == name)
+    //             {
+    //                 layer.active = isActive;
+    //                 rigBuilder.Build();
+    //                 return;
+    //             }
+    //         }
+    //     }
+    // }
 }

@@ -30,7 +30,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public HealthBar healthBar;
 
-    protected Animator animator;
+    protected Animator[] animators;
 
     protected virtual void Awake()
     {
@@ -42,7 +42,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         BodyParts.Add(EquipmentType.Legs, new BodyPart(EquipmentType.Legs));
 
         healthBar = GetComponentInChildren<HealthBar>();
-        animator = GetComponent<Animator>();
+        animators = GetComponentsInChildren<Animator>(true);
         EquipItemInList();
     }
 
@@ -55,10 +55,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     }
     public virtual void Attack(ITroop target)
     {
+        if (target == null)
+        {
+            Debug.Log("No target to attack");
+            return;
+        }
         // Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         transform.LookAt(((TroopBase) target).transform);
-        animator.applyRootMotion = false;
-        animator.SetInteger("animState", 2);
+        UpdateAnimationState(2, false);
         target.TakeDamage(AttackPower);
         // transform.position = position;
         Invoke(nameof(SetAnimationIdle), 2.5f);
@@ -67,7 +71,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public virtual IEnumerator MoveTo(Vector3 position)
     {
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-        animator.SetInteger("animState", 1); // Start walking/running animation
+        UpdateAnimationState(1); // Start walking/running animation
 
         while (Vector3.Distance(transform.position, position) > 0.35) {
             transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
@@ -76,7 +80,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             yield return null;
         }
 
-        animator.SetInteger("animState", 0); // Switch to idle animation
+        UpdateAnimationState(0);// Switch to idle animation
         
     }
 
@@ -88,15 +92,22 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         if (Health <= 0)
         {
-            animator.SetInteger("animState", 3);
+            UpdateAnimationState(3);
             Destroy(gameObject, 3f);
         }
     }
 
     private void SetAnimationIdle()
     {
-        animator.SetInteger("animState", 0);
-        animator.applyRootMotion = true;
+        UpdateAnimationState(0);
+    }
+
+    private void UpdateAnimationState(int state, bool applyRootMotion = true){
+        foreach (var childAnimator in animators)
+        {
+             childAnimator.SetInteger("animState", state);
+             childAnimator.applyRootMotion = applyRootMotion;
+        }
     }
 
 
