@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public interface ITroop
@@ -23,7 +24,7 @@ public interface ITroop
 
     void Attack(ITroop target);
 
-    void MoveTo(Vector3 position);
+    IEnumerator MoveTo(Vector3 position);
 
     void TakeDamage(float damage);
     // Returns true if the item was equipped, false otherwise

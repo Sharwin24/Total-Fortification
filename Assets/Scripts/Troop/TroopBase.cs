@@ -10,9 +10,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     // Currently the weapons only increase the status, with no effect.
     [SerializeField] private float health = 100.0f;
     [SerializeField] private float armor = 0.0f;
-    [SerializeField] private float moveRange = 5;
+    [SerializeField] private float moveRange = 7;
     [SerializeField] private float speed = 1;
-    [SerializeField] private float attackRange = 3;
+    [SerializeField] private float attackRange = 5;
     [SerializeField] private float attackPower = 10;
     [SerializeField] private bool isRange = false;
 
@@ -55,26 +55,29 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     }
     public virtual void Attack(ITroop target)
     {
-        transform.LookAt(((TroopBase)target).transform);
+        // Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        transform.LookAt(((TroopBase) target).transform);
+        animator.applyRootMotion = false;
         animator.SetInteger("animState", 2);
         target.TakeDamage(AttackPower);
-        Invoke(nameof(SetAnimationIdle), 2f);
+        // transform.position = position;
+        Invoke(nameof(SetAnimationIdle), 2.5f);
     }
 
-    public virtual void MoveTo(Vector3 position)
+    public virtual IEnumerator MoveTo(Vector3 position)
     {
-        float elapsedTime = 0;
-        Vector3 startingPosition = transform.position;
-        transform.LookAt(transform);
-        animator.SetInteger("animState", 1);
-        while (elapsedTime < 2)
-        {
-            transform.position = Vector3.Lerp(startingPosition, position, elapsedTime / 2);
-            elapsedTime += Time.deltaTime;
+        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+        animator.SetInteger("animState", 1); // Start walking/running animation
+
+        while (Vector3.Distance(transform.position, position) > 0.35) {
+            transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+            // If using root motion, the actual movement might be driven by the animation.
+            // Otherwise, include code here to move towards the target position.
+            yield return null;
         }
+
+        animator.SetInteger("animState", 0); // Switch to idle animation
         
-        transform.position = position;
-        Invoke(nameof(SetAnimationIdle), 2f);
     }
 
     public virtual void TakeDamage(float physicalDamage)
@@ -93,6 +96,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     private void SetAnimationIdle()
     {
         animator.SetInteger("animState", 0);
+        animator.applyRootMotion = true;
     }
 
 
