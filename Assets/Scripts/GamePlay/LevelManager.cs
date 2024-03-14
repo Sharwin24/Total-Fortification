@@ -17,17 +17,16 @@ public class LevelManager : MonoBehaviour {
     public Button enterBattleButton;
     public TextMeshProUGUI levelMessage;
     public TextMeshProUGUI turnMessage;
+    public GameObject deploymentUI;
+    public GameObject combatUI;
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
-
-    private GameObject deploymentUI;
-    private GameObject combatUI;
 
     void Start() {
         levelMessage.text = "";
         turnMessage.text = "";
         actionDone = false;
-        gameState = GameState.COMBAT; // Initial setup for demonstration purposes
+        gameState = GameState.DEPLOYMENT; // Initial setup for demonstration purposes
         if (deploymentUI == null) {
             deploymentUI = GameObject.FindWithTag("DeploymentUI");
         }

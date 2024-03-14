@@ -9,15 +9,15 @@ public class DeploymentManager : MonoBehaviour {
     public GameObject[] troopPrefabs = new GameObject[numTroops];
 
     private readonly Dictionary<string, int> tagToTroopIndex = new Dictionary<string, int> {
-        {"Troop1Btn", 0},
-        {"Troop2Btn", 1},
-        {"Troop3Btn", 2},
-        {"Troop4Btn", 3}
+        {"TroopBtn1", 0},
+        {"TroopBtn2", 1},
+        {"TroopBtn3", 2},
+        {"TroopBtn4", 3}
     };
 
     private int[] troopCounts = new int[numTroops];
-    private Text[] troopCountTexts = new Text[numTroops];
-    private Button[] troopButtons = new Button[numTroops];
+    public Text[] troopCountTexts = new Text[numTroops];
+    public Button[] troopButtons = new Button[numTroops];
 
     private void Awake() {
         for (int i = 0; i < numTroops; i++) {
@@ -29,8 +29,8 @@ public class DeploymentManager : MonoBehaviour {
     void Start() {
         foreach (var icon in troopIcons) {
             int index = tagToTroopIndex[icon.tag];
-            troopCountTexts[index] = icon.GetComponentInChildren<Text>();
             troopButtons[index] = icon.GetComponent<Button>();
+            troopCountTexts[index] = icon.GetComponentInChildren<Text>();
             troopButtons[index].onClick.AddListener(() => OnTroopButtonClicked(index));
         }
     }

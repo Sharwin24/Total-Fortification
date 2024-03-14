@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &64450094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64450096}
+  - component: {fileID: 64450095}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &64450095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64450094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afdd98b0aca0a44ceac9d6317ca5026a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &64450096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64450094}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5510001, y: 1.8798877, z: -4.2290382}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100965870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,8 +1465,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   nextLevel: 
-  enemyManagement: {fileID: 0}
+  enemyManagement: {fileID: 64450094}
   enterBattleButton: {fileID: 1710388306}
+  levelMessage: {fileID: 1619577448}
+  turnMessage: {fileID: 1778647552}
 --- !u!4 &617538752
 Transform:
   m_ObjectHideFlags: 0
@@ -5267,3 +5313,4 @@ SceneRoots:
   - {fileID: 2064013426}
   - {fileID: 940068320}
   - {fileID: 1991391028}
+  - {fileID: 64450096}
