@@ -15,6 +15,9 @@ public class LevelManager : MonoBehaviour {
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
+    GameObject deploymentUI = GameObject.FindWithTag("DeploymentUI");
+    GameObject combatUI = GameObject.FindWithTag("CombatUI");
+
     void Start() {
         actionDone = false;
         gameState = GameState.COMBAT; // Initial setup for demonstration purposes
@@ -35,7 +38,7 @@ public class LevelManager : MonoBehaviour {
         print("TakeTurnsCoroutine triggered");
 
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
-
+        DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
             
             print("Loop entered");
@@ -74,6 +77,16 @@ public class LevelManager : MonoBehaviour {
         if (gameState == GameState.COMBAT) {
             gameState = GameState.END;
             // Handle end of combat
+        }
+    }
+
+    void DisplayUI(GameState gameState) {
+        if (gameState == GameState.DEPLOYMENT) {
+            combatUI.SetActive(false);
+            deploymentUI.SetActive(true);
+        } else if (gameState == GameState.COMBAT) {
+            deploymentUI.SetActive(false);
+            combatUI.SetActive(true);
         }
     }
 
