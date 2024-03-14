@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
   healthModifier: 12
-  armorModifier: 1
+  armorModifier: 6
   attackPowerModifier: 3
   attackRangeModifier: 5
   moveRangeModifier: 4
@@ -23,5 +23,5 @@ MonoBehaviour:
   equipmentName: Shield
   equipmentDescription: test
   isWeapon: 1
-  isArmor: 0
-  isRangeWeapon: 1
+  isArmor: 1
+  isRangeWeapon: 0

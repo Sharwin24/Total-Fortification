@@ -11,6 +11,11 @@ public class EnemyBehavior : MonoBehaviour
     // MUST update LevelManager.actionDone upon ending execution!
     public IEnumerator TakeAction(GameObject current)
     {
+
+        // Patch - forcing height to be 1.32 - animation changes y-coord for some reason
+        Vector3 currentPosition = current.transform.position;
+        current.transform.position = new Vector3(currentPosition.x, 1.32f, currentPosition.z);
+
         print("Enemy Taking Action");
         // // Animator anim = currentTroop.GetComponent<Animator>();
         TroopBase currentTroop = current.GetComponent<TroopBase>();
@@ -22,14 +27,9 @@ public class EnemyBehavior : MonoBehaviour
         if (!inAttackRange(current, currentTroop, closestTarget)) {
             print("Ally troop not in range");
 
-;           MoveTowardTarget(current, currentTroop, closestTarget); // When moving animtaion is added, remove this line and add wait.
+            MoveTowardTarget(current, currentTroop, closestTarget); 
+            yield return new WaitForSeconds(3); // wait for move to complete
 
-            //  Attack if in range
-            if (inAttackRange(current, currentTroop, closestTarget)) {
-                Attack(currentTroop, closestTargetTroop);
-            }
-            yield return new WaitForSeconds(0); // modify this to wait for longer
-        // Attack twice
         } else {
             print("Ally troop in range");
             Attack(currentTroop, closestTargetTroop);
@@ -42,30 +42,28 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     private void Attack(TroopBase currentTroop, TroopBase targetTroop) {
-        targetTroop.TakeDamage(currentTroop.AttackPower);
+        currentTroop.Attack(targetTroop);
     }
 
     private bool inAttackRange(GameObject current, TroopBase currentTroop, GameObject target) {
         return Vector3.Distance(target.transform.position, current.transform.position) <= currentTroop.AttackRange;
     }
 
-    private bool canContinueMove(GameObject current, TroopBase currentTroop, GameObject target, Vector3 positionBeforeAction) {
-        return Vector3.Distance(positionBeforeAction, current.transform.position) < currentTroop.MoveRange;
-    }
-
     private void MoveTowardTarget(GameObject current, TroopBase currentTroop, GameObject target) {
-        print("MoveToward called");
-        Vector3 positionBeforeAction = current.transform.position;
-        print(!inAttackRange(current, currentTroop, target));
-        print(canContinueMove(current, currentTroop, target, positionBeforeAction));
+        Vector3 moverPosition = current.transform.position;
+        Vector3 targetPosition = target.transform.position;
+        float moveDistance = currentTroop.MoveRange;
+        float stopDistance = currentTroop.AttackRange;
 
-        while (!inAttackRange(current, currentTroop, target) && canContinueMove(current, currentTroop, target, positionBeforeAction)) {
-            print("IN LOOP");
-            // Temp - let animation handle this later
-            current.transform.position = Vector3.MoveTowards(current.transform.position, target.transform.position, 3);
-            // Should wait for this to look better but this is temp so leave it
-        }
+        Vector3 direction = (targetPosition - moverPosition).normalized;
+        float distanceToTarget = Vector3.Distance(moverPosition, targetPosition);
+        float moveDistanceAdjusted = Mathf.Min(moveDistance, distanceToTarget - stopDistance);
+
+        Vector3 finalPosition = moverPosition + direction * moveDistanceAdjusted;
+
+        StartCoroutine(currentTroop.MoveTo(finalPosition));
     }
+
 
     private GameObject findClosestTarget(Vector3 currentPosition, GameObject[] targets) {
         float minDistance = Mathf.Infinity;

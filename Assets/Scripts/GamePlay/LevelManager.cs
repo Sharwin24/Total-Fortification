@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
@@ -14,6 +15,8 @@ public class LevelManager : MonoBehaviour {
     public string nextLevel;
     public GameObject enemyManagement;
     public Button enterBattleButton;
+    public TextMeshProUGUI levelMessage;
+    public TextMeshProUGUI turnMessage;
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
@@ -21,6 +24,8 @@ public class LevelManager : MonoBehaviour {
     private GameObject combatUI;
 
     void Start() {
+        levelMessage.text = "";
+        turnMessage.text = "";
         actionDone = false;
         gameState = GameState.COMBAT; // Initial setup for demonstration purposes
         if (deploymentUI == null) {
@@ -58,17 +63,22 @@ public class LevelManager : MonoBehaviour {
 
             yield return new WaitForSeconds(2);
         }
-
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
+        int turnCount = 1;
+        int troopsInTurn = troopQueue.Count;
+        turnMessage.text = "Turn: " + turnCount;
+
         DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
-
             print("Loop entered");
+
+            // Add Game End Logic Here
 
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
             if (troopGameObject == null) {
+                troopsInTurn--;
                 continue;
             }
 
@@ -94,6 +104,13 @@ public class LevelManager : MonoBehaviour {
 
             troopQueue.Enqueue(troopGameObject, currentTroop.Speed);
 
+            troopsInTurn--;
+            if (troopsInTurn <= 0) {
+                turnCount++;
+                turnMessage.text = "Turn: " + turnCount;
+                troopsInTurn = troopQueue.Count; // Reset the counter for the next cycle of turns
+            }
+            
         }
 
         if (gameState == GameState.COMBAT) {
