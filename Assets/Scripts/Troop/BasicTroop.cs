@@ -26,7 +26,8 @@ public class BasicSoldier : TroopBase
     private List<string> TroopEquipmentAppearanceTags = new() { "RightHandSword", "LeftHandShield", "TwoHandsBow" };
     private List<string> TroopAppearanceTags;
 
-    private List<string> currentAppearanceTags = new();
+
+    private int AppearanceRange = 3;
 
     protected override void Awake()
     {
@@ -35,6 +36,11 @@ public class BasicSoldier : TroopBase
         TroopAppearanceTags.AddRange(TroopPrefabTags);
         TroopAppearanceTags.AddRange(TroopEquipmentAppearanceTags);
         rigBuilders = GetComponentsInChildren<RigBuilder>(true);
+        //Increase the move and attack range by the appearance range
+        //So that army won't collide with each other
+        MoveRange += AppearanceRange;
+        AttackRange += AppearanceRange;
+
         base.Awake();
     }
 
