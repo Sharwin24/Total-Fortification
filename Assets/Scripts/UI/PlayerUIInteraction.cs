@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Linq;
 
 public class PlayerUIInteraction : MonoBehaviour
 {
@@ -27,8 +28,7 @@ public class PlayerUIInteraction : MonoBehaviour
     void Update()
     {
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
-        {
+        if (Mouse.current.leftButton.wasReleasedThisFrame) {
             GetUiElementsClicked();
         }
 
@@ -48,5 +48,17 @@ public class PlayerUIInteraction : MonoBehaviour
             Debug.Log("Hit " + result.gameObject.name);
         }
     }
+
+    public IEnumerable<GameObject> GetRaycastTargets() {
+        List<RaycastResult> clickResults = new List<RaycastResult>();;
+
+        if (Mouse.current.leftButton.wasReleasedThisFrame) {
+            click_data.position = Mouse.current.position.ReadValue();
+
+            ui_Raycaster.Raycast(click_data, clickResults);
+        }
+
+        return clickResults.Select(target => target.gameObject);
+    } 
 
 }

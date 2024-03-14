@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour {
     public GameState gameState;
     public string nextLevel;
     public GameObject enemyManagement;
+    public GameObject playerManagement;
     public TextMeshProUGUI levelMessage;
     public TextMeshProUGUI turnMessage;
 
@@ -40,16 +41,13 @@ public class LevelManager : MonoBehaviour {
         print("TakeTurnsCoroutine triggered");
 
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
+        PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
         int troopsInTurn = troopQueue.Count;
         turnMessage.text = "Turn: " + turnCount;
 
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
                         
-            print("Loop entered");
-
-            // Add Game End Logic Here
-
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
@@ -63,10 +61,9 @@ public class LevelManager : MonoBehaviour {
             print(troopGameObject.tag);
 
             if (currentTroop.tag == "Ally") {
-                PlayerBehavior.TakeAction(troopGameObject);
-
+                print(playerBehavior);
+                StartCoroutine(playerBehavior.TakeAction(troopGameObject));
             } else if (currentTroop.tag == "Enemy") {
-                print("Jumping to EnemyBehavior.TakeAction()");
                 StartCoroutine(enemyBehavior.TakeAction(troopGameObject));
             } else {
                 throw new ArgumentException("Troop tag no recognized. Given: " + currentTroop.tag);

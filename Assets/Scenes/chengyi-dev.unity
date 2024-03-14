@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1445,6 +1445,10 @@ PrefabInstance:
       value: AllyBasicTroopArmy
       objectReference: {fileID: 0}
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_TagString
       value: Ally
       objectReference: {fileID: 0}
@@ -1490,11 +1494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1564,6 +1568,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroop
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1680,6 +1688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 482481530}
   - component: {fileID: 482481531}
+  - component: {fileID: 482481532}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1715,6 +1724,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerUI: {fileID: 1338914948}
+--- !u!114 &482481532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482481528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4df87b2374c4d6792538726995f978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &485543631 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8229187947021036297, guid: 4427cc24d1a44894d82ec7337f92c7a8, type: 3}
@@ -1780,6 +1801,10 @@ PrefabInstance:
       value: EnemyBasicTroopArmy
       objectReference: {fileID: 0}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -1793,7 +1818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.7046497
+      value: 7.042
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1825,11 +1850,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1973,6 +1998,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroop
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2745,6 +2774,7 @@ MonoBehaviour:
   gameState: 0
   nextLevel: 
   enemyManagement: {fileID: 89268894}
+  playerManagement: {fileID: 482481528}
   levelMessage: {fileID: 1619577448}
   turnMessage: {fileID: 1778647552}
 --- !u!1 &628654994 stripped
@@ -4105,6 +4135,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroop (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5604,6 +5638,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroop (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7537,6 +7575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroop (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37354517
@@ -8201,7 +8243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Turn 01 / 99
+  m_text: Turn 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -17,7 +17,6 @@ public class EnemyBehavior : MonoBehaviour
         current.transform.position = new Vector3(currentPosition.x, 1.32f, currentPosition.z);
 
         print("Enemy Taking Action");
-        // // Animator anim = currentTroop.GetComponent<Animator>();
         TroopBase currentTroop = current.GetComponent<TroopBase>();
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Ally");
         GameObject closestTarget = findClosestTarget(current.transform.position, targets);
