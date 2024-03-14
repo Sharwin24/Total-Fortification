@@ -17,6 +17,11 @@ TagManager:
   - Ally
   - DeploymentUI
   - CombatUI
+  - EnterBattleButton
+  - TroopBtn1
+  - TroopBtn2
+  - TroopBtn3
+  - TroopBtn4
   layers:
   - Default
   - TransparentFX

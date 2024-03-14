@@ -17,12 +17,18 @@ public class LevelManager : MonoBehaviour {
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
-    GameObject deploymentUI = GameObject.FindWithTag("DeploymentUI");
-    GameObject combatUI = GameObject.FindWithTag("CombatUI");
+    private GameObject deploymentUI;
+    private GameObject combatUI;
 
     void Start() {
         actionDone = false;
         gameState = GameState.COMBAT; // Initial setup for demonstration purposes
+        if (deploymentUI == null) {
+            deploymentUI = GameObject.FindWithTag("DeploymentUI");
+        }
+        if (combatUI == null) {
+            combatUI = GameObject.FindWithTag("CombatUI");
+        }
         if (enterBattleButton == null) {
             enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
         }
@@ -56,7 +62,7 @@ public class LevelManager : MonoBehaviour {
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
-            
+
             print("Loop entered");
 
             GameObject troopGameObject = troopQueue.Dequeue();
@@ -65,7 +71,7 @@ public class LevelManager : MonoBehaviour {
             if (troopGameObject == null) {
                 continue;
             }
-            
+
             TroopBase currentTroop = troopGameObject.GetComponent<TroopBase>();
 
             print(troopGameObject.tag);
@@ -87,7 +93,7 @@ public class LevelManager : MonoBehaviour {
             actionDone = false;
 
             troopQueue.Enqueue(troopGameObject, currentTroop.Speed);
-            
+
         }
 
         if (gameState == GameState.COMBAT) {
