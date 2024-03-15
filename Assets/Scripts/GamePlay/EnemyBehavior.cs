@@ -12,12 +12,9 @@ public class EnemyBehavior : MonoBehaviour
     public IEnumerator TakeAction(GameObject current)
     {
 
-        // Patch - forcing height to be 1.32 - animation changes y-coord for some reason
-        Vector3 currentPosition = current.transform.position;
-        current.transform.position = new Vector3(currentPosition.x, 1.32f, currentPosition.z);
+        float currentPositionY = current.transform.position.y;
 
         print("Enemy Taking Action");
-        // // Animator anim = currentTroop.GetComponent<Animator>();
         TroopBase currentTroop = current.GetComponent<TroopBase>();
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Ally");
         GameObject closestTarget = findClosestTarget(current.transform.position, targets);
@@ -33,19 +30,24 @@ public class EnemyBehavior : MonoBehaviour
         } else {
             print("Ally troop in range");
             Attack(currentTroop, closestTargetTroop);
-            yield return new WaitForSeconds(2); // wait for animation to complete
+            yield return new WaitForSeconds(3); // wait for animation to complete
         }
 
         // Mark action as done
         print("Enemy Action done");
         LevelManager.actionDone = true;
+        Vector3 updatedPosition = current.transform.position;
+        current.transform.position = new Vector3(updatedPosition.x, currentPositionY, updatedPosition.z);
     }
 
     private void Attack(TroopBase currentTroop, TroopBase targetTroop) {
-        currentTroop.Attack(targetTroop);
+        StartCoroutine(currentTroop.Attack(targetTroop));
     }
 
     private bool inAttackRange(GameObject current, TroopBase currentTroop, GameObject target) {
+        print("Attack range: " + currentTroop.AttackRange);
+        print("Distance: " + Vector3.Distance(target.transform.position, current.transform.position));
+
         return Vector3.Distance(target.transform.position, current.transform.position) <= currentTroop.AttackRange;
     }
 
@@ -53,7 +55,7 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 moverPosition = current.transform.position;
         Vector3 targetPosition = target.transform.position;
         float moveDistance = currentTroop.MoveRange;
-        float stopDistance = currentTroop.AttackRange;
+        float stopDistance = currentTroop.AttackRange - 0.5f;
 
         Vector3 direction = (targetPosition - moverPosition).normalized;
         float distanceToTarget = Vector3.Distance(moverPosition, targetPosition);

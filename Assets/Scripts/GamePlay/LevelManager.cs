@@ -54,20 +54,22 @@ public class LevelManager : MonoBehaviour {
         print("TakeTurnsCoroutine triggered");
 
         // Start in Deployment Phase and when button is triggered, switch to Combat Phase
-        DisplayUI(gameState);
+        // DisplayUI(gameState);
         while (gameState == GameState.DEPLOYMENT) {
 
             // Allow Deployment Phase to run
             // Squares can be clicked and troops can be selected from inventory
 
             yield return new WaitForSeconds(2);
+            print("waiting");
         }
+
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         int turnCount = 1;
         int troopsInTurn = troopQueue.Count;
         turnMessage.text = "Turn: " + turnCount;
 
-        DisplayUI(gameState);
+        // DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
             print("Loop entered");
 
@@ -116,6 +118,7 @@ public class LevelManager : MonoBehaviour {
             gameState = GameState.END;
             // Handle end of combat
         }
+        yield return new WaitForSeconds(0);
     }
 
     void DisplayUI(GameState gameState) {
