@@ -22,7 +22,7 @@ public class DeploymentManager : MonoBehaviour {
 
     private void Awake() {
         for (int i = 0; i < numTroops; i++) {
-            troopCounts[i] = 0;
+            troopCounts[i] = 2;
         }
     }
 

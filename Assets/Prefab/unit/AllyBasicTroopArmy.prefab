@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 479756}
   - component: {fileID: -6986695461307080538}
+  - component: {fileID: 6786047213649879871}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy
   m_TagString: Ally
@@ -63,6 +64,27 @@ MonoBehaviour:
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
   rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
   rigBuilders: []
+--- !u!65 &6786047213649879871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118096}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6, y: 4, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 1}
 --- !u!1 &29636264316044954
 GameObject:
   m_ObjectHideFlags: 0

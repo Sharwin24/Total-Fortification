@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - MainCrosshair
   - RightHandSword
   - LeftHandShield
   - HeavyArmorMelee
@@ -22,6 +21,7 @@ TagManager:
   - TroopBtn2
   - TroopBtn3
   - TroopBtn4
+  - SelectionIndicator
   layers:
   - Default
   - TransparentFX

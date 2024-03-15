@@ -316,6 +316,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 119458, guid: a6ebdfa58063c6e40a19612fc9013404, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4626065080487523278}
+    - targetCorrespondingSourceObject: {fileID: 119458, guid: a6ebdfa58063c6e40a19612fc9013404, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6738240664719820088}
+    - targetCorrespondingSourceObject: {fileID: 119458, guid: a6ebdfa58063c6e40a19612fc9013404, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6628796270924992208}
   m_SourcePrefab: {fileID: 100100000, guid: a6ebdfa58063c6e40a19612fc9013404, type: 3}
 --- !u!4 &8177887162648943343 stripped
 Transform:
@@ -347,3 +353,67 @@ MonoBehaviour:
   _isEnemy: 1
   healthBar: {fileID: 8854010353315784483}
   enemies: []
+--- !u!64 &6738240664719820088
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177887162649023789}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!23 &6628796270924992208
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177887162649023789}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
