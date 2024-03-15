@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1565,6 +1565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroop
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.21701097
@@ -1607,11 +1611,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1775,6 +1779,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: equipments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: equipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d57cb1239632434a9a87de1aa3ba6d0, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy
@@ -1974,6 +1986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBasicTroop
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.76
@@ -2016,11 +2032,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2745,6 +2761,7 @@ MonoBehaviour:
   gameState: 0
   nextLevel: 
   enemyManagement: {fileID: 89268894}
+  enterBattleButton: {fileID: 0}
   levelMessage: {fileID: 1619577448}
   turnMessage: {fileID: 1778647552}
 --- !u!1 &628654994 stripped
@@ -4106,6 +4123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroop (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.023
@@ -4156,11 +4177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5605,6 +5626,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBasicTroop (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.17
@@ -5655,11 +5680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9c8e883bc7e1acc4487a2d290e4c6f86, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7537,6 +7562,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroop (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37354517
@@ -7587,11 +7616,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

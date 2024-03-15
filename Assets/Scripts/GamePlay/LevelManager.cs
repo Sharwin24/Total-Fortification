@@ -17,8 +17,8 @@ public class LevelManager : MonoBehaviour {
     public Button enterBattleButton;
     public TextMeshProUGUI levelMessage;
     public TextMeshProUGUI turnMessage;
-    public GameObject deploymentUI;
-    public GameObject combatUI;
+    // public GameObject deploymentUI;
+    // public GameObject combatUI;
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
@@ -26,17 +26,18 @@ public class LevelManager : MonoBehaviour {
         levelMessage.text = "";
         turnMessage.text = "";
         actionDone = false;
-        gameState = GameState.DEPLOYMENT; // Initial setup for demonstration purposes
-        if (deploymentUI == null) {
-            deploymentUI = GameObject.FindWithTag("DeploymentUI");
-        }
-        if (combatUI == null) {
-            combatUI = GameObject.FindWithTag("CombatUI");
-        }
-        if (enterBattleButton == null) {
-            enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
-        }
-        enterBattleButton.onClick.AddListener(TaskOnClick);
+        // gameState = GameState.DEPLOYMENT; // Initial setup for demonstration purposes
+        // if (deploymentUI == null) {
+        //     deploymentUI = GameObject.FindWithTag("DeploymentUI");
+        // }
+        // if (combatUI == null) {
+        //     combatUI = GameObject.FindWithTag("CombatUI");
+        // }
+        // if (enterBattleButton == null) {
+        //     enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
+        // }
+        // enterBattleButton.onClick.AddListener(TaskOnClick);
+        gameState = GameState.COMBAT;
         InitializeTroops();
         StartCoroutine(TakeTurnsCoroutine());
     }
@@ -54,20 +55,20 @@ public class LevelManager : MonoBehaviour {
         print("TakeTurnsCoroutine triggered");
 
         // Start in Deployment Phase and when button is triggered, switch to Combat Phase
-        DisplayUI(gameState);
-        while (gameState == GameState.DEPLOYMENT) {
+        // DisplayUI(gameState);
+        // while (gameState == GameState.DEPLOYMENT) {
 
-            // Allow Deployment Phase to run
-            // Squares can be clicked and troops can be selected from inventory
+        //     // Allow Deployment Phase to run
+        //     // Squares can be clicked and troops can be selected from inventory
 
-            yield return new WaitForSeconds(2);
-        }
+        //     yield return new WaitForSeconds(2);
+        // }
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         int turnCount = 1;
         int troopsInTurn = troopQueue.Count;
         turnMessage.text = "Turn: " + turnCount;
 
-        DisplayUI(gameState);
+        // DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
             print("Loop entered");
 
@@ -116,17 +117,18 @@ public class LevelManager : MonoBehaviour {
             gameState = GameState.END;
             // Handle end of combat
         }
+        yield return new WaitForSeconds(0);
     }
 
-    void DisplayUI(GameState gameState) {
-        if (gameState == GameState.DEPLOYMENT) {
-            combatUI.SetActive(false);
-            deploymentUI.SetActive(true);
-        } else if (gameState == GameState.COMBAT) {
-            deploymentUI.SetActive(false);
-            combatUI.SetActive(true);
-        }
-    }
+    // void DisplayUI(GameState gameState) {
+    //     if (gameState == GameState.DEPLOYMENT) {
+    //         combatUI.SetActive(false);
+    //         deploymentUI.SetActive(true);
+    //     } else if (gameState == GameState.COMBAT) {
+    //         deploymentUI.SetActive(false);
+    //         combatUI.SetActive(true);
+    //     }
+    // }
 
     public void TaskOnClick() {
         gameState = GameState.COMBAT;

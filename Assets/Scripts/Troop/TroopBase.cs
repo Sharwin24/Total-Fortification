@@ -69,18 +69,17 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     }
     public virtual IEnumerator Attack(ITroop target)
     {
-        if (target == null)
-        {
+        if (target == null) {
             Debug.Log("No target to attack");
             yield return null;
         }
-        // Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Vector3 position = ((TroopBase)target).transform.position;
-        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
 
+        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
         UpdateAnimationState(2, false);
+
         target.TakeDamage(AttackPower);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         Debug.Log("Attacking");
 
         UpdateAnimationState(0);
@@ -94,8 +93,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         while (Vector3.Distance(transform.position, position) > 0.35f)
         {
             transform.position = Vector3.MoveTowards(transform.position, position, Speed * Time.deltaTime);
-            // yield return null;
-             yield return new WaitForSeconds(0f);
+            yield return new WaitForSeconds(0f);
         }
 
         UpdateAnimationState(0);// Switch to idle animation
@@ -112,7 +110,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         if (Health <= 0)
         {
             UpdateAnimationState(3);
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 3);
         }
     }
     private void UpdateAnimationState(int state = 0, bool applyRootMotion = true)
