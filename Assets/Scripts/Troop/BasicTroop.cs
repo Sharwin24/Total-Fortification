@@ -26,7 +26,6 @@ public class BasicSoldier : TroopBase
     private List<string> TroopEquipmentAppearanceTags = new() { "RightHandSword", "LeftHandShield", "TwoHandsBow" };
     private List<string> TroopAppearanceTags;
 
-    private List<string> currentAppearanceTags = new();
 
     protected override void Awake()
     {
@@ -35,6 +34,8 @@ public class BasicSoldier : TroopBase
         TroopAppearanceTags.AddRange(TroopPrefabTags);
         TroopAppearanceTags.AddRange(TroopEquipmentAppearanceTags);
         rigBuilders = GetComponentsInChildren<RigBuilder>(true);
+
+
         base.Awake();
     }
 
