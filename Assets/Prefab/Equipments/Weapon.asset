@@ -22,6 +22,6 @@ MonoBehaviour:
   equipmentType: 0
   equipmentName: 
   equipmentDescription: 
-  isWeapon: 1
+  isWeapon: 0
   isArmor: 0
-  isRangeWeapon: 1
+  isRangeWeapon: 0

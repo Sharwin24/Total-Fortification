@@ -51,11 +51,12 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);
+        EquipItemInList();
         
     }
     void Start()
     {
-       EquipItemInList();
+       
     }
 
     //Only called for enemy troops.

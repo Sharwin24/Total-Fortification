@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
   healthModifier: 12
-  armorModifier: 6
+  armorModifier: 3
   attackPowerModifier: 3
   attackRangeModifier: 5
   moveRangeModifier: 4
   speedModifier: 3
   equipmentIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  equipmentType: 2
+  equipmentType: 5
   equipmentName: Shield
   equipmentDescription: test
-  isWeapon: 1
+  isWeapon: 0
   isArmor: 0
   isRangeWeapon: 0
