@@ -30,7 +30,7 @@ public class PlayerBehavior : MonoBehaviour
         print("Player Taking Action!");
 
         Vector3 currentPosition = current.transform.position;
-        current.transform.position = new Vector3(currentPosition.x, 1.32f, currentPosition.z);
+        current.transform.position = new Vector3(currentPosition.x, 1f, currentPosition.z);
 
         // Render move range and attack range circle
         (GameObject moveRendererObject, GameObject attackRendererObject) = RenderRanges(current);
@@ -66,7 +66,7 @@ public class PlayerBehavior : MonoBehaviour
         if (intendedMoveDistance <= playerTroop.MoveRange) {
             Debug.Log("call MoveTo now");
             StartCoroutine(playerTroop.MoveTo(intendedPosition));
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(5);
             onComplete();
         } else {
             Debug.Log("Cannot move beyond MoveRange");

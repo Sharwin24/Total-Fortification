@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour {
         foreach (var troop in allTroops) {
             troopQueue.Enqueue(troop.gameObject, troop.Speed);
         }
+
     }
 
     IEnumerator TakeTurnsCoroutine() {
@@ -80,7 +81,9 @@ public class LevelManager : MonoBehaviour {
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
+
             if (troopGameObject == null) {
+                Debug.Log("In Game Troop Length " + troopQueue.Count);
                 troopsInTurn--;
                 continue;
             }
