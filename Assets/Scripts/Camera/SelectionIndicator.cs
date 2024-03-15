@@ -14,14 +14,16 @@ public class SelectionIndicator : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+#if false
         GameObject gameObject = mouseSelector.GetSelectedObject();
         if (gameObject != null) {
             // this.transform.position = gameObject.transform.position;
+            Debug.Log(gameObject.name);
             for (int i = 0; i < this.transform.childCount; i++) {
                 this.transform.GetChild(i).gameObject.SetActive(true);
             }
 
-            Rect visualRect = RendererBoundsInScreenSpace(mouseSelector.GetComponentInChildren<Renderer>());
+            Rect visualRect = RendererBoundsInScreenSpace(mouseSelector.GetComponentInChildren<MeshRenderer>());
             RectTransform rt = GetComponent<RectTransform>();
 
             rt.position = new Vector2(visualRect.xMin, visualRect.yMin);
@@ -31,7 +33,9 @@ public class SelectionIndicator : MonoBehaviour {
                 this.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
+#endif
     }
+
     static Rect RendererBoundsInScreenSpace(Renderer r) {
         // This is the space occupied by the object's visuals
         // in WORLD space.

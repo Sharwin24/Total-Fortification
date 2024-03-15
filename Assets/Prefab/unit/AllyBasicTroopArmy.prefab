@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 479756}
   - component: {fileID: -6986695461307080538}
+  - component: {fileID: 6786047213649879871}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy
   m_TagString: Ally
@@ -59,10 +60,33 @@ MonoBehaviour:
   isRange: 0
   equipments: []
   healthBar: {fileID: 5375754419733436611}
+  AppearanceRange: 4
+  MinimumContactDistance: 0
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
   rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
   rigBuilders: []
+--- !u!65 &6786047213649879871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118096}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6, y: 4, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 1}
 --- !u!1 &29636264316044954
 GameObject:
   m_ObjectHideFlags: 0
@@ -6076,7 +6100,7 @@ GameObject:
   - component: {fileID: 7073876416793483341}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (2)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8855,7 +8879,7 @@ GameObject:
   - component: {fileID: 6241233862558999294}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (3)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11593,7 +11617,7 @@ GameObject:
   - component: {fileID: 141984379252112664}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (5)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13924,7 +13948,7 @@ GameObject:
   - component: {fileID: 5262162280673735046}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (4)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14938,7 +14962,7 @@ GameObject:
   - component: {fileID: 3827083355939354776}
   m_Layer: 0
   m_Name: AllyBasicTroopArmy (1)
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18484,7 +18508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18508,7 +18532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.1740112
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

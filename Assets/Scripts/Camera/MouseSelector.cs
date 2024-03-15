@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class MouseSelector : MonoBehaviour {
 
-    public Color selectedObjectColor = Color.green;
-
     GameObject selectedObject;
-    Color previouslySelectedObjectColor;
 
     // Start is called before the first frame update
     void Start() {
@@ -16,39 +13,31 @@ public class MouseSelector : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        // Get Ray from mouse position on screen
-        Vector3 cameraPosition = Camera.main.transform.position;
-        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 directionToWorldPoint = worldPoint - cameraPosition;
-        //Ray ray = Camera.main.ScreenToWorldPoint(mousePosition);
-        //Debug.Log(ray);
-        if (Physics.Raycast(cameraPosition, directionToWorldPoint, out RaycastHit hitInfo, Mathf.Infinity)) {
-            GameObject hitObject = hitInfo.transform.root.gameObject;
-            Debug.Log(hitObject.name);
-            SelectObject(hitObject);
-        } else {
-            ClearSelectedObject();
+        if (Input.GetMouseButtonDown(0)) {
+            // Get Ray from mouse position on screen
+            Vector3 cameraPosition = Camera.main.transform.position;
+            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100f));
+            Vector3 directionToWorldPoint = Vector3.Normalize(worldPoint - cameraPosition);
+            Debug.DrawRay(cameraPosition, directionToWorldPoint, Color.red);
+            if (Physics.Raycast(cameraPosition, directionToWorldPoint, out RaycastHit hitInfo, Mathf.Infinity)) {
+                GameObject hitObject = hitInfo.transform.gameObject;
+                Debug.Log(hitObject.name);
+                SelectObject(hitObject);
+            } else {
+                ClearSelectedObject();
+            }
         }
     }
 
+    /// <summary>
+    /// Returns the currently selected object, may be null.
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetSelectedObject() {
         return selectedObject;
     }
 
-    void SetObjectColor(Color color) {
-        if (true) return;
-        Renderer[] rs = selectedObject.GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in rs) {
-            Material m = r.material;
-            m.color = color;
-            r.material = m;
-        }
-    }
-
     void ClearSelectedObject() {
-        if (selectedObject == null) return;
-
-        SetObjectColor(previouslySelectedObjectColor);
         selectedObject = null;
     }
 
@@ -57,9 +46,7 @@ public class MouseSelector : MonoBehaviour {
             if (obj == selectedObject) return;
             ClearSelectedObject();
         }
-        previouslySelectedObjectColor = obj.GetComponent<Renderer>().material.color;
         selectedObject = obj;
-
-        SetObjectColor(selectedObjectColor);
+        Debug.Log("Selected Object: " + selectedObject.name);
     }
 }
