@@ -14,50 +14,94 @@ public class PlayerBehavior : MonoBehaviour
     public GameObject playerUI;
 
     PlayerUIInteraction graphicUIRaycast;
+    MouseSelector selector;
+    Button moveButton;
+    Button attackButton;
 
     void Start() {
         graphicUIRaycast = GetComponent<PlayerUIInteraction>();
+        selector = Camera.main.GetComponent<MouseSelector>();
+        moveButton = GameObject.FindGameObjectWithTag("MoveButton").GetComponent<Button>();
+        attackButton = GameObject.FindGameObjectWithTag("AttackButton").GetComponent<Button>();
     }
 
-   public IEnumerator TakeAction(GameObject current)
-   {
+   public IEnumerator TakeAction(GameObject current) {
+
+        print("Player Taking Action!");
+
         Vector3 currentPosition = current.transform.position;
         current.transform.position = new Vector3(currentPosition.x, 1.32f, currentPosition.z);
 
-        // render move range and attack range circle
+        // Render move range and attack range circle
         (GameObject moveRendererObject, GameObject attackRendererObject) = RenderRanges(current);
-        yield return new WaitForSeconds(10);
 
-        // wait for move or attack
-        while (true) {
-            
-            // 1. Select an Enemy troop and click attack
-            // Need to select an gameobject as target
-            if (chooseToAttack()) {
+    
+        bool actionTaken = false;
 
-            }
+        moveButton.onClick.AddListener(() => StartCoroutine(MovePlayer(current, () => actionTaken = true)));
+        attackButton.onClick.AddListener(() => StartCoroutine(AttackEnemy(current, () => actionTaken = true)));
 
-            // 2. Click on ground within the green circle to moves
+        // Wait for action to be taken
+        yield return new WaitUntil(() => actionTaken);
 
+        moveButton.onClick.RemoveAllListeners();
+        attackButton.onClick.RemoveAllListeners();
 
-            yield return null; // wait for next frame
-        }
-
-        // Mark action as done
-        yield return new WaitForSeconds(0);
         Destroy(moveRendererObject);
         Destroy(attackRendererObject);
         LevelManager.actionDone = true;
     }
 
-    private bool chooseToAttack() {
-        
-        bool attackClicked = graphicUIRaycast.GetRaycastTargets().Any(obj => obj.name == "AttackButton");
-        if (attackClicked) {
-            // do some work
-        }
+    private IEnumerator MovePlayer(GameObject player, Action onComplete) {
+        Debug.Log("Move initiated.");
 
-        return false;
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
+        GameObject selectedRegion = selector.GetSelectedObject();
+        Vector3 selectedPosition = selectedRegion.transform.position;
+        Vector3 intendedPosition = new Vector3(selectedPosition.x, player.transform.position.y, selectedPosition.z);
+        float intendedMoveDistance = Vector3.Distance(player.transform.position, intendedPosition);
+        
+        TroopBase playerTroop = player.GetComponent<TroopBase>();
+        if (intendedMoveDistance <= playerTroop.MoveRange) {
+            Debug.Log("call MoveTo now");
+            StartCoroutine(playerTroop.MoveTo(intendedPosition));
+            yield return new WaitForSeconds(3);
+            onComplete();
+        } else {
+            Debug.Log("Cannot move beyond MoveRange");
+            yield return new WaitForSeconds(0);
+        }
+    }
+
+    private IEnumerator AttackEnemy(GameObject player, Action onComplete) {
+        Debug.Log("Attack initiated.");
+        yield return new WaitUntil(
+            () => Input.GetMouseButtonDown(0) && selector.GetSelectedObject() != null);
+
+        GameObject targetEnemy = selector.GetSelectedObject();
+
+        if (targetEnemy.tag == "Enemy") {
+        
+            Vector3 enemyPosition = targetEnemy.transform.position;
+
+            TroopBase playerTroop = player.GetComponent<TroopBase>();
+            TroopBase enemyTroop = targetEnemy.GetComponent<TroopBase>();
+
+            float intendedAttackDistance = Vector3.Distance(player.transform.position, enemyPosition);
+
+            if (intendedAttackDistance <= playerTroop.AttackRange) {
+                StartCoroutine(playerTroop.Attack(enemyTroop));
+                yield return new WaitForSeconds(3);
+                onComplete();
+            } else {
+                Debug.Log("Cannot attack beyond ATtackRange");
+                yield return new WaitForSeconds(0);
+            }
+        } else {
+            Debug.Log("Can only attack troop");
+            yield return new WaitForSeconds(0);
+        }    
     }
 
     private (GameObject moveRendererObject, GameObject attackRendererObject) RenderRanges(GameObject current) {

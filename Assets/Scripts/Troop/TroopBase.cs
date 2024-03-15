@@ -87,6 +87,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual IEnumerator MoveTo(Vector3 position)
     {
+        print("Moving to " + position);
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
         UpdateAnimationState(1,false); // Start walking/running animation
 

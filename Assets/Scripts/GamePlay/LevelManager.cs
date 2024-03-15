@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour {
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
+
     void Start() {
         levelMessage.text = "";
         turnMessage.text = "";
@@ -65,6 +66,8 @@ public class LevelManager : MonoBehaviour {
             print("waiting");
         }
 
+        deploymentUI.SetActive(false);
+
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
@@ -85,6 +88,7 @@ public class LevelManager : MonoBehaviour {
             TroopBase currentTroop = troopGameObject.GetComponent<TroopBase>();
 
             print(troopGameObject.tag);
+            Vector3 currentTroopPosition = troopGameObject.transform.position;
 
             if (currentTroop.tag == "Ally") {
                 print(playerBehavior);
