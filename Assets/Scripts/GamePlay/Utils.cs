@@ -11,7 +11,7 @@ public class PriorityQueue<T> {
 
     public void Enqueue(T item, float priority) {
         elements.Add(new KeyValuePair<T, float>(item, priority));
-        elements = elements.OrderBy(pair => pair.Value).ToList();
+        elements = elements.OrderByDescending(pair => pair.Value).ToList();
     }
 
     public T Dequeue() {
@@ -36,4 +36,22 @@ public class PriorityQueue<T> {
 
     public bool IsEmpty() => Count == 0;
 
+    public void Reverse() {
+        for (int i = 0; i < elements.Count; i++)
+        {
+            var item = elements[i].Key;
+            var invertedPriority = elements[i].Value * -1;
+            elements[i] = new KeyValuePair<T, float>(item, invertedPriority);
+        }
+
+        elements.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
+    }
+
+    public List<T> ToList() {
+        List<T> result = new List<T>();
+        foreach (KeyValuePair<T, float> pair in elements) {
+            result.Add(pair.Key);
+        }
+        return result;
+    }
 }

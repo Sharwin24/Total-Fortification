@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
+using Unity.IO.LowLevel.Unsafe;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
 
@@ -64,7 +66,6 @@ public class LevelManager : MonoBehaviour {
             // Squares can be clicked and troops can be selected from inventory
 
             yield return new WaitForSeconds(2);
-            print("waiting");
         }
 
         deploymentUI.SetActive(false);
@@ -108,21 +109,29 @@ public class LevelManager : MonoBehaviour {
             }
             actionDone = false;
 
-            troopQueue.Enqueue(troopGameObject, currentTroop.Speed);
+            troopQueue.Enqueue(troopGameObject, -1 * currentTroop.Speed);
+
+            // Check Game End
+            List<GameObject> allTroops = troopQueue.ToList();
+
+            if (CheckIfTagExists(allTroops, "Enemy")) {
+                levelMessage.text = "You win!";
+                break;
+            } else if (CheckIfTagExists(allTroops, "Ally")) {
+                levelMessage.text = "You lost!";
+                break;
+            }
 
             troopsInTurn--;
             if (troopsInTurn <= 0) {
                 turnCount++;
                 turnMessage.text = "Turn: " + turnCount;
                 troopsInTurn = troopQueue.Count; // Reset the counter for the next cycle of turns
+                troopQueue.Reverse();
             }
-            
         }
 
-        if (gameState == GameState.COMBAT) {
-            gameState = GameState.END;
-            // Handle end of combat
-        }
+    
         yield return new WaitForSeconds(0);
     }
 
@@ -139,6 +148,19 @@ public class LevelManager : MonoBehaviour {
     public void TaskOnClick() {
         gameState = GameState.COMBAT;
     }
+
+    bool CheckIfTagExists(List<GameObject> allTroops, string tag) {
+        int count = 0;
+        foreach (GameObject troop in allTroops) {
+            if (troop != null && troop.tag == tag) {
+                count++;
+            }
+        }
+
+        return count == 0;
+    }
+
+
 
 
 

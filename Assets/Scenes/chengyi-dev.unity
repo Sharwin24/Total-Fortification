@@ -1401,6 +1401,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: equipments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: equipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 09cd3a3d15bafe74da1c456f7dc5c08d, type: 2}
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy
@@ -1838,6 +1854,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: equipments.Array.size
       value: 1
@@ -4279,7 +4303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 118096, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4331,11 +4355,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: e244e55a402c1cf4c8e7ec5ee144384e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
