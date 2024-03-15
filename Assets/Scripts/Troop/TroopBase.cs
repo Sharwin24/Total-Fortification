@@ -33,15 +33,13 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     protected Animator[] animators;
 
     public int AppearanceRange = 2;
-    public float MinimumContactDistance;
 
     protected virtual void Awake()
     {
         //Increase the move and attack range by the appearance range
         //So that army won't collide with each other
-        // MoveRange += AppearanceRange;
-        // AttackRange += AppearanceRange;
-        // MinimumContactDistance = AppearanceRange + 1;
+        MoveRange += AppearanceRange;
+        AttackRange += AppearanceRange;
         // Initialize each body part and add it to the dictionary
         BodyParts.Add(EquipmentType.Head, new BodyPart(EquipmentType.Head));
         BodyParts.Add(EquipmentType.Chest, new BodyPart(EquipmentType.Chest));
@@ -87,14 +85,16 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual IEnumerator MoveTo(Vector3 position)
     {
+        print("Moving to " + position);
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
         UpdateAnimationState(1,false); // Start walking/running animation
 
-        while (Vector3.Distance(transform.position, position) > 0.35f)
+        while (Vector3.Distance(transform.position, position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, position, Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, position, 2 * Time.deltaTime);
             yield return new WaitForSeconds(0f);
         }
+        transform.position = new Vector3(position.x, transform.position.y, position.z);
 
         UpdateAnimationState(0);// Switch to idle animation
 

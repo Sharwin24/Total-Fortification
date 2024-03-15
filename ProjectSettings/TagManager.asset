@@ -22,6 +22,8 @@ TagManager:
   - TroopBtn3
   - TroopBtn4
   - SelectionIndicator
+  - MoveButton
+  - AttackButton
   layers:
   - Default
   - TransparentFX

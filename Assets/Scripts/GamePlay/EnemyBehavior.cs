@@ -25,7 +25,7 @@ public class EnemyBehavior : MonoBehaviour
             print("Ally troop not in range");
 
             MoveTowardTarget(current, currentTroop, closestTarget); 
-            yield return new WaitForSeconds(3); // wait for move to complete
+            yield return new WaitForSeconds(5); // wait for move to complete
 
         } else {
             print("Ally troop in range");
