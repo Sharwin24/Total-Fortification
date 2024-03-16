@@ -34,6 +34,8 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public int AppearanceRange = 2;
 
+    public int MoveSpeed = 2;
+
     protected virtual void Awake()
     {
         //Increase the move and attack range by the appearance range
@@ -91,7 +93,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         while (Vector3.Distance(transform.position, position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, position, 2 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, position, MoveSpeed * Time.deltaTime);
             yield return new WaitForSeconds(0f);
         }
         transform.position = new Vector3(position.x, transform.position.y, position.z);

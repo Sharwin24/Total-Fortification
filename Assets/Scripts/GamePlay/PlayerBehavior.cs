@@ -57,16 +57,17 @@ public class PlayerBehavior : MonoBehaviour
 
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
 
-        GameObject selectedRegion = selector.GetSelectedObject();
-        Vector3 selectedPosition = selectedRegion.transform.position;
+        Vector3 selectedPosition = selector.GetSelectedPosition();
         Vector3 intendedPosition = new Vector3(selectedPosition.x, player.transform.position.y, selectedPosition.z);
         float intendedMoveDistance = Vector3.Distance(player.transform.position, intendedPosition);
         
         TroopBase playerTroop = player.GetComponent<TroopBase>();
+        // Time needed to move to the intended position
+        float timeNeeded = intendedMoveDistance / playerTroop.MoveSpeed;
         if (intendedMoveDistance <= playerTroop.MoveRange) {
             Debug.Log("call MoveTo now");
             StartCoroutine(playerTroop.MoveTo(intendedPosition));
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(timeNeeded);
             onComplete();
         } else {
             Debug.Log("Cannot move beyond MoveRange");
