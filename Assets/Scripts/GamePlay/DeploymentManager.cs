@@ -54,7 +54,7 @@ public class DeploymentManager : MonoBehaviour {
     }
 
     private void DeselectAll() {
-        foreach(var i in troopIcons) {
+        foreach (var i in troopIcons) {
             i.color = Color.white;
         }
     }
@@ -68,6 +68,7 @@ public class DeploymentManager : MonoBehaviour {
         DeselectAll();
         SelectedTroop(icon);
         int index = tagToTroopIndex[icon.tag];
+        if (index >= allies.Count) return;
         var troop = allies[index];
         print("Selected troop: " + troop.name); // Troop should visually appear selected somehow
         OpenEquipmentManager(troop);
