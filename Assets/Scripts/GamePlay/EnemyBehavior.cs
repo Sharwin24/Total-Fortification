@@ -23,9 +23,9 @@ public class EnemyBehavior : MonoBehaviour
         
         if (!inAttackRange(current, currentTroop, closestTarget)) {
             print("Ally troop not in range");
-
-            MoveTowardTarget(current, currentTroop, closestTarget); 
-            yield return new WaitForSeconds(5); // wait for move to complete
+            //Wait for the move time to complete
+            float moveTime = MoveTowardTarget(current, currentTroop, closestTarget); 
+            yield return new WaitForSeconds(moveTime);
 
         } else {
             print("Ally troop in range");
@@ -51,7 +51,7 @@ public class EnemyBehavior : MonoBehaviour
         return Vector3.Distance(target.transform.position, current.transform.position) <= currentTroop.AttackRange;
     }
 
-    private void MoveTowardTarget(GameObject current, TroopBase currentTroop, GameObject target) {
+    private float MoveTowardTarget(GameObject current, TroopBase currentTroop, GameObject target) {
         Vector3 moverPosition = current.transform.position;
         Vector3 targetPosition = target.transform.position;
         float moveDistance = currentTroop.MoveRange;
@@ -64,6 +64,8 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 finalPosition = moverPosition + direction * moveDistanceAdjusted;
 
         StartCoroutine(currentTroop.MoveTo(finalPosition));
+
+        return moveDistanceAdjusted / currentTroop.MoveSpeed;
     }
 
 
