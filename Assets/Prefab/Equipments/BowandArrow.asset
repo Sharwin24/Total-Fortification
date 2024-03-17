@@ -19,7 +19,7 @@ MonoBehaviour:
   moveRangeModifier: 0
   speedModifier: 0
   equipmentIcon: {fileID: 21300000, guid: ca1daa8ee7742fd41a3401e3c97e4868, type: 3}
-  equipmentType: 0
+  equipmentType: 2
   equipmentName: Bow
   equipmentDescription: 
   isWeapon: 1

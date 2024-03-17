@@ -31,6 +31,13 @@ TagManager:
   - HeavyArmorEquipment
   - ResetEquipmentButton
   - ApplyEquipmentButton
+  - TroopBtn5
+  - TroopBtn6
+  - TroopBtn7
+  - TroopBtn8
+  - TroopBtn9
+  - TroopBtn10
+  - TroopBtn11
   layers:
   - Default
   - TransparentFX

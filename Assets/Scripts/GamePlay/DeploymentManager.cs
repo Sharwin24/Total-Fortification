@@ -25,7 +25,14 @@ public class DeploymentManager : MonoBehaviour {
         { "TroopBtn1", 0 },
         { "TroopBtn2", 1 },
         { "TroopBtn3", 2 },
-        { "TroopBtn4", 3 }
+        { "TroopBtn4", 3 },
+        { "TroopBtn5", 4 },
+        { "TroopBtn6", 5 },
+        { "TroopBtn7", 6 },
+        { "TroopBtn8", 7 },
+        { "TroopBtn9", 8 },
+        { "TroopBtn10", 9 },
+        { "TroopBtn11", 10 },
     };
 
     private readonly Dictionary<string, int> tagToEquipmentIndex = new() {
@@ -41,7 +48,7 @@ public class DeploymentManager : MonoBehaviour {
 
     // Maps Troop Index to list of equipment selected (bool), index of equipment selected matches equipment above
     private Dictionary<int, List<bool>> troopIndexToEquipmentSelected = new();
-    private List<GameObject> allies;
+    private List<TroopBase> allies;
     private Color selectedColor = new(0, 1, 0, 0.5f);
     private int currentlySelectedTroopIndex;
 
@@ -61,8 +68,8 @@ public class DeploymentManager : MonoBehaviour {
         }
         resetEquipmentButton.onClick.AddListener(() => OnResetEquipmentButtonClicked());
         applyEquipmentButton.onClick.AddListener(() => OnApplyEquipmentButtonClicked());
-        // Collect all GameObjects with Ally tag
-        allies = GameObject.FindGameObjectsWithTag("Ally").ToList();
+        // Collect all TroopBase objects with Ally tag
+        allies = GameObject.FindGameObjectsWithTag("Ally").Select(go => go.GetComponent<TroopBase>()).ToList();
         Debug.Log("DeploymentManager found " + allies.Count + " allies");
         // Populate equipment dictionary with no equipment
         for (int i = 0; i < allies.Count; i++) {
@@ -96,7 +103,7 @@ public class DeploymentManager : MonoBehaviour {
         currentlySelectedTroopIndex = -1;
     }
 
-    private GameObject GetTroopFromIcon(Image troopIcon) {
+    private TroopBase GetTroopFromIcon(Image troopIcon) {
         int index = tagToTroopIndex[troopIcon.tag];
         if (index >= allies.Count) return null;
         return allies[index];
@@ -133,22 +140,22 @@ public class DeploymentManager : MonoBehaviour {
 
     private void OnApplyEquipmentButtonClicked() {
         // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
-        var allyGameObject = allies[currentlySelectedTroopIndex];
-        BasicSoldier selectedAlly = allyGameObject.GetComponentInChildren<BasicSoldier>();
+        TroopBase selectedAlly = allies[currentlySelectedTroopIndex];
         for (int i = 0; i < equipmentIcons.Count; i++) {
             if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
             var equipmentGameObject = equipmentObjects[i];
             if (equipmentGameObject != null) {
-                // TODO: Create IEquipment components in prefabs
-                var equipmentToApply = equipmentGameObject;//.GetComponentInChildren<IEquipment>();
-                if (equipmentToApply == null) return;
-                selectedAlly.EquipItem(equipmentToApply);
-                print("Applied " + equipmentToApply.EquipmentName + " to " + selectedAlly.name);
+                if (equipmentGameObject == null) {
+                    Debug.LogError("EquipmentBase object is null, cannot apply");
+                    return;
+                }
+                selectedAlly.EquipItem(equipmentGameObject);
+                print("Applied " + equipmentGameObject.EquipmentName + " to " + selectedAlly.name);
             }
         }
     }
 
-    private void OpenEquipmentManager(GameObject allyTroop) {
+    private void OpenEquipmentManager(TroopBase allyTroop) {
         print("Open EquipmentManager for troop " + allyTroop.name);
         // Load the equipment for the selected troop
         ClearSelectedEquipment();
@@ -176,7 +183,7 @@ public class DeploymentManager : MonoBehaviour {
             else if (equipmentIndex == 2) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][3] = false;
             else if (equipmentIndex == 3) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][2] = false;
         }
-    }
+    }   
 
     private void SelectEquipment(Image icon) {
         // Find the Icon
