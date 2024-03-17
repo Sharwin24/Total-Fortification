@@ -25,6 +25,10 @@ TagManager:
   - MoveButton
   - AttackButton
   - EquipmentWindow
+  - SwordEquipment
+  - BowEquipment
+  - LightArmorEquipment
+  - HeavyArmorEquipment
   layers:
   - Default
   - TransparentFX

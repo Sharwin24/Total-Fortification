@@ -357,8 +357,8 @@ GameObject:
   - component: {fileID: 6072842642302634600}
   - component: {fileID: 8368098719541215631}
   m_Layer: 5
-  m_Name: EquipmentIcon3
-  m_TagString: Untagged
+  m_Name: LightArmor
+  m_TagString: LightArmorEquipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2aa1c950d65f16443b74f7ca8dd35a26, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 3562485641145468974}
   m_Layer: 5
   m_Name: Bow
-  m_TagString: Untagged
+  m_TagString: BowEquipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 4155249652856082894}
   m_Layer: 5
   m_Name: EquipmentWIndow
-  m_TagString: Untagged
+  m_TagString: EquipmentWindow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 7044275039118082703}
   m_Layer: 5
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: SwordEquipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1466,8 +1466,8 @@ GameObject:
   - component: {fileID: 1180162258412773165}
   - component: {fileID: 3569309488248090769}
   m_Layer: 5
-  m_Name: EquipmentIcon4
-  m_TagString: Untagged
+  m_Name: HeavyArmor
+  m_TagString: HeavyArmorEquipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1519,7 +1519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 89e7521e771f4f34a8fc9760979f3f1d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

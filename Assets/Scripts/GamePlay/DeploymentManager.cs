@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +18,27 @@ public class DeploymentManager : MonoBehaviour {
     public List<Image> equipmentIcons;
     public List<Button> equipmentButtons;
     public Image equipmentManager;
+    public Button resetEquipmentButton;
 
-    private List<GameObject> allies;
-
-    private readonly Dictionary<string, int> tagToTroopIndex = new Dictionary<string, int> {
+    private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
         { "TroopBtn2", 1 },
         { "TroopBtn3", 2 },
         { "TroopBtn4", 3 }
     };
 
-    private Dictionary<GameObject, List<bool>> equipmentSelected = new Dictionary<GameObject, List<bool>>();
+    private readonly Dictionary<string, int> tagToEquipmentIndex = new() {
+        { "SwordEquipment", 0 },
+        { "BowEquipment", 1 },
+        { "LightArmorEquipment", 2 },
+        { "HeavyArmorEquipment", 3 }
+    };
 
-    private bool equipmentManagerOpen = false;
+    // Maps Troop Index to list of equipment selected (bool), index of equipment selected matches equipment above
+    private Dictionary<int, List<bool>> troopIndexToEquipmentSelected = new();
+    private List<GameObject> allies;
     private Color selectedColor = new(0, 1, 0, 0.5f);
-    private Image selectedTroopIcon;
+    private int currentlySelectedTroopIndex;
 
     private void Awake() {
     }
@@ -47,26 +54,25 @@ public class DeploymentManager : MonoBehaviour {
             equipmentButtons.Add(icon.GetComponent<Button>());
             equipmentButtons[^1].onClick.AddListener(() => OnEquipmentButtonClicked(icon));
         }
+        resetEquipmentButton.onClick.AddListener(() => OnResetEquipmentButtonClicked());
         // Collect all GameObjects with Ally tag
         allies = GameObject.FindGameObjectsWithTag("Ally").ToList();
+        Debug.Log("DeploymentManager found " + allies.Count + " allies");
+        // Populate equipment dictionary with no equipment
+        for (int i = 0; i < allies.Count; i++) {
+            troopIndexToEquipmentSelected[i] = new List<bool> { false, false, false, false };
+        }
+        CloseEquipmentManager();
     }
 
     // Update is called once per frame
     void Update() {
-        if (equipmentManagerOpen) {
-            // Display equipment manager
-            equipmentManager.gameObject.SetActive(true);
-        } else {
-            // Hide equipment manager
-            // Save selected equipment for that ally
-            SaveSelectedEquipment();
-            ClearSelectedEquipment();
-            equipmentManager.gameObject.SetActive(false);
-        }
+
     }
 
-    private void SelectedTroop(Image icon) {
+    private void SelectTroopIcon(Image icon) {
         Image foundIcon = troopIcons.Find(i => i == icon);
+        if (foundIcon == null) return;
         // If the icon is already selected, unselect it
         if (foundIcon.color == selectedColor) {
             foundIcon.color = Color.white;
@@ -74,20 +80,14 @@ public class DeploymentManager : MonoBehaviour {
             // Change to green with transparency so image can be seen
             foundIcon.color = selectedColor;
         }
-        selectedTroopIcon = foundIcon;
+        currentlySelectedTroopIndex = troopIcons.IndexOf(foundIcon);
     }
 
-    private void DeselectAll() {
+    private void UnselectAllTroopIcons() {
         foreach (var i in troopIcons) {
             i.color = Color.white;
         }
-        selectedTroopIcon = null;
-    }
-
-    private void OpenEquipmentManager(GameObject allyTroop) {
-        print("Open EquipmentManager for troop " + allyTroop.name);
-        equipmentManagerOpen = true;
-        // Load the equipment for the selected troop
+        currentlySelectedTroopIndex = -1;
     }
 
     private GameObject GetTroopFromIcon(Image troopIcon) {
@@ -99,46 +99,71 @@ public class DeploymentManager : MonoBehaviour {
 
     public void OnTroopButtonClicked(Image icon) {
         // If the icon is already selected, unselect it and close the equipment manager
-        if (icon.color == selectedColor) {
-            DeselectAll();
-            equipmentManagerOpen = false;
-            return;
+        int clickedIndex = troopIcons.IndexOf(icon);
+        if (clickedIndex == -1 || clickedIndex >= allies.Count) return; // If our index can't be mapped to an ally, don't do anything
+        else if (clickedIndex == currentlySelectedTroopIndex) {
+            UnselectAllTroopIcons();
+            CloseEquipmentManager();
+        } else { // If the icon is not the currently selected one
+            UnselectAllTroopIcons(); // Unselect all
+            SelectTroopIcon(icon); // Select this troops
+            var troop = GetTroopFromIcon(icon);
+            if (troop == null) return;
+            print("Selected troop: " + troop.name); // Troop should visually appear selected somehow
+            OpenEquipmentManager(troop); // Open this troop's equipment Manager
         }
-        DeselectAll();
-        SelectedTroop(icon);
-        var troop = GetTroopFromIcon(icon);
-        if (troop == null) return;
-        print("Selected troop: " + troop.name); // Troop should visually appear selected somehow
-        OpenEquipmentManager(troop);
+    }
+    public void OnEquipmentButtonClicked(Image icon) {
+        SelectEquipment(icon);
+    }
+
+    private void OnResetEquipmentButtonClicked() {
+        // Clear dictionary for current troop
+        if (troopIndexToEquipmentSelected.ContainsKey(currentlySelectedTroopIndex)) {
+            troopIndexToEquipmentSelected[currentlySelectedTroopIndex] = new List<bool> { false, false, false, false };
+        }
+        ClearSelectedEquipment();
+    }
+
+    private void OpenEquipmentManager(GameObject allyTroop) {
+        print("Open EquipmentManager for troop " + allyTroop.name);
+        // Load the equipment for the selected troop
+        ClearSelectedEquipment();
+        LoadSelectedEquipment();
+        equipmentManager.gameObject.SetActive(true);
+        resetEquipmentButton.gameObject.SetActive(true);
+    }
+
+    private void CloseEquipmentManager() {
+        equipmentManager.gameObject.SetActive(false);
+        resetEquipmentButton.gameObject.SetActive(false);
+    }
+
+    private void UpdateEquipmentPolicies(int equipmentIndex) {
+        var currentEquipments = troopIndexToEquipmentSelected[currentlySelectedTroopIndex];
+        // If it is already selected, unselect it
+        if (currentEquipments[equipmentIndex]) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][equipmentIndex] = false;
+        else troopIndexToEquipmentSelected[currentlySelectedTroopIndex][equipmentIndex] = true;
+        // If the opposing equipment was selected, unselect that one
+        if (troopIndexToEquipmentSelected[currentlySelectedTroopIndex][equipmentIndex]) {
+            if (equipmentIndex == 0) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][1] = false;
+            else if (equipmentIndex == 1) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][0] = false;
+            else if (equipmentIndex == 2) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][3] = false;
+            else if (equipmentIndex == 3) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][2] = false;
+        }
     }
 
     private void SelectEquipment(Image icon) {
+        // Find the Icon
         Image foundIcon = equipmentIcons.Find(i => i == icon);
-        // If the icon is already selected, unselect it
-        if (foundIcon.color == selectedColor) {
-            foundIcon.color = Color.white;
-        } else {
-            // Change to green with transparency so image can be seen
-            foundIcon.color = selectedColor;
-        }
         // Save the selected equipment for the current ally
-        var troop = GetTroopFromIcon(selectedTroopIcon);
-        if (troop == null) return;
-        var equipmentIndex = equipmentIcons.FindIndex(i => i == icon);
-        if (!equipmentSelected.ContainsKey(troop)) {
-            equipmentSelected[troop] = new List<bool> { false, false, false, false };
+        int equipmentIndex = tagToEquipmentIndex[foundIcon.tag];
+        if (!troopIndexToEquipmentSelected.ContainsKey(currentlySelectedTroopIndex)) {
+            troopIndexToEquipmentSelected.Add(currentlySelectedTroopIndex, new List<bool> { false, false, false, false });
         }
-        equipmentSelected[troop][equipmentIndex] = foundIcon.color == selectedColor;
-    }
-
-    private void SaveSelectedEquipment() {
-        // The current selected equipments should be saved to the corresponding ally
-        var troop = GetTroopFromIcon(selectedTroopIcon);
-        if (troop == null) return;
-        // Update dictionary
-        if (!equipmentSelected.ContainsKey(troop)) {
-            equipmentSelected[troop] = new List<bool> { false, false, false, false };
-        }
+        UpdateEquipmentPolicies(equipmentIndex);
+        // Color the icons based on selections list
+        LoadSelectedEquipment();
     }
 
     private void ClearSelectedEquipment() {
@@ -147,8 +172,14 @@ public class DeploymentManager : MonoBehaviour {
         }
     }
 
-    public void OnEquipmentButtonClicked(Image icon) {
-        print("Selected equipment: " + icon.name);
-        SelectEquipment(icon);
+    private void LoadSelectedEquipment() {
+        // Get current troop's equipment
+        if (troopIndexToEquipmentSelected.ContainsKey(currentlySelectedTroopIndex)) {
+            for (int i = 0; i < equipmentIcons.Count; i++) {
+                // If this icon is selected, color it
+                if (troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) equipmentIcons[i].color = selectedColor;
+                else equipmentIcons[i].color = Color.white;
+            }
+        }
     }
 }
