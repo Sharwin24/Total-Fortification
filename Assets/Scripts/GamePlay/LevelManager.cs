@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour {
     IEnumerator TakeTurnsCoroutine() {
         print("TakeTurnsCoroutine triggered");
 
+        DisplayUI(gameState);
         // Start in Deployment Phase and when button is triggered, switch to Combat Phase
         // DisplayUI(gameState);
         while (gameState == GameState.DEPLOYMENT) {
