@@ -139,7 +139,8 @@ public class DeploymentManager : MonoBehaviour {
             if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
             var equipmentGameObject = equipmentObjects[i];
             if (equipmentGameObject != null) {
-                var equipmentToApply = equipmentGameObject.GetComponentInChildren<EquipmentBase>();
+                var equipmentToApply = equipmentGameObject.GetComponentInChildren<IEquipment>();
+                if (equipmentToApply == null) return;
                 selectedAlly.EquipItem(equipmentToApply);
                 print("Applied " + equipmentToApply.EquipmentName + " to " + selectedAlly.name);
             }
