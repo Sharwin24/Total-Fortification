@@ -24,6 +24,13 @@ TagManager:
   - SelectionIndicator
   - MoveButton
   - AttackButton
+  - EquipmentWindow
+  - SwordEquipment
+  - BowEquipment
+  - LightArmorEquipment
+  - HeavyArmorEquipment
+  - ResetEquipmentButton
+  - ApplyEquipmentButton
   layers:
   - Default
   - TransparentFX
