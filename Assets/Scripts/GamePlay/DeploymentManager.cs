@@ -138,11 +138,12 @@ public class DeploymentManager : MonoBehaviour {
             if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
             var equipmentGameObject = equipmentObjects[i];
             if (equipmentGameObject != null) {
-                // TODO: Create IEquipment components in prefabs
-                var equipmentToApply = equipmentGameObject;//.GetComponentInChildren<IEquipment>();
-                if (equipmentToApply == null) return;
-                selectedAlly.EquipItem(equipmentToApply);
-                print("Applied " + equipmentToApply.EquipmentName + " to " + selectedAlly.name);
+                if (equipmentGameObject == null) {
+                    Debug.LogError("EquipmentBase object is null, cannot apply");
+                    return;
+                }
+                selectedAlly.EquipItem(equipmentGameObject);
+                print("Applied " + equipmentGameObject.EquipmentName + " to " + selectedAlly.name);
             }
         }
     }
