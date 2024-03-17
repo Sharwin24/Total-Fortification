@@ -25,7 +25,13 @@ public class DeploymentManager : MonoBehaviour {
         { "TroopBtn1", 0 },
         { "TroopBtn2", 1 },
         { "TroopBtn3", 2 },
-        { "TroopBtn4", 3 }
+        { "TroopBtn4", 3 },
+        { "TroopBtn5", 4 },
+        { "TroopBtn6", 5 },
+        { "TroopBtn7", 6 },
+        { "TroopBtn8", 7 },
+        { "TroopBtn9", 8 },
+        { "TroopBtn10", 9 }
     };
 
     private readonly Dictionary<string, int> tagToEquipmentIndex = new() {
@@ -176,7 +182,7 @@ public class DeploymentManager : MonoBehaviour {
             else if (equipmentIndex == 2) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][3] = false;
             else if (equipmentIndex == 3) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][2] = false;
         }
-    }
+    }   
 
     private void SelectEquipment(Image icon) {
         // Find the Icon
