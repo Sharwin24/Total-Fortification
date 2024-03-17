@@ -2255,6 +2255,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.266056, y: 0.99999994, z: 1.266056}
   m_Center: {x: 0, y: 0.49999997, z: 0}
+--- !u!114 &907326959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5813053993435526889, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+  m_PrefabInstance: {fileID: 7268628382502717858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &919847706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5048,6 +5059,7 @@ MonoBehaviour:
   equipmentButtons: []
   equipmentManager: {fileID: 471880278}
   resetEquipmentButton: {fileID: 1286915827}
+  applyEquipmentButton: {fileID: 907326959}
 --- !u!4 &1991391028
 Transform:
   m_ObjectHideFlags: 0

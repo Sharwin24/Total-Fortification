@@ -19,6 +19,7 @@ public class DeploymentManager : MonoBehaviour {
     public List<Button> equipmentButtons;
     public Image equipmentManager;
     public Button resetEquipmentButton;
+    public Button applyEquipmentButton;
 
     private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
@@ -32,6 +33,15 @@ public class DeploymentManager : MonoBehaviour {
         { "BowEquipment", 1 },
         { "LightArmorEquipment", 2 },
         { "HeavyArmorEquipment", 3 }
+    };
+
+    // Map from indices in equipment window to EquipmentBase objects
+    // These need to be populated via inspector
+    public readonly Dictionary<int, EquipmentBase> equipmentIndexToObject = new() {
+        {0 , null },
+        {1 , null},
+        {2 , null },
+        {3 , null },
     };
 
     // Maps Troop Index to list of equipment selected (bool), index of equipment selected matches equipment above
@@ -55,6 +65,7 @@ public class DeploymentManager : MonoBehaviour {
             equipmentButtons[^1].onClick.AddListener(() => OnEquipmentButtonClicked(icon));
         }
         resetEquipmentButton.onClick.AddListener(() => OnResetEquipmentButtonClicked());
+        applyEquipmentButton.onClick.AddListener(() => OnApplyEquipmentButtonClicked());
         // Collect all GameObjects with Ally tag
         allies = GameObject.FindGameObjectsWithTag("Ally").ToList();
         Debug.Log("DeploymentManager found " + allies.Count + " allies");
@@ -125,6 +136,18 @@ public class DeploymentManager : MonoBehaviour {
         ClearSelectedEquipment();
     }
 
+
+    private void OnApplyEquipmentButtonClicked() {
+        // Obtain the current selected troop's gameobject
+        var allyGameObject = allies[currentlySelectedTroopIndex];
+        BasicSoldier selectedAlly = allyGameObject.GetComponentInChildren<BasicSoldier>();
+        for (int i = 0; i < equipmentIcons.Count; i++) {
+            if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
+            var equipmentToApply = equipmentIndexToObject[i];
+            if (equipmentToApply != null) selectedAlly.EquipItem(equipmentToApply);
+        }
+    }
+
     private void OpenEquipmentManager(GameObject allyTroop) {
         print("Open EquipmentManager for troop " + allyTroop.name);
         // Load the equipment for the selected troop
@@ -132,11 +155,13 @@ public class DeploymentManager : MonoBehaviour {
         LoadSelectedEquipment();
         equipmentManager.gameObject.SetActive(true);
         resetEquipmentButton.gameObject.SetActive(true);
+        applyEquipmentButton.gameObject.SetActive(true);
     }
 
     private void CloseEquipmentManager() {
         equipmentManager.gameObject.SetActive(false);
         resetEquipmentButton.gameObject.SetActive(false);
+        applyEquipmentButton.gameObject.SetActive(false);
     }
 
     private void UpdateEquipmentPolicies(int equipmentIndex) {

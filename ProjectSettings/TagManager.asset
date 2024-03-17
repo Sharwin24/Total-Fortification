@@ -30,6 +30,7 @@ TagManager:
   - LightArmorEquipment
   - HeavyArmorEquipment
   - ResetEquipmentButton
+  - ApplyEquipmentButton
   layers:
   - Default
   - TransparentFX
