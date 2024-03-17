@@ -62,6 +62,13 @@ MonoBehaviour:
   equipments: []
   healthBar: {fileID: 5375754419733436611}
   AppearanceRange: 4
+  MoveSpeed: 2
+  rangedAttackSound: {fileID: 8300000, guid: d22b1f389ba7d3140ade174e859e896b, type: 3}
+  meleeAttackSound: {fileID: 8300000, guid: fbd58e13a5b44fb4890617af2f84a33f, type: 3}
+  deathSound: {fileID: 8300000, guid: 038051689133d4a4e910f1813ec3c242, type: 3}
+  hitSound: {fileID: 8300000, guid: 39a6809444535f84392aed63028472f2, type: 3}
+  moveSound: {fileID: 8300000, guid: fcaaf50d0aa687a4e980b1168e9652ab, type: 3}
+  mainCamera: {fileID: 0}
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
   rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
