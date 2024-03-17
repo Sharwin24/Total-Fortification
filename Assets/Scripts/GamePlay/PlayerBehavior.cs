@@ -1,18 +1,14 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using System.Collections.Generic;
-using System.Linq;
+using TMPro;
 
 public class PlayerBehavior : MonoBehaviour
 {
 
     public GameObject playerUI;
-
+    public TextMeshProUGUI warningMessage;
     PlayerUIInteraction graphicUIRaycast;
     MouseSelector selector;
     Button moveButton;
@@ -23,6 +19,7 @@ public class PlayerBehavior : MonoBehaviour
         selector = Camera.main.GetComponent<MouseSelector>();
         moveButton = GameObject.FindGameObjectWithTag("MoveButton").GetComponent<Button>();
         attackButton = GameObject.FindGameObjectWithTag("AttackButton").GetComponent<Button>();
+        warningMessage.text = "";
     }
 
    public IEnumerator TakeAction(GameObject current) {
@@ -51,7 +48,7 @@ public class PlayerBehavior : MonoBehaviour
         Destroy(attackRendererObject);
         LevelManager.actionDone = true;
     }
-    
+
     private IEnumerator MovePlayer(GameObject player, Action onComplete) {
         Debug.Log("Move initiated.");
 
@@ -70,8 +67,9 @@ public class PlayerBehavior : MonoBehaviour
             yield return new WaitForSeconds(timeNeeded);
             onComplete();
         } else {
-            Debug.Log("Cannot move beyond MoveRange");
-            yield return new WaitForSeconds(0);
+            warningMessage.text = "Can't Move Beyond Move Range";
+            yield return new WaitForSeconds(1);
+            warningMessage.text = "";
         }
     }
 
@@ -96,12 +94,14 @@ public class PlayerBehavior : MonoBehaviour
                 yield return new WaitForSeconds(3);
                 onComplete();
             } else {
-                Debug.Log("Cannot attack beyond ATtackRange");
-                yield return new WaitForSeconds(0);
+                warningMessage.text = "Can't Attack Beyond Attack Range";
+                yield return new WaitForSeconds(1);
+                warningMessage.text = "";
             }
         } else {
-            Debug.Log("Can only attack troop");
-            yield return new WaitForSeconds(0);
+            warningMessage.text = "Can only attack troop";
+            yield return new WaitForSeconds(1);
+            warningMessage.text = "";
         }    
     }
 
@@ -144,3 +144,4 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 }
+
