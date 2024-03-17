@@ -24,6 +24,7 @@ TagManager:
   - SelectionIndicator
   - MoveButton
   - AttackButton
+  - EquipmentWindow
   layers:
   - Default
   - TransparentFX
