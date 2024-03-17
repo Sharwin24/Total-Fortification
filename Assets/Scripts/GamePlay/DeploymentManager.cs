@@ -136,15 +136,17 @@ public class DeploymentManager : MonoBehaviour {
         ClearSelectedEquipment();
     }
 
-
     private void OnApplyEquipmentButtonClicked() {
-        // Obtain the current selected troop's gameobject
+        // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
         var allyGameObject = allies[currentlySelectedTroopIndex];
         BasicSoldier selectedAlly = allyGameObject.GetComponentInChildren<BasicSoldier>();
         for (int i = 0; i < equipmentIcons.Count; i++) {
             if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
             var equipmentToApply = equipmentIndexToObject[i];
-            if (equipmentToApply != null) selectedAlly.EquipItem(equipmentToApply);
+            if (equipmentToApply != null) {
+                selectedAlly.EquipItem(equipmentToApply);
+                print("Applied " + equipmentToApply.EquipmentName + " to " + selectedAlly.name);
+            }
         }
     }
 
