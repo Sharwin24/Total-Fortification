@@ -8339,14 +8339,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeploymentUI
       objectReference: {fileID: 0}
-    - target: {fileID: 8097154977844098793, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 8097154977844098793, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 225
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
