@@ -154,7 +154,7 @@ public class DeploymentManager : MonoBehaviour {
         // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
         TroopBase selectedAlly = allies[currentlySelectedTroopIndex];
         for (int i = 0; i < equipmentIcons.Count; i++) {
-            if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) RemoveEquipment(selectedAlly, i);
+            if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;//RemoveEquipment(selectedAlly, i);
             var equipmentGameObject = equipmentObjects[i];
             if (equipmentGameObject != null) {
                 if (equipmentGameObject == null) {
