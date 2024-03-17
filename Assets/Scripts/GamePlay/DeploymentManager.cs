@@ -31,7 +31,8 @@ public class DeploymentManager : MonoBehaviour {
         { "TroopBtn7", 6 },
         { "TroopBtn8", 7 },
         { "TroopBtn9", 8 },
-        { "TroopBtn10", 9 }
+        { "TroopBtn10", 9 },
+        { "TroopBtn11", 10 },
     };
 
     private readonly Dictionary<string, int> tagToEquipmentIndex = new() {
