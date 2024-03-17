@@ -37,7 +37,7 @@ public class DeploymentManager : MonoBehaviour {
 
     // Map from indices in equipment window to EquipmentBase objects
     [Tooltip("Needs to be Populated with EquipmentBase Prefabs according to icon indices")]
-    public List<GameObject> equipmentObjects = new();
+    public List<EquipmentBase> equipmentObjects = new();
 
     // Maps Troop Index to list of equipment selected (bool), index of equipment selected matches equipment above
     private Dictionary<int, List<bool>> troopIndexToEquipmentSelected = new();
@@ -140,7 +140,7 @@ public class DeploymentManager : MonoBehaviour {
             var equipmentGameObject = equipmentObjects[i];
             if (equipmentGameObject != null) {
                 // TODO: Create IEquipment components in prefabs
-                var equipmentToApply = equipmentGameObject.GetComponentInChildren<IEquipment>();
+                var equipmentToApply = equipmentGameObject;//.GetComponentInChildren<IEquipment>();
                 if (equipmentToApply == null) return;
                 selectedAlly.EquipItem(equipmentToApply);
                 print("Applied " + equipmentToApply.EquipmentName + " to " + selectedAlly.name);

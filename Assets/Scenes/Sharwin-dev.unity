@@ -5061,10 +5061,10 @@ MonoBehaviour:
   resetEquipmentButton: {fileID: 1286915827}
   applyEquipmentButton: {fileID: 907326959}
   equipmentObjects:
-  - {fileID: 131468, guid: 58ecd46fc2cb23f47bcc13d9ed973807, type: 3}
-  - {fileID: 466318824962825654, guid: 061a427ff28b1fa46a332eebb74a856e, type: 3}
-  - {fileID: 161448, guid: 138a6638000698f49934b9d35162a2b4, type: 3}
-  - {fileID: 161448, guid: 138a6638000698f49934b9d35162a2b4, type: 3}
+  - {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+  - {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+  - {fileID: 11400000, guid: 10b146db91df6be4b99a4eb62c566f7c, type: 2}
+  - {fileID: 11400000, guid: de6a4dddfcd52b54dbd9f8c9774f9fa6, type: 2}
 --- !u!4 &1991391028
 Transform:
   m_ObjectHideFlags: 0
