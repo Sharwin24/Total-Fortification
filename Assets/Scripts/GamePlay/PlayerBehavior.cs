@@ -51,7 +51,7 @@ public class PlayerBehavior : MonoBehaviour
         Destroy(attackRendererObject);
         LevelManager.actionDone = true;
     }
-
+    
     private IEnumerator MovePlayer(GameObject player, Action onComplete) {
         Debug.Log("Move initiated.");
 

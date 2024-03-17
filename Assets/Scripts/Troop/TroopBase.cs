@@ -36,6 +36,18 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public int MoveSpeed = 2;
 
+    public AudioClip rangedAttackSound;
+    public AudioClip meleeAttackSound;
+
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+
+    public AudioClip moveSound;
+
+    public Camera mainCamera;
+
+    private AudioSource cameraAudioSource;
+
     protected virtual void Awake()
     {
         //Increase the move and attack range by the appearance range
@@ -52,7 +64,8 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);
         EquipItemInList();
-        
+        mainCamera = Camera.main;
+        cameraAudioSource = mainCamera.GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -73,13 +86,26 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             Debug.Log("No target to attack");
             yield return null;
         }
+        if(Health <= 0)
+        {
+            yield return null;
+        }  
         Vector3 position = ((TroopBase)target).transform.position;
 
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
         UpdateAnimationState(2, false);
-
-        target.TakeDamage(AttackPower);
+        if (IsRange)
+        {
+            cameraAudioSource.clip = rangedAttackSound;
+        }
+        else
+        {
+            cameraAudioSource.clip = meleeAttackSound;
+        }
+        cameraAudioSource.Play();
         yield return new WaitForSeconds(2.5f);
+        cameraAudioSource.Stop();
+        target.TakeDamage(AttackPower);
         Debug.Log("Attacking");
 
         UpdateAnimationState(0);
@@ -90,12 +116,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         print("Moving to " + position);
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
         UpdateAnimationState(1,false); // Start walking/running animation
-
+        cameraAudioSource.clip = moveSound;
+        cameraAudioSource.Play();
         while (Vector3.Distance(transform.position, position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, position, MoveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, position, MoveSpeed* Time.deltaTime);
             yield return new WaitForSeconds(0f);
         }
+        cameraAudioSource.Stop();
         transform.position = new Vector3(position.x, transform.position.y, position.z);
 
         UpdateAnimationState(0);// Switch to idle animation
@@ -105,6 +133,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual void TakeDamage(float physicalDamage)
     {
+        AudioSource.PlayClipAtPoint(hitSound, mainCamera.transform.position);
         transform.LookAt(transform);
         Health -= physicalDamage;
         healthBar.SetHealth(Health);
@@ -112,6 +141,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         if (Health <= 0)
         {
             UpdateAnimationState(3);
+            AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
             Destroy(gameObject, 3);
         }
     }
