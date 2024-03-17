@@ -139,6 +139,7 @@ public class DeploymentManager : MonoBehaviour {
             if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
             var equipmentGameObject = equipmentObjects[i];
             if (equipmentGameObject != null) {
+                // TODO: Create IEquipment components in prefabs
                 var equipmentToApply = equipmentGameObject.GetComponentInChildren<IEquipment>();
                 if (equipmentToApply == null) return;
                 selectedAlly.EquipItem(equipmentToApply);

@@ -5060,6 +5060,11 @@ MonoBehaviour:
   equipmentManager: {fileID: 471880278}
   resetEquipmentButton: {fileID: 1286915827}
   applyEquipmentButton: {fileID: 907326959}
+  equipmentObjects:
+  - {fileID: 131468, guid: 58ecd46fc2cb23f47bcc13d9ed973807, type: 3}
+  - {fileID: 466318824962825654, guid: 061a427ff28b1fa46a332eebb74a856e, type: 3}
+  - {fileID: 161448, guid: 138a6638000698f49934b9d35162a2b4, type: 3}
+  - {fileID: 161448, guid: 138a6638000698f49934b9d35162a2b4, type: 3}
 --- !u!4 &1991391028
 Transform:
   m_ObjectHideFlags: 0
