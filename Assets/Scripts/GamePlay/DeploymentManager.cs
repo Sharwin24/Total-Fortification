@@ -36,13 +36,8 @@ public class DeploymentManager : MonoBehaviour {
     };
 
     // Map from indices in equipment window to EquipmentBase objects
-    // These need to be populated via inspector
-    public readonly Dictionary<int, EquipmentBase> equipmentIndexToObject = new() {
-        {0 , null },
-        {1 , null},
-        {2 , null },
-        {3 , null },
-    };
+    [Tooltip("Needs to be Populated with EquipmentBase objects")]
+    public List<EquipmentBase> equipmentObjects = new() { null, null, null, null };
 
     // Maps Troop Index to list of equipment selected (bool), index of equipment selected matches equipment above
     private Dictionary<int, List<bool>> troopIndexToEquipmentSelected = new();
@@ -138,11 +133,12 @@ public class DeploymentManager : MonoBehaviour {
 
     private void OnApplyEquipmentButtonClicked() {
         // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
+        Debug.Log("Apply Button clicked");
         var allyGameObject = allies[currentlySelectedTroopIndex];
         BasicSoldier selectedAlly = allyGameObject.GetComponentInChildren<BasicSoldier>();
         for (int i = 0; i < equipmentIcons.Count; i++) {
             if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
-            var equipmentToApply = equipmentIndexToObject[i];
+            var equipmentToApply = equipmentObjects[i];
             if (equipmentToApply != null) {
                 selectedAlly.EquipItem(equipmentToApply);
                 print("Applied " + equipmentToApply.EquipmentName + " to " + selectedAlly.name);
