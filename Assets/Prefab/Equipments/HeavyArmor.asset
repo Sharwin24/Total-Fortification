@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeavyArmor
   m_EditorClassIdentifier: 
   healthModifier: 0
-  armorModifier: 0
+  armorModifier: 10
   attackPowerModifier: 0
   attackRangeModifier: 0
   moveRangeModifier: 0

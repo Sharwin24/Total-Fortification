@@ -42,6 +42,13 @@ public class DeploymentManager : MonoBehaviour {
         { "HeavyArmorEquipment", 3 }
     };
 
+    private readonly Dictionary<int, EquipmentType> equipmentIndexToBodyPart = new() {
+        { 0, EquipmentType.RightArm },
+        { 1, EquipmentType.LeftArm },
+        { 2, EquipmentType.Chest },
+        { 3, EquipmentType.Chest }
+    };
+
     // Map from indices in equipment window to EquipmentBase objects
     [Tooltip("Needs to be Populated with EquipmentBase Prefabs according to icon indices")]
     public List<EquipmentBase> equipmentObjects = new();
@@ -138,11 +145,16 @@ public class DeploymentManager : MonoBehaviour {
         ClearSelectedEquipment();
     }
 
+    private void RemoveEquipment(TroopBase troop, int equipmentIndex) {
+        print("Removing equipment equipped to " + troop.name + " on " + equipmentIndexToBodyPart[equipmentIndex]);
+        troop.RemoveItem(equipmentIndexToBodyPart[equipmentIndex]);
+    }
+
     private void OnApplyEquipmentButtonClicked() {
         // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
         TroopBase selectedAlly = allies[currentlySelectedTroopIndex];
         for (int i = 0; i < equipmentIcons.Count; i++) {
-            if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;
+            if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;//RemoveEquipment(selectedAlly, i);
             var equipmentGameObject = equipmentObjects[i];
             if (equipmentGameObject != null) {
                 if (equipmentGameObject == null) {

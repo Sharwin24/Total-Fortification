@@ -77,7 +77,7 @@ public class LevelManager : MonoBehaviour {
         int troopsInTurn = troopQueue.Count;
         turnMessage.text = "Turn: " + turnCount;
 
-        // DisplayUI(gameState);
+        DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
 
             GameObject troopGameObject = troopQueue.Dequeue();

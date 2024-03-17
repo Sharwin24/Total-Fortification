@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LightArmor
   m_EditorClassIdentifier: 
   healthModifier: 0
-  armorModifier: 0
+  armorModifier: 4
   attackPowerModifier: 0
   attackRangeModifier: 0
   moveRangeModifier: 0
