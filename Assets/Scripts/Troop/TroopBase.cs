@@ -24,7 +24,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public float AttackRange { get => attackRange; set => attackRange = value; }
     public float AttackPower { get => attackPower; set => attackPower = value; }
     public bool IsRange { get => isRange; set => isRange = value; }
-
+    //The default equipments a troop has, used for enemy troops.
     public EquipmentBase[] equipments;
     public Dictionary<EquipmentType, BodyPart> BodyParts { get; } = new Dictionary<EquipmentType, BodyPart>();
 
@@ -32,8 +32,28 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     protected Animator[] animators;
 
+    public int AppearanceRange = 2;
+
+    public int MoveSpeed = 2;
+
+    public AudioClip rangedAttackSound;
+    public AudioClip meleeAttackSound;
+
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+
+    public AudioClip moveSound;
+
+    public Camera mainCamera;
+
+    private AudioSource cameraAudioSource;
+
     protected virtual void Awake()
     {
+        //Increase the move and attack range by the appearance range
+        //So that army won't collide with each other
+        MoveRange += AppearanceRange;
+        AttackRange += AppearanceRange;
         // Initialize each body part and add it to the dictionary
         BodyParts.Add(EquipmentType.Head, new BodyPart(EquipmentType.Head));
         BodyParts.Add(EquipmentType.Chest, new BodyPart(EquipmentType.Chest));
@@ -44,48 +64,77 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);
         EquipItemInList();
+        mainCamera = Camera.main;
+        cameraAudioSource = mainCamera.GetComponent<AudioSource>();
+    }
+    void Start()
+    {
+
     }
 
     //Only called for enemy troops.
-    private void EquipItemInList(){
+    private void EquipItemInList()
+    {
         foreach (var equipment in equipments)
         {
             EquipItem(equipment);
         }
     }
-    public virtual void Attack(ITroop target)
+    public virtual IEnumerator Attack(ITroop target)
     {
         if (target == null)
         {
             Debug.Log("No target to attack");
-            return;
+            yield return null;
         }
-        // Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        transform.LookAt(((TroopBase) target).transform);
-        UpdateAnimationState(2, false);
-        target.TakeDamage(AttackPower);
-        // transform.position = position;
-        Invoke(nameof(SetAnimationIdle), 2.5f);
+        if (Health > 0)
+        {
+            Vector3 position = ((TroopBase)target).transform.position;
+
+            transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+            UpdateAnimationState(2, false);
+            if (IsRange)
+            {
+                cameraAudioSource.clip = rangedAttackSound;
+            }
+            else
+            {
+                cameraAudioSource.clip = meleeAttackSound;
+            }
+            cameraAudioSource.Play();
+            yield return new WaitForSeconds(2.5f);
+            cameraAudioSource.Stop();
+            target.TakeDamage(AttackPower);
+            Debug.Log("Attacking");
+
+            UpdateAnimationState(0);
+        }
+
     }
 
     public virtual IEnumerator MoveTo(Vector3 position)
     {
+        print("Moving to " + position);
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-        UpdateAnimationState(1); // Start walking/running animation
-
-        while (Vector3.Distance(transform.position, position) > 0.35) {
-            transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-            // If using root motion, the actual movement might be driven by the animation.
-            // Otherwise, include code here to move towards the target position.
-            yield return null;
+        UpdateAnimationState(1, false); // Start walking/running animation
+        cameraAudioSource.clip = moveSound;
+        cameraAudioSource.Play();
+        while (Vector3.Distance(transform.position, position) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, position, MoveSpeed * Time.deltaTime);
+            yield return new WaitForSeconds(0f);
         }
+        cameraAudioSource.Stop();
+        transform.position = new Vector3(position.x, transform.position.y, position.z);
 
         UpdateAnimationState(0);// Switch to idle animation
-        
+
+        yield return new WaitForSeconds(0f);
     }
 
     public virtual void TakeDamage(float physicalDamage)
     {
+        AudioSource.PlayClipAtPoint(hitSound, mainCamera.transform.position);
         transform.LookAt(transform);
         Health -= physicalDamage;
         healthBar.SetHealth(Health);
@@ -93,20 +142,17 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         if (Health <= 0)
         {
             UpdateAnimationState(3);
-            Destroy(gameObject, 3f);
+            AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
+            Destroy(gameObject, 5);
         }
     }
-
-    private void SetAnimationIdle()
+    private void UpdateAnimationState(int state = 0, bool applyRootMotion = true)
     {
-        UpdateAnimationState(0);
-    }
-
-    private void UpdateAnimationState(int state, bool applyRootMotion = true){
+        Debug.Log("UpdateAnimationState" + state);
         foreach (var childAnimator in animators)
         {
-             childAnimator.SetInteger("animState", state);
-             childAnimator.applyRootMotion = applyRootMotion;
+            childAnimator.SetInteger("animState", state);
+            childAnimator.applyRootMotion = applyRootMotion;
         }
     }
 

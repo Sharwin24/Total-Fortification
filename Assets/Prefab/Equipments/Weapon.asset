@@ -15,7 +15,7 @@ MonoBehaviour:
   healthModifier: 0
   armorModifier: 0
   attackPowerModifier: 0
-  attackRangeModifier: 0
+  attackRangeModifier: 5
   moveRangeModifier: 0
   speedModifier: 0
   equipmentIcon: {fileID: 0}
@@ -24,4 +24,4 @@ MonoBehaviour:
   equipmentDescription: 
   isWeapon: 1
   isArmor: 0
-  isRangeWeapon: 1
+  isRangeWeapon: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class MouseSelector : MonoBehaviour {
 
     GameObject selectedObject;
+    Vector3 selectedPosition;
 
     // Start is called before the first frame update
     void Start() {
@@ -20,6 +21,7 @@ public class MouseSelector : MonoBehaviour {
             Vector3 directionToWorldPoint = Vector3.Normalize(worldPoint - cameraPosition);
             Debug.DrawRay(cameraPosition, directionToWorldPoint, Color.red);
             if (Physics.Raycast(cameraPosition, directionToWorldPoint, out RaycastHit hitInfo, Mathf.Infinity)) {
+                selectedPosition = hitInfo.point;
                 GameObject hitObject = hitInfo.transform.gameObject;
                 Debug.Log(hitObject.name);
                 SelectObject(hitObject);
@@ -35,6 +37,10 @@ public class MouseSelector : MonoBehaviour {
     /// <returns></returns>
     public GameObject GetSelectedObject() {
         return selectedObject;
+    }
+
+    public Vector3 GetSelectedPosition() {
+        return selectedPosition;
     }
 
     void ClearSelectedObject() {

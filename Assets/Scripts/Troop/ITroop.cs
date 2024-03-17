@@ -22,7 +22,7 @@ public interface ITroop
 
     Dictionary<EquipmentType, BodyPart> BodyParts { get; }
 
-    void Attack(ITroop target);
+    IEnumerator Attack(ITroop target);
 
     IEnumerator MoveTo(Vector3 position);
 
