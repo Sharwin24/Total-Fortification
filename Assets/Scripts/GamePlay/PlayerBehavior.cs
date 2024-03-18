@@ -14,7 +14,7 @@ public class PlayerBehavior : MonoBehaviour
     Button moveButton;
     Button attackButton;
 
-    void Start() {
+    void Awake() {
         graphicUIRaycast = GetComponent<PlayerUIInteraction>();
         selector = Camera.main.GetComponent<MouseSelector>();
         moveButton = GameObject.FindGameObjectWithTag("MoveButton").GetComponent<Button>();

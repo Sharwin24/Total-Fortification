@@ -69,8 +69,7 @@ public class LevelManager : MonoBehaviour {
             yield return new WaitForSeconds(2);
         }
 
-        deploymentUI.SetActive(false);
-
+        gameState = GameState.COMBAT;
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
