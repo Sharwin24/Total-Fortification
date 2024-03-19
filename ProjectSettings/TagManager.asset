@@ -38,6 +38,8 @@ TagManager:
   - TroopBtn9
   - TroopBtn10
   - TroopBtn11
+  - TroopInfo
+  - TroopInfoContent
   layers:
   - Default
   - TransparentFX
