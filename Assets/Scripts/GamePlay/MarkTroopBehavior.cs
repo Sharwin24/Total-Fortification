@@ -41,15 +41,20 @@ public class MarkTroopBehavior : MonoBehaviour
 
         // non-troop objects selected
         if (selectedObject == null || (!selectedObject.CompareTag("Ally") && !selectedObject.CompareTag("Enemy"))) {
-            if (markedTroop != null) {
-                Transform healthBarCanvas = markedTroop.transform.Find("HealthBar Canvas");
-            healthBarCanvas.Find("Star").gameObject.SetActive(false);
-            }
+            RemoveStarIfMarkedTroopNotNull();
             markedTroop = null;
         } else {
+            RemoveStarIfMarkedTroopNotNull();
             markedTroop = selectedObject;
         }
 
+    }
+
+    void RemoveStarIfMarkedTroopNotNull() {
+        if (markedTroop != null) {
+            Transform healthBarCanvas = markedTroop.transform.Find("HealthBar Canvas");
+            healthBarCanvas.Find("Star").gameObject.SetActive(false);
+        }
     }
 
     void MarkTroop() {
@@ -72,8 +77,6 @@ public class MarkTroopBehavior : MonoBehaviour
                 markedTroopBase.Speed, markedTroopBase.MoveRange, markedTroopBase.AttackRange, 
                 markedTroopBase.AttackPower);
             
-            print(content);
-
             troopInfoContent.text = content;
         }
 
