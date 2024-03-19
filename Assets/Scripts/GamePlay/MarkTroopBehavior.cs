@@ -41,6 +41,10 @@ public class MarkTroopBehavior : MonoBehaviour
 
         // non-troop objects selected
         if (selectedObject == null || (!selectedObject.CompareTag("Ally") && !selectedObject.CompareTag("Enemy"))) {
+            if (markedTroop != null) {
+                Transform healthBarCanvas = markedTroop.transform.Find("HealthBar Canvas");
+            healthBarCanvas.Find("Star").gameObject.SetActive(false);
+            }
             markedTroop = null;
         } else {
             markedTroop = selectedObject;
@@ -57,6 +61,10 @@ public class MarkTroopBehavior : MonoBehaviour
             troopInfoPanel.SetActive(false);
         } else {
             troopInfoPanel.SetActive(true);
+
+            Transform healthBarCanvas = markedTroop.transform.Find("HealthBar Canvas");
+            healthBarCanvas.Find("Star").gameObject.SetActive(true);
+
             TroopBase markedTroopBase = markedTroop.GetComponent<TroopBase>();
 
             String content = String.Format(
