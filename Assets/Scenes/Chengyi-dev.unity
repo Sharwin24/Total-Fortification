@@ -3160,6 +3160,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53f88503caea1425ea8bd14c0668352b, type: 3}
+--- !u!114 &1981507441068735143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5789660806800167068, guid: 53f88503caea1425ea8bd14c0668352b, type: 3}
+  m_PrefabInstance: {fileID: 1981507441068735142}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1981507441068735144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6992225351603272493, guid: 53f88503caea1425ea8bd14c0668352b, type: 3}
+  m_PrefabInstance: {fileID: 1981507441068735142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4883322227823955279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3212,6 +3228,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7999827332608685869, guid: 44927cdee70a842de8903f1e9ad189af, type: 3}
+      propertyPath: troopInfoPanel
+      value: 
+      objectReference: {fileID: 1981507441068735144}
+    - target: {fileID: 7999827332608685869, guid: 44927cdee70a842de8903f1e9ad189af, type: 3}
+      propertyPath: troopInfoContent
+      value: 
+      objectReference: {fileID: 1981507441068735143}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -7,8 +7,8 @@ using UnityEngine;
 public class MarkTroopBehavior : MonoBehaviour
 {
 
-    private GameObject troopInfoPanel;
-    private TextMeshProUGUI troopInfoContent;
+    public GameObject troopInfoPanel;
+    public TextMeshProUGUI troopInfoContent;
     private String troopInfoTemplate;
     private GameObject markedTroop;
     private MouseSelector mouseSelector;
@@ -18,10 +18,6 @@ public class MarkTroopBehavior : MonoBehaviour
     void Start()
     {
         mouseSelector = Camera.main.GetComponent<MouseSelector>();
-
-        troopInfoPanel = GameObject.FindGameObjectWithTag("TroopInfo");
-        troopInfoContent = GameObject.FindGameObjectWithTag("TroopInfoContent").GetComponent<TextMeshProUGUI>();
-
         troopInfoTemplate = SetTroopInfoTemplate();
     }
 
