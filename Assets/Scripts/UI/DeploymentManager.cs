@@ -13,16 +13,7 @@ using static UnityEditor.ShaderData;
 
 public class DeploymentManager : MonoBehaviour {
 
-    /*
-    Deployment UI:
-    - Deploy Troop on different places by Player(drag or drop, or clicking)
-    - Player only have a certain number of equipments available, for example, only 5 heavy chest armor.
-    - Troop Highlight when selected(a gem on their head). For both phases.
-    - Equipments UI should be in the form of Head, Chest, Left Arm, Right Arm, and Legs.Then the player can choose equipment for these parts.With Troop Status like this.
-    - When the user clicks on one of these bodyparts. they will only see weapons/armor available at those parts. 
-    Implementation detail:
-    - Combine the EquipmentIcon with the Equipment Object into one list. 
-    */
+    /// TODO: Deploy Troop on different places by Player(drag or drop, or clicking)
 
     public List<Button> troopButtons;
     public List<Button> equipmentButtons;
