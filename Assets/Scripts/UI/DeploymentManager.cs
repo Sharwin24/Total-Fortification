@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 using static UnityEditor.ShaderData;
 
 public class DeploymentManager : MonoBehaviour {
@@ -33,6 +34,7 @@ public class DeploymentManager : MonoBehaviour {
     //[Tooltip("Needs to be Populated with EquipmentBase Prefabs and count")]
     public Dictionary<EquipmentBase, int> EquipmentInventory = new();
 
+    public Sprite emptySlotSprite;
     private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
         { "TroopBtn2", 1 },
@@ -55,7 +57,7 @@ public class DeploymentManager : MonoBehaviour {
         { "LegsEquipmentBtn", EquipmentType.Legs }
     };
 
-
+    private List<EquipmentButtonBehavior> equipmentBtnBehaviors;
     private List<TroopBase> allies = new();
     private Dictionary<TroopBase, List<IEquipment>> troopEquipmentMemory = new();
     private Color selectedColor = new(0, 1, 0, 0.5f);
@@ -98,6 +100,7 @@ public class DeploymentManager : MonoBehaviour {
     void Start() {
         // Populate icons with buttons and add listeners
         SetupButtons();
+        this.equipmentBtnBehaviors = GameObject.FindObjectsByType<EquipmentButtonBehavior>(FindObjectsSortMode.None).Where((ebb) => ebb.equipmentObject != null).ToList();
         // Collect all TroopBase objects with Ally tag
         allies = GameObject.FindGameObjectsWithTag("Ally").Select(go => go.GetComponent<TroopBase>()).ToList();
         Debug.Log("DeploymentManager found " + allies.Count + " allies");
@@ -107,6 +110,20 @@ public class DeploymentManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+    }
+
+    public void AssignEquippedSlot(EquipmentType type, IEquipment item) {
+        if (type == EquipmentType.None || item == null) return;
+        Image i = equipmentButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
+        // Set image to item
+        i.sprite = item.EquipmentIcon;
+    }
+
+    public void ClearEquippedSlot(EquipmentType type) {
+        if (type == EquipmentType.None) return;
+        Image i = equipmentButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
+        // Set image to item
+        i.sprite = emptySlotSprite;
     }
 
     private void HighlightSelectedTroop(bool enable) {
@@ -179,6 +196,9 @@ public class DeploymentManager : MonoBehaviour {
             image.color = selectedColor;
             equipmentTypeSelected = tagToEquipmentType[btn.tag];
             Debug.Log("Equipment Type: " + equipmentTypeSelected + " selected");
+        }
+        foreach (var ebb in this.equipmentBtnBehaviors) {
+            ebb.EnableByType(equipmentTypeSelected);
         }
     }
 

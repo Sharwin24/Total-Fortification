@@ -19,7 +19,7 @@ MonoBehaviour:
   moveRangeModifier: 0
   speedModifier: 0
   equipmentIcon: {fileID: 21300000, guid: 2aa1c950d65f16443b74f7ca8dd35a26, type: 3}
-  equipmentType: 1
+  equipmentType: 2
   equipmentName: LightArmor
   equipmentDescription: 
   isWeapon: 0

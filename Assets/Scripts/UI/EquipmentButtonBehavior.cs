@@ -37,11 +37,12 @@ public class EquipmentButtonBehavior : MonoBehaviour {
 
     void Update() {
         DisplayCount();
-        if (deploymentManager != null && equipmentObject != null) {
-            if (deploymentManager.GetEquipmentTypeSelected() != equipmentObject.EquipmentType) {
-                SetColor(Color.red);
-            }
-        }
+    }
+
+    public void EnableByType(EquipmentType type) {
+        if (type == EquipmentType.None || this.equipmentObject == null) this.gameObject.SetActive(true);
+        else if (type != this.equipmentObject.EquipmentType) this.gameObject.SetActive(false);
+        else this.gameObject.SetActive(true);
     }
 
     private void OnEnable() {
@@ -65,9 +66,14 @@ public class EquipmentButtonBehavior : MonoBehaviour {
         // Equip to Troop and set icon in equipment slot
         TroopBase troop = deploymentManager.GetSelectedTroop;
         if (troop == null) return;
+        if (deploymentManager.GetEquipmentTypeSelected() != equipmentObject.EquipmentType) {
+            Debug.LogWarning("Cannot equip " + equipmentObject + " to " + equipmentObject.EquipmentType);
+            return;
+        }
         // If the troop already has this item equipped, then clicking this button should remove it
         if (troop.equippedItems.Contains(this.equipmentObject)) {
             troop.RemoveItem(this.equipmentObject.EquipmentType);
+            deploymentManager.ClearEquippedSlot(this.equipmentObject.EquipmentType);
             SetColor(Color.white);
             this.count++;
             Debug.Log("Removed " + this.equipmentObject.EquipmentName + " from " + troop.name);
@@ -77,6 +83,7 @@ public class EquipmentButtonBehavior : MonoBehaviour {
                 return;
             }
             troop.EquipItem(this.equipmentObject);
+            deploymentManager.AssignEquippedSlot(this.equipmentObject.EquipmentType, this.equipmentObject);
             SetColor(selectedColor);
             this.count--;
             Debug.Log("Equipped " + this.equipmentObject.EquipmentName + " to " + troop.name);
