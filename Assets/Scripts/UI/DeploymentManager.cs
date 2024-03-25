@@ -30,6 +30,8 @@ public class DeploymentManager : MonoBehaviour {
     public Button resetEquipmentButton;
     public Button applyEquipmentButton;
     public EquipmentType equipmentTypeSelected = EquipmentType.None;
+    public TroopBase GetSelectedTroop => currentlySelectedTroopIndex != -1 ? allies[currentlySelectedTroopIndex] : null;
+
 
     private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
@@ -202,28 +204,6 @@ public class DeploymentManager : MonoBehaviour {
         return equipmentTypeSelected;
     }
 
-    //private void RemoveEquipment(TroopBase troop, int equipmentIndex) {
-    //    print("Removing equipment equipped to " + troop.name + " on " + equipmentIndexToBodyPart[equipmentIndex]);
-    //    troop.RemoveItem(equipmentIndexToBodyPart[equipmentIndex]);
-    //}
-
-    //private void OnApplyEquipmentButtonClicked() {
-    //    // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
-    //    TroopBase selectedAlly = allies[currentlySelectedTroopIndex];
-    //    for (int i = 0; i < equipmentIcons.Count; i++) {
-    //        if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;//RemoveEquipment(selectedAlly, i);
-    //        var equipmentGameObject = equipmentObjects[i];
-    //        if (equipmentGameObject != null) {
-    //            if (equipmentGameObject == null) {
-    //                Debug.LogError("EquipmentBase object is null, cannot apply");
-    //                return;
-    //            }
-    //            selectedAlly.EquipItem(equipmentGameObject);
-    //            print("Applied " + equipmentGameObject.EquipmentName + " to " + selectedAlly.name);
-    //        }
-    //    }
-    //}
-
     private void OpenEquipmentManager(TroopBase allyTroop) {
         print("Open EquipmentManager for troop " + allyTroop.name);
         // Load the equipment for the selected troop
@@ -245,6 +225,28 @@ public class DeploymentManager : MonoBehaviour {
     private void LoadEquipmentManager(TroopBase troop) {
 
     }
+
+    //private void RemoveEquipment(TroopBase troop, int equipmentIndex) {
+    //    print("Removing equipment equipped to " + troop.name + " on " + equipmentIndexToBodyPart[equipmentIndex]);
+    //    troop.RemoveItem(equipmentIndexToBodyPart[equipmentIndex]);
+    //}
+
+    //private void OnApplyEquipmentButtonClicked() {
+    //    // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
+    //    TroopBase selectedAlly = allies[currentlySelectedTroopIndex];
+    //    for (int i = 0; i < equipmentIcons.Count; i++) {
+    //        if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;//RemoveEquipment(selectedAlly, i);
+    //        var equipmentGameObject = equipmentObjects[i];
+    //        if (equipmentGameObject != null) {
+    //            if (equipmentGameObject == null) {
+    //                Debug.LogError("EquipmentBase object is null, cannot apply");
+    //                return;
+    //            }
+    //            selectedAlly.EquipItem(equipmentGameObject);
+    //            print("Applied " + equipmentGameObject.EquipmentName + " to " + selectedAlly.name);
+    //        }
+    //    }
+    //}
 
     //private void UpdateEquipmentPolicies(int equipmentIndex) {
     //    var currentEquipments = troopIndexToEquipmentSelected[currentlySelectedTroopIndex];
