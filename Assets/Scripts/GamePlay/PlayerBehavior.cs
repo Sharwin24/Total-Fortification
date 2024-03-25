@@ -9,12 +9,13 @@ public class PlayerBehavior : MonoBehaviour
 
     public GameObject playerUI;
     public TextMeshProUGUI warningMessage;
+    public float verticalMovementLimit = 3f;
     PlayerUIInteraction graphicUIRaycast;
     MouseSelector selector;
     Button moveButton;
     Button attackButton;
 
-    void Start() {
+    void Awake() {
         graphicUIRaycast = GetComponent<PlayerUIInteraction>();
         selector = Camera.main.GetComponent<MouseSelector>();
         moveButton = GameObject.FindGameObjectWithTag("MoveButton").GetComponent<Button>();
@@ -50,8 +51,6 @@ public class PlayerBehavior : MonoBehaviour
     }
 
     private IEnumerator MovePlayer(GameObject player, Action onComplete) {
-        Debug.Log("Move initiated.");
-
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
 
         Vector3 selectedPosition = selector.GetSelectedPosition();
@@ -61,8 +60,12 @@ public class PlayerBehavior : MonoBehaviour
         TroopBase playerTroop = player.GetComponent<TroopBase>();
         // Time needed to move to the intended position
         float timeNeeded = intendedMoveDistance / playerTroop.MoveSpeed;
-        if (intendedMoveDistance <= playerTroop.MoveRange) {
-            Debug.Log("call MoveTo now");
+
+        if (selectedPosition.y >= verticalMovementLimit) {
+            warningMessage.text = "Intended Move too high.";
+            yield return new WaitForSeconds(1);
+            warningMessage.text = "";
+        } else if (intendedMoveDistance <= playerTroop.MoveRange) {
             StartCoroutine(playerTroop.MoveTo(intendedPosition));
             yield return new WaitForSeconds(timeNeeded);
             onComplete();
@@ -74,7 +77,6 @@ public class PlayerBehavior : MonoBehaviour
     }
 
     private IEnumerator AttackEnemy(GameObject player, Action onComplete) {
-        Debug.Log("Attack initiated.");
         yield return new WaitUntil(
             () => Input.GetMouseButtonDown(0) && selector.GetSelectedObject() != null);
 

@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
-using Unity.IO.LowLevel.Unsafe;
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
@@ -25,12 +24,10 @@ public class LevelManager : MonoBehaviour {
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
-
     void Start() {
-        levelMessage.text = "";
-        turnMessage.text = "";
-        actionDone = false;
-        gameState = GameState.DEPLOYMENT; // Initial setup for demonstration purposes
+
+        Initialize();
+
         if (deploymentUI == null) {
             deploymentUI = GameObject.FindWithTag("DeploymentUI");
         }
@@ -69,8 +66,7 @@ public class LevelManager : MonoBehaviour {
             yield return new WaitForSeconds(2);
         }
 
-        deploymentUI.SetActive(false);
-
+        gameState = GameState.COMBAT;
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
@@ -79,7 +75,7 @@ public class LevelManager : MonoBehaviour {
 
         DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
-
+            
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
@@ -160,6 +156,14 @@ public class LevelManager : MonoBehaviour {
 
         return count == 0;
     }
+
+    void Initialize() {
+        levelMessage.text = "";
+        turnMessage.text = "";
+        actionDone = false;
+        gameState = GameState.DEPLOYMENT; 
+    }
+
 
 
 
