@@ -26,7 +26,6 @@ TagManager:
   - AttackButton
   - EquipmentWindow
   - ResetEquipmentButton
-  - ApplyEquipmentButton
   - TroopBtn5
   - TroopBtn6
   - TroopBtn7
@@ -42,6 +41,7 @@ TagManager:
   - LeftArmEquipmentBtn
   - RightArmEquipmentBtn
   - LegsEquipmentBtn
+  - DeploymentManager
   layers:
   - Default
   - TransparentFX

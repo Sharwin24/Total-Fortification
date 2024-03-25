@@ -28,10 +28,10 @@ public class DeploymentManager : MonoBehaviour {
     public Image equipmentWindowManager;
     public Image equipmentItemsWindow;
     public Button resetEquipmentButton;
-    public Button applyEquipmentButton;
     public EquipmentType equipmentTypeSelected = EquipmentType.None;
-    public TroopBase GetSelectedTroop => currentlySelectedTroopIndex != -1 ? allies[currentlySelectedTroopIndex] : null;
-
+    public TroopBase GetSelectedTroop => currentlySelectedTroopIndex != -1 && allies.Count > 0 ? allies[currentlySelectedTroopIndex] : null;
+    //[Tooltip("Needs to be Populated with EquipmentBase Prefabs and count")]
+    public Dictionary<EquipmentBase, int> EquipmentInventory = new();
 
     private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
@@ -55,12 +55,9 @@ public class DeploymentManager : MonoBehaviour {
         { "LegsEquipmentBtn", EquipmentType.Legs }
     };
 
-    // Map from indices in equipment window to EquipmentBase objects
-    [Tooltip("Needs to be Populated with EquipmentBase Prefabs and count")]
-    public Dictionary<EquipmentBase, int> equipmentInventory = new();
 
-    // Maps Troop Index to list of equipment selected (bool), index of equipment selected matches equipment above
-    private List<TroopBase> allies;
+    private List<TroopBase> allies = new();
+    private Dictionary<TroopBase, List<IEquipment>> troopEquipmentMemory = new();
     private Color selectedColor = new(0, 1, 0, 0.5f);
     private int currentlySelectedTroopIndex;
 
@@ -89,13 +86,12 @@ public class DeploymentManager : MonoBehaviour {
                 Button button = go.GetComponent<Button>();
                 if (button != null) {
                     equipmentButtons.Add(button);
-                    equipmentButtons[^1].onClick.AddListener(() => OnEquipmentButtonClicked(button));
+                    equipmentButtons[^1].onClick.AddListener(() => OnEquipmentSlotButtonClicked(button));
                 }
             }
         }
-        // Reset and Apply buttons
+        // Reset button
         resetEquipmentButton.onClick.AddListener(() => OnResetEquipmentButtonClicked());
-        //applyEquipmentButton.onClick.AddListener(() => OnApplyEquipmentButtonClicked());
     }
 
     // Start is called before the first frame update
@@ -172,7 +168,7 @@ public class DeploymentManager : MonoBehaviour {
             OpenEquipmentManager(troop); // Open this troop's equipment Manager
         }
     }
-    public void OnEquipmentButtonClicked(Button btn) {
+    public void OnEquipmentSlotButtonClicked(Button btn) {
         // Find the Icon
         Image image = btn.GetComponent<Image>();
         if (image.color == selectedColor) {
@@ -184,9 +180,6 @@ public class DeploymentManager : MonoBehaviour {
             equipmentTypeSelected = tagToEquipmentType[btn.tag];
             Debug.Log("Equipment Type: " + equipmentTypeSelected + " selected");
         }
-        //UpdateEquipmentPolicies(equipmentIndex);
-        // Color the icons based on selections list
-        //LoadSelectedEquipment();
     }
 
     private void OnResetEquipmentButtonClicked() {
@@ -211,7 +204,7 @@ public class DeploymentManager : MonoBehaviour {
         equipmentWindowManager.gameObject.SetActive(true);
         equipmentItemsWindow.gameObject.SetActive(true);
         resetEquipmentButton.gameObject.SetActive(true);
-        applyEquipmentButton.gameObject.SetActive(true);
+        LoadEquipmentManager(allyTroop);
     }
 
     private void CloseEquipmentManager() {
@@ -219,11 +212,23 @@ public class DeploymentManager : MonoBehaviour {
         equipmentWindowManager.gameObject.SetActive(false);
         equipmentItemsWindow.gameObject.SetActive(false);
         resetEquipmentButton.gameObject.SetActive(false);
-        applyEquipmentButton.gameObject.SetActive(false);
     }
 
     private void LoadEquipmentManager(TroopBase troop) {
+        if (troop == null) return;
+        if (troopEquipmentMemory.ContainsKey(troop)) {
+            this.troopEquipmentMemory[troop] = troop.equippedItems;
+        } else this.troopEquipmentMemory.Add(troop, new());
+        // Highlight the selected equipment buttons if they are equipped to this troop
+    }
 
+    public bool SelectedTroopHasEquipment(IEquipment equipment) {
+        TroopBase troop = this.GetSelectedTroop;
+        if (troop == null || equipment == null) return false;
+        if (troopEquipmentMemory.ContainsKey(troop)) {
+            return troopEquipmentMemory[troop].Contains(equipment);
+        }
+        return false;
     }
 
     //private void RemoveEquipment(TroopBase troop, int equipmentIndex) {
