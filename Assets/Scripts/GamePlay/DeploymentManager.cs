@@ -8,12 +8,6 @@ using UnityEngine.UI;
 
 public class DeploymentManager : MonoBehaviour {
 
-
-    // DeploymentManager should find out how many GameObjects with Ally tag are in the scene
-    // and display that many buttons with the corresponding icons
-    // When a button is clicked, the player should be able to open the equipment manager for that troop
-
-    public List<Image> troopIcons;
     public List<Button> troopButtons;
     public List<Image> equipmentIcons;
     public List<Button> equipmentButtons;
@@ -62,17 +56,32 @@ public class DeploymentManager : MonoBehaviour {
     private void Awake() {
     }
 
+    void SetupTroopButtons() {
+        // The troop buttons are tagged TroopBtn1, TroopBtn2, etc.
+        // so we can find them by tag and add them to the list
+        for (int i = 1; i <= tagToTroopIndex.Count; i++) {
+            string tag = "TroopBtn" + i;
+            GameObject go = GameObject.FindGameObjectWithTag(tag);
+            if (go != null) {
+                Button button = go.GetComponent<Button>();
+                if (button != null) {
+                    troopButtons.Add(button);
+                    troopButtons[^1].onClick.AddListener(() => OnTroopButtonClicked(button));
+                }
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start() {
         // Populate icons with buttons and add listeners
-        foreach (var icon in troopIcons) {
-            troopButtons.Add(icon.GetComponent<Button>());
-            troopButtons[^1].onClick.AddListener(() => OnTroopButtonClicked(icon));
-        }
+        SetupTroopButtons();
+
         foreach (var icon in equipmentIcons) {
             equipmentButtons.Add(icon.GetComponent<Button>());
             equipmentButtons[^1].onClick.AddListener(() => OnEquipmentButtonClicked(icon));
         }
+
         resetEquipmentButton.onClick.AddListener(() => OnResetEquipmentButtonClicked());
         applyEquipmentButton.onClick.AddListener(() => OnApplyEquipmentButtonClicked());
         // Collect all TroopBase objects with Ally tag
@@ -90,44 +99,60 @@ public class DeploymentManager : MonoBehaviour {
 
     }
 
-    private void SelectTroopIcon(Image icon) {
-        Image foundIcon = troopIcons.Find(i => i == icon);
-        if (foundIcon == null) return;
+    private void HighlightSelectedTroop(bool enable) {
+        if (currentlySelectedTroopIndex == -1) return;
+        var selectedTroop = allies[currentlySelectedTroopIndex];
+        // Get the SelectedIndicatorGem object
+        // Find child object of selectedTroop with tag "SelectionIndicatorGem"
+        GameObject gem = selectedTroop.transform.Find("SelectionIndicatorGem")?.gameObject;
+        //GameObject gem = selectedTroop.GetComponentInChildren<GemIndicator>()?.gameObject;
+        if (gem == null) return;
+        // Enable the GemIndicator
+        gem.SetActive(enable);
+    }
+
+    private void SelectTroopIcon(Button btn) {
+        Image image = btn.GetComponent<Image>();
+        if (image == null) return;
+        currentlySelectedTroopIndex = tagToTroopIndex[btn.tag];
         // If the icon is already selected, unselect it
-        if (foundIcon.color == selectedColor) {
-            foundIcon.color = Color.white;
+        if (image.color == selectedColor) {
+            image.color = Color.white;
+            HighlightSelectedTroop(false);
         } else {
             // Change to green with transparency so image can be seen
-            foundIcon.color = selectedColor;
+            image.color = selectedColor;
+            HighlightSelectedTroop(true);
         }
-        currentlySelectedTroopIndex = troopIcons.IndexOf(foundIcon);
     }
 
     private void UnselectAllTroopIcons() {
-        foreach (var i in troopIcons) {
+        foreach (var btn in troopButtons) {
+            Image i = btn.GetComponent<Image>();
             i.color = Color.white;
         }
+        HighlightSelectedTroop(false);
         currentlySelectedTroopIndex = -1;
     }
 
-    private TroopBase GetTroopFromIcon(Image troopIcon) {
-        int index = tagToTroopIndex[troopIcon.tag];
+    private TroopBase GetTroopFromIcon(Button btn) {
+        int index = tagToTroopIndex[btn.tag];
         if (index >= allies.Count) return null;
         return allies[index];
     }
 
 
-    public void OnTroopButtonClicked(Image icon) {
+    public void OnTroopButtonClicked(Button btn) {
         // If the icon is already selected, unselect it and close the equipment manager
-        int clickedIndex = troopIcons.IndexOf(icon);
+        int clickedIndex = tagToTroopIndex[btn.tag];
         if (clickedIndex == -1 || clickedIndex >= allies.Count) return; // If our index can't be mapped to an ally, don't do anything
         else if (clickedIndex == currentlySelectedTroopIndex) {
             UnselectAllTroopIcons();
             CloseEquipmentManager();
         } else { // If the icon is not the currently selected one
             UnselectAllTroopIcons(); // Unselect all
-            SelectTroopIcon(icon); // Select this troops
-            var troop = GetTroopFromIcon(icon);
+            SelectTroopIcon(btn); // Select this troops
+            var troop = GetTroopFromIcon(btn);
             if (troop == null) return;
             print("Selected troop: " + troop.name); // Troop should visually appear selected somehow
             OpenEquipmentManager(troop); // Open this troop's equipment Manager

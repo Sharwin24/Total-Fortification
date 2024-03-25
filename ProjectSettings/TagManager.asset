@@ -40,6 +40,7 @@ TagManager:
   - TroopBtn11
   - TroopInfo
   - TroopInfoContent
+  - SelectionIndicatorGem
   layers:
   - Default
   - TransparentFX
