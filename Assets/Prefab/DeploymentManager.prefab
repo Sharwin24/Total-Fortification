@@ -44,30 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9c0ecdaa8c66c49b111e7a7d07d2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  troopIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   troopButtons: []
-  equipmentIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   equipmentButtons: []
-  equipmentManager: {fileID: 0}
+  equipmentWindowManager: {fileID: 0}
+  equipmentItemsWindow: {fileID: 0}
   resetEquipmentButton: {fileID: 0}
   applyEquipmentButton: {fileID: 0}
-  equipmentObjects:
-  - {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
-  - {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
-  - {fileID: 11400000, guid: 10b146db91df6be4b99a4eb62c566f7c, type: 2}
-  - {fileID: 11400000, guid: de6a4dddfcd52b54dbd9f8c9774f9fa6, type: 2}
