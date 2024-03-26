@@ -24,8 +24,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public float AttackRange { get => attackRange; set => attackRange = value; }
     public float AttackPower { get => attackPower; set => attackPower = value; }
     public bool IsRange { get => isRange; set => isRange = value; }
+    public List<IEquipment> equippedItems = new();
     //The default equipments a troop has, used for enemy troops.
-    public EquipmentBase[] equipments;
+    public EquipmentBase[] defaultEquipments;
     public Dictionary<EquipmentType, BodyPart> BodyParts { get; } = new Dictionary<EquipmentType, BodyPart>();
 
     public HealthBar healthBar;
@@ -75,7 +76,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     //Only called for enemy troops.
     private void EquipItemInList()
     {
-        foreach (var equipment in equipments)
+        foreach (var equipment in defaultEquipments)
         {
             EquipItem(equipment);
         }
@@ -156,8 +157,6 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         }
     }
 
-
-
     public virtual bool EquipItem(IEquipment item)
     {
         bool equipped = false;
@@ -181,6 +180,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         }
         if (equipped)
         {
+            equippedItems.Add(item);
             ApplyEquipmentModifiers(item);
             IsRange = item.IsRangeWeapon;
             UpdateAppearance();
@@ -203,12 +203,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             }
             if (bodyPartToUnEquip.equipmentType == EquipmentType.TwoHanded)
             {
+                equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 BodyParts[EquipmentType.LeftArm].equippedItem = null;
                 BodyParts[EquipmentType.RightArm].equippedItem = null;
                 removed = true;
             }
             else
             {
+                equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 bodyPartToUnEquip.equippedItem = null;
                 removed = true;
             }

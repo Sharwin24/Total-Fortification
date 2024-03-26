@@ -19,7 +19,7 @@ MonoBehaviour:
   moveRangeModifier: 0
   speedModifier: 0
   equipmentIcon: {fileID: 21300000, guid: 89e7521e771f4f34a8fc9760979f3f1d, type: 3}
-  equipmentType: 1
+  equipmentType: 2
   equipmentName: HeavyArmor
   equipmentDescription: 
   isWeapon: 0

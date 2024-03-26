@@ -25,12 +25,7 @@ TagManager:
   - MoveButton
   - AttackButton
   - EquipmentWindow
-  - SwordEquipment
-  - BowEquipment
-  - LightArmorEquipment
-  - HeavyArmorEquipment
   - ResetEquipmentButton
-  - ApplyEquipmentButton
   - TroopBtn5
   - TroopBtn6
   - TroopBtn7
@@ -40,6 +35,13 @@ TagManager:
   - TroopBtn11
   - TroopInfo
   - TroopInfoContent
+  - SelectionIndicatorGem
+  - HeadEquipmentBtn
+  - ChestEquipmentBtn
+  - LeftArmEquipmentBtn
+  - RightArmEquipmentBtn
+  - LegsEquipmentBtn
+  - DeploymentManager
   layers:
   - Default
   - TransparentFX

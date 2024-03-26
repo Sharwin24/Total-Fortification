@@ -1,5 +1,6 @@
 public enum EquipmentType
 {
+    None,
     Head,
     Chest,
     LeftArm,
