@@ -82,6 +82,8 @@ public class LevelManager : MonoBehaviour {
         InitializeTroops();
         DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
+
+            print("Troop Queue Size: " + troopQueue.Count);
             
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
