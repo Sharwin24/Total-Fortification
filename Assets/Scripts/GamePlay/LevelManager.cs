@@ -22,6 +22,9 @@ public class LevelManager : MonoBehaviour {
     public TextMeshProUGUI turnMessage;
     public GameObject deploymentUI;
     public GameObject combatUI;
+    public AudioClip deploymentMusic;
+    public AudioClip combatMusic;
+    public AudioSource cameraAudioSource;
 
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
@@ -56,6 +59,8 @@ public class LevelManager : MonoBehaviour {
     IEnumerator TakeTurnsCoroutine() {
         print("TakeTurnsCoroutine triggered");
 
+        PlayMusic(deploymentMusic);
+
         DisplayUI(gameState);
         // Start in Deployment Phase and when button is triggered, switch to Combat Phase
         // DisplayUI(gameState);
@@ -68,6 +73,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         gameState = GameState.COMBAT;
+        PlayMusic(combatMusic);
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
@@ -172,7 +178,11 @@ public class LevelManager : MonoBehaviour {
         gameState = GameState.DEPLOYMENT; 
     }
 
-
+    public void PlayMusic(AudioClip clip) {
+        cameraAudioSource.Stop(); 
+        cameraAudioSource.clip = clip; 
+        cameraAudioSource.Play(); 
+    }
 
 
 

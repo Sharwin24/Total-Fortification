@@ -53,3 +53,6 @@ MonoBehaviour:
   turnMessage: {fileID: 0}
   deploymentUI: {fileID: 0}
   combatUI: {fileID: 0}
+  deploymentMusic: {fileID: 8300000, guid: d2ea5576ee19c4fc1bb3b9a8704851b0, type: 3}
+  combatMusic: {fileID: 8300000, guid: 465331bb26400417ab306298f1107bbf, type: 3}
+  cameraAudioSource: {fileID: 0}

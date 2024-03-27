@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: applyEquipmentButton
       value: 
-      objectReference: {fileID: 1769085700}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: resetEquipmentButton
       value: 
@@ -146,63 +146,63 @@ PrefabInstance:
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[0]
       value: 
-      objectReference: {fileID: 616011471}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[1]
       value: 
-      objectReference: {fileID: 616011470}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[2]
       value: 
-      objectReference: {fileID: 206922018}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[3]
       value: 
-      objectReference: {fileID: 206922017}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[4]
       value: 
-      objectReference: {fileID: 206922016}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[5]
       value: 
-      objectReference: {fileID: 206922015}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[6]
       value: 
-      objectReference: {fileID: 206922014}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[7]
       value: 
-      objectReference: {fileID: 206922013}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[8]
       value: 
-      objectReference: {fileID: 206922012}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[9]
       value: 
-      objectReference: {fileID: 206922011}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopIcons.Array.data[10]
       value: 
-      objectReference: {fileID: 206922010}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: equipmentIcons.Array.data[0]
       value: 
-      objectReference: {fileID: 1769085704}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: equipmentIcons.Array.data[1]
       value: 
-      objectReference: {fileID: 1769085703}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: equipmentIcons.Array.data[2]
       value: 
-      objectReference: {fileID: 698296484}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: equipmentIcons.Array.data[3]
       value: 
-      objectReference: {fileID: 698296483}
+      objectReference: {fileID: 0}
     - target: {fileID: 4807628374768431183, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: m_Name
       value: DeploymentManager
@@ -264,6 +264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.86
@@ -306,11 +310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -322,105 +326,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
   m_PrefabInstance: {fileID: 154739775}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &206922010 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 899356558115961780, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922011 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5903989874770449470, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922012 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5360199426960551121, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922013 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8356144040483327929, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922014 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2097184314626487868, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922015 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8924646160532567123, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922016 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7567005655805691408, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922017 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8612180875210704816, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &206922018 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8355051622566497546, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &288778307 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4731425433454567193, guid: 9884863d109bc5442a8ceaa8ca9da628, type: 3}
@@ -440,6 +345,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (2)
@@ -514,6 +423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.315166
@@ -556,11 +469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -708,6 +621,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.85
@@ -750,11 +667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -766,28 +683,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
   m_PrefabInstance: {fileID: 608597682}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &616011470 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3723938946540310885, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &616011471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2365705920847678105, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &631912098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -799,6 +694,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -842,11 +741,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -965,28 +864,6 @@ Transform:
   - {fileID: 2131717723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &698296483 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1180162258412773165, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &698296484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6072842642302634600, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +970,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.16
@@ -1135,11 +1016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1162,6 +1043,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1205,11 +1090,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1232,6 +1117,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1275,11 +1164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1318,6 +1207,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1361,11 +1254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1430,6 +1323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.243736
@@ -1472,11 +1369,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1499,6 +1396,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1542,11 +1443,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1569,6 +1470,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1612,11 +1517,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1639,6 +1544,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1682,11 +1591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1709,6 +1618,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1752,11 +1665,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1779,6 +1692,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1822,11 +1739,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2090,6 +2007,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.02
@@ -2132,11 +2053,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2147,6 +2068,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
   m_PrefabInstance: {fileID: 1523163721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1643417481 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6493267010321592426, guid: 9507c6b1fefde9446b9b26fcd5adb86c, type: 3}
+  m_PrefabInstance: {fileID: 1922728705}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1759507907
 PrefabInstance:
@@ -2159,6 +2085,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2202,11 +2132,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2315,17 +2245,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
---- !u!114 &1769085700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5813053993435526889, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1769085701 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7344422829970459593, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
@@ -2340,28 +2259,6 @@ MonoBehaviour:
 --- !u!114 &1769085702 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4155249652856082894, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1769085703 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 796718483536514279, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1769085704 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5567555404196599239, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
   m_PrefabInstance: {fileID: 1769085699}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -2500,6 +2397,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
       value: 43.173737
@@ -2542,11 +2443,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2569,6 +2470,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2612,11 +2517,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2714,10 +2619,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 8327922870245117731, guid: 9507c6b1fefde9446b9b26fcd5adb86c, type: 3}
-      propertyPath: MinDistance
-      value: 0.9841995
-      objectReference: {fileID: 0}
     - target: {fileID: 8977296007785254953, guid: 9507c6b1fefde9446b9b26fcd5adb86c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.6
@@ -2795,6 +2696,10 @@ PrefabInstance:
       propertyPath: playerManagement
       value: 
       objectReference: {fileID: 1905342785}
+    - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+      propertyPath: cameraAudioSource
+      value: 
+      objectReference: {fileID: 1643417481}
     - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: enterBattleButton
       value: 
@@ -2997,7 +2902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.37
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3005,7 +2910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50.3
+      value: 15.21
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3065,6 +2970,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.033735
@@ -3107,11 +3016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6943584930283838457, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3135,8 +3044,8 @@ SceneRoots:
   - {fileID: 692292030}
   - {fileID: 1926980773}
   - {fileID: 1922728705}
-  - {fileID: 1905342784}
   - {fileID: 1517599456}
+  - {fileID: 1905342784}
   - {fileID: 1769085699}
   - {fileID: 73118681}
   - {fileID: 2031342384}
