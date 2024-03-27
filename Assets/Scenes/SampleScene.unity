@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 526530762}
   m_Layer: 5
   m_Name: ShopUI
-  m_TagString: Untagged
+  m_TagString: ShopUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1807,7 +1807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1509145822}
   m_Layer: 5
-  m_Name: EquipmentsButton
+  m_Name: EquipmentsButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3096,6 +3096,34 @@ PrefabInstance:
     - target: {fileID: 294400758290307929, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
       propertyPath: m_Name
       value: EquipmentButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800569527627125308, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800569527627125308, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800569527627125308, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+    - target: {fileID: 5800569527627125308, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800569527627125308, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShopFinishOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800569527627125308, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800569527627125308, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6005134594210044114, guid: d14023d199c38d547ae48ba92b95d4e9, type: 3}
       propertyPath: m_Pivot.x

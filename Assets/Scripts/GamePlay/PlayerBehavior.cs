@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerBehavior : MonoBehaviour
     public TextMeshProUGUI warningMessage;
     public float verticalMovementLimit = 3f;
 
-    public int playerScore = 200;
+    public ScoreManager scoreManager;
     PlayerUIInteraction graphicUIRaycast;
     MouseSelector selector;
     Button moveButton;
@@ -97,8 +98,7 @@ public class PlayerBehavior : MonoBehaviour
                 StartCoroutine(playerTroop.Attack(enemyTroop));
                 yield return new WaitForSeconds(4);
                 if(enemyTroop.Health <= 0) {
-                    playerScore += enemyTroop.GetTroopScore();
-                    Debug.Log("Player Score: " + playerScore);
+                    scoreManager.AddScore(enemyTroop.GetTroopScore());
                 }
                 onComplete();
             } else {

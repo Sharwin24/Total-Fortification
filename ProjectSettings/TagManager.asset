@@ -42,6 +42,8 @@ TagManager:
   - RightArmEquipmentBtn
   - LegsEquipmentBtn
   - DeploymentManager
+  - ShopUI
+  - ShopCloseButton
   layers:
   - Default
   - TransparentFX
