@@ -35,4 +35,6 @@ public interface ITroop
     void UpdateAppearance();
     //Update the animation controller of the troop given its ranged or not
     void UpdateAnimation();
+    //Calculate the score of this troop, used for enemy
+    int GetTroopScore();
 }

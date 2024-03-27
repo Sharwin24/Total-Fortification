@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour {
     public Button enterBattleButton;
     public TextMeshProUGUI levelMessage;
     public TextMeshProUGUI turnMessage;
+    public TextMeshProUGUI scoreMessage;
     public GameObject deploymentUI;
     public GameObject combatUI;
 
@@ -38,7 +39,6 @@ public class LevelManager : MonoBehaviour {
             enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
         }
         enterBattleButton.onClick.AddListener(TaskOnClick);
-        InitializeTroops();
         StartCoroutine(TakeTurnsCoroutine());
     }
 
@@ -72,13 +72,15 @@ public class LevelManager : MonoBehaviour {
         int turnCount = 1;
         int troopsInTurn = troopQueue.Count;
         turnMessage.text = "Turn: " + turnCount;
-
+        scoreMessage.text = "Score: " + playerBehavior.playerScore;
+        InitializeTroops();
         DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
             
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
+            scoreMessage.text = "Score: " + playerBehavior.playerScore;
 
             if (troopGameObject == null) {
                 Debug.Log("In Game Troop Length " + troopQueue.Count);
@@ -160,13 +162,14 @@ public class LevelManager : MonoBehaviour {
     void Initialize() {
         levelMessage.text = "";
         turnMessage.text = "";
+        scoreMessage.text = "";
         actionDone = false;
         gameState = GameState.DEPLOYMENT; 
     }
 
-
-
-
+    public int GetPlayerScore() {
+        return playerManagement.GetComponent<PlayerBehavior>().playerScore;
+    }
 
 
 }
