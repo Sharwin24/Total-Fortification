@@ -24,8 +24,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject combatUI;
     public AudioClip deploymentMusic;
     public AudioClip combatMusic;
-    public AudioSource cameraAudioSource;
-
+    private AudioSource cameraAudioSource;
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
     void Start() {
@@ -176,6 +175,7 @@ public class LevelManager : MonoBehaviour {
         turnMessage.text = "";
         actionDone = false;
         gameState = GameState.DEPLOYMENT; 
+        cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
     }
 
     public void PlayMusic(AudioClip clip) {
