@@ -10,6 +10,8 @@ public class PlayerBehavior : MonoBehaviour
     public GameObject playerUI;
     public TextMeshProUGUI warningMessage;
     public float verticalMovementLimit = 3f;
+
+    public int playerScore = 200;
     PlayerUIInteraction graphicUIRaycast;
     MouseSelector selector;
     Button moveButton;
@@ -93,7 +95,11 @@ public class PlayerBehavior : MonoBehaviour
 
             if (intendedAttackDistance <= playerTroop.AttackRange) {
                 StartCoroutine(playerTroop.Attack(enemyTroop));
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(4);
+                if(enemyTroop.Health <= 0) {
+                    playerScore += enemyTroop.GetTroopScore();
+                    Debug.Log("Player Score: " + playerScore);
+                }
                 onComplete();
             } else {
                 warningMessage.text = "Can't Attack Beyond Attack Range";

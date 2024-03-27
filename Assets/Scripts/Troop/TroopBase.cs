@@ -47,6 +47,8 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public Camera mainCamera;
 
+    public int ScoreMultiplier = 5;
+
     private AudioSource cameraAudioSource;
 
     protected virtual void Awake()
@@ -262,5 +264,8 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public abstract void UpdateAnimation();
 
-
+    public int GetTroopScore()
+    {
+        return (int)Math.Floor((Armor + AttackPower + AttackRange + MoveRange + Speed) * ScoreMultiplier);
+    }
 }

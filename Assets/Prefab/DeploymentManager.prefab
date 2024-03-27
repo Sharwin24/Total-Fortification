@@ -50,3 +50,4 @@ MonoBehaviour:
   equipmentItemsWindow: {fileID: 0}
   resetEquipmentButton: {fileID: 0}
   equipmentTypeSelected: 0
+  emptySlotSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
