@@ -17,6 +17,8 @@ public class BasicSoldier : TroopBase
     public RuntimeAnimatorController rangeController;
     public RigBuilder[] rigBuilders;
 
+    
+
 
     private bool hasShield = false;
     private bool hasSword = false;
@@ -157,36 +159,6 @@ public class BasicSoldier : TroopBase
             if (found) rigBuilder.Build();
         }
     }
-    // public override void UpdateAnimation()
-    // {
-    //     Animator[] childAnimators = GetComponentsInChildren<Animator>(true);
-
-    //     foreach (var childAnimator in childAnimators)
-    //     {
-    //         childAnimator.runtimeAnimatorController = IsRange ? rangeController : meleeController;
-    //     }
-    //     animator = childAnimators;
-
-    //     SetRigLayerActiveByName(IsRange ? "MeleeRigLayer" : "RangeRigLayer", false);
-    //     SetRigLayerActiveByName(IsRange ? "RangeRigLayer" : "MeleeRigLayer", true);
-
-    // }
 
 
-    // // Enable a Rig Layer by name
-    // private void SetRigLayerActiveByName(string name, bool isActive)
-    // {
-    //     foreach (var rigBuilder in rigBuilders)
-    //     {
-    //         foreach (var layer in rigBuilder.layers)
-    //         {
-    //             if (layer.name == name)
-    //             {
-    //                 layer.active = isActive;
-    //                 rigBuilder.Build();
-    //                 return;
-    //             }
-    //         }
-    //     }
-    // }
 }
