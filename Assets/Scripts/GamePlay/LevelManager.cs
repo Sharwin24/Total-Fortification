@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
@@ -113,6 +114,7 @@ public class LevelManager : MonoBehaviour {
 
             if (CheckIfTagExists(allTroops, "Enemy")) {
                 levelMessage.text = "You win!";
+                Invoke("LoadNextLevel", 3);
                 break;
             } else if (CheckIfTagExists(allTroops, "Ally")) {
                 levelMessage.text = "You lost!";
@@ -130,6 +132,12 @@ public class LevelManager : MonoBehaviour {
 
     
         yield return new WaitForSeconds(0);
+    }
+
+    void LoadNextLevel() {
+        if (nextLevel != null) {
+            SceneManager.LoadScene(nextLevel);
+        }
     }
 
     void DisplayUI(GameState gameState) {
@@ -170,3 +178,4 @@ public class LevelManager : MonoBehaviour {
 
 
 }
+
