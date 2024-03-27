@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
@@ -22,7 +23,9 @@ public class LevelManager : MonoBehaviour {
     public TextMeshProUGUI scoreMessage;
     public GameObject deploymentUI;
     public GameObject combatUI;
-
+    public AudioClip deploymentMusic;
+    public AudioClip combatMusic;
+    private AudioSource cameraAudioSource;
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
     void Start() {
@@ -55,6 +58,8 @@ public class LevelManager : MonoBehaviour {
     IEnumerator TakeTurnsCoroutine() {
         print("TakeTurnsCoroutine triggered");
 
+        PlayMusic(deploymentMusic);
+
         DisplayUI(gameState);
         // Start in Deployment Phase and when button is triggered, switch to Combat Phase
         // DisplayUI(gameState);
@@ -67,6 +72,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         gameState = GameState.COMBAT;
+        PlayMusic(combatMusic);
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
@@ -115,6 +121,7 @@ public class LevelManager : MonoBehaviour {
 
             if (CheckIfTagExists(allTroops, "Enemy")) {
                 levelMessage.text = "You win!";
+                Invoke("LoadNextLevel", 3);
                 break;
             } else if (CheckIfTagExists(allTroops, "Ally")) {
                 levelMessage.text = "You lost!";
@@ -132,6 +139,12 @@ public class LevelManager : MonoBehaviour {
 
     
         yield return new WaitForSeconds(0);
+    }
+
+    void LoadNextLevel() {
+        if (nextLevel != null) {
+            SceneManager.LoadScene(nextLevel);
+        }
     }
 
     void DisplayUI(GameState gameState) {
@@ -165,11 +178,20 @@ public class LevelManager : MonoBehaviour {
         scoreMessage.text = "";
         actionDone = false;
         gameState = GameState.DEPLOYMENT; 
+        cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
     }
 
     public int GetPlayerScore() {
         return playerManagement.GetComponent<PlayerBehavior>().playerScore;
     }
+    public void PlayMusic(AudioClip clip) {
+        cameraAudioSource.Stop(); 
+        cameraAudioSource.clip = clip; 
+        cameraAudioSource.Play(); 
+    }
+
+
 
 
 }
+
