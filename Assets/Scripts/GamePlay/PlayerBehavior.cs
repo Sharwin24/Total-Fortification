@@ -24,6 +24,7 @@ public class PlayerBehavior : MonoBehaviour
         moveButton = GameObject.FindGameObjectWithTag("MoveButton").GetComponent<Button>();
         attackButton = GameObject.FindGameObjectWithTag("AttackButton").GetComponent<Button>();
         warningMessage.text = "";
+        scoreManager = ScoreManager.Instance;
     }
 
    public IEnumerator TakeAction(GameObject current) {

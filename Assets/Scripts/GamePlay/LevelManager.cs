@@ -62,6 +62,7 @@ public class LevelManager : MonoBehaviour
 
         enterBattleButton.onClick.AddListener(TaskOnClick);
         shopCloseButton.onClick.AddListener(ShopFinishOnClick);
+        scoreManager = ScoreManager.Instance;
         StartCoroutine(TakeTurnsCoroutine());
     }
 
@@ -92,6 +93,7 @@ public class LevelManager : MonoBehaviour
         DisplayUI(gameState);
         // Start in Deployment Phase and when button is triggered, switch to Combat Phase
         // DisplayUI(gameState);
+        gameState = GameState.DEPLOYMENT;
         while (gameState == GameState.DEPLOYMENT)
         {
 
@@ -220,7 +222,8 @@ public class LevelManager : MonoBehaviour
     public void ShopFinishOnClick()
     {
         gameState = GameState.DEPLOYMENT;
-        Debug.Log("Shop Finish Clicked"  + gameState);
+        Debug.Log("Player Purchased Following Equipments: " +
+        shopUI.GetComponent<ShopManager>().printEquipmentList());
     }
 
     bool CheckIfTagExists(List<GameObject> allTroops, string tag)

@@ -54,8 +54,6 @@ public class DeploymentManager : MonoBehaviour {
     private Color selectedColor = new(0, 1, 0, 0.5f);
     private int currentlySelectedTroopIndex;
 
-    private void Awake() {
-    }
 
     void SetupButtons() {
         // The troop buttons are tagged TroopBtn1, TroopBtn2, etc.
@@ -88,7 +86,7 @@ public class DeploymentManager : MonoBehaviour {
     }
 
     // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         // Populate icons with buttons and add listeners
         SetupButtons();
         this.equipmentBtnBehaviors = GameObject.FindObjectsByType<EquipmentButtonBehavior>(FindObjectsSortMode.None).Where((ebb) => ebb.equipmentObject != null).ToList();
