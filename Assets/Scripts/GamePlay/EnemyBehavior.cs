@@ -1,11 +1,20 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EnemyBehavior : MonoBehaviour
 {
+
+    enum EnmyFSM {
+        IDLE,
+        MOVING,
+        ATTACKING
+    }
+    EnmyFSM enemyState;
+
+    void Start() {
+        enemyState = EnmyFSM.IDLE;
+    }
 
 
     // MUST update LevelManager.actionDone upon ending execution!
@@ -20,21 +29,29 @@ public class EnemyBehavior : MonoBehaviour
         GameObject closestTarget = findClosestTarget(current.transform.position, targets);
         TroopBase closestTargetTroop = closestTarget.GetComponent<TroopBase>();
 
+        if (enemyState == EnmyFSM.IDLE && !inAttackRange(current, currentTroop, closestTarget)) {
+            enemyState = EnmyFSM.MOVING;
+        } else {
+            enemyState = EnmyFSM.ATTACKING;
+        }
         
-        if (!inAttackRange(current, currentTroop, closestTarget)) {
+        if (enemyState == EnmyFSM.MOVING) {
             print("Ally troop not in range");
             //Wait for the move time to complete
             float moveTime = MoveTowardTarget(current, currentTroop, closestTarget); 
             yield return new WaitForSeconds(moveTime);
 
-        } else {
+        } else if (enemyState == EnmyFSM.ATTACKING) {
             print("Ally troop in range");
             Attack(currentTroop, closestTargetTroop);
             yield return new WaitForSeconds(3); // wait for animation to complete
+        } else {
+            throw new InvalidOperationException("Enemy state not recognized");
         }
 
         // Mark action as done
         print("Enemy Action done");
+        enemyState = EnmyFSM.IDLE;
         LevelManager.actionDone = true;
         Vector3 updatedPosition = current.transform.position;
         current.transform.position = new Vector3(updatedPosition.x, currentPositionY, updatedPosition.z);
@@ -88,3 +105,4 @@ public class EnemyBehavior : MonoBehaviour
         return closestPlayerTroop;
     }
 }
+
