@@ -76,12 +76,14 @@ public class LevelManager : MonoBehaviour {
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
-        int troopsInTurn = troopQueue.Count;
         turnMessage.text = "Turn: " + turnCount;
         scoreMessage.text = "Score: " + playerBehavior.playerScore;
         InitializeTroops();
+        int troopsInTurn = troopQueue.Count;
         DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
+
+            print("Troop Queue Size: " + troopQueue.Count);
             
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
