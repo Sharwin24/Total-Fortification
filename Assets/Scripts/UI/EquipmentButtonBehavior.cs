@@ -73,10 +73,6 @@ public class EquipmentButtonBehavior : MonoBehaviour {
         TroopBase troop = deploymentManager.GetSelectedTroop;
         deploymentManager.SetTroopInfo(troop);
         if (troop == null) return;
-        //if (deploymentManager.GetEquipmentTypeSelected() != equipmentObject.EquipmentType) {
-        //    Debug.LogWarning("Cannot equip " + equipmentObject + " to " + equipmentObject.EquipmentType);
-        //    return;
-        //}
         // If the troop already has this item equipped, then clicking this button should remove it
         if (troop.equippedItems.Contains(this.equipmentObject)) {
             troop.RemoveItem(this.equipmentObject.EquipmentType);

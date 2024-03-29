@@ -129,7 +129,7 @@ public class DeploymentManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // If right click is pressed, deploy the selected troop
-        if (Input.GetMouseButtonDown(1)) DeployTroopOnMap();
+        // if (Input.GetMouseButtonDown(1)) DeployTroopOnMap();
     }
 
     private void DeployTroopOnMap() {
@@ -139,7 +139,8 @@ public class DeploymentManager : MonoBehaviour {
         // Instantiate the selected troop at the selected position
         GameObject go = Instantiate(troopToDeployPrefab, pos, Quaternion.identity);
         TroopBase troop = go.GetComponent<TroopBase>();
-        if (troop == null) return;
+        // TODO: Dynamically create a troopbutton for this troop
+        // We might need to rethink how the troopButtons are created so we can dynamically add and remove them from the window
     }
 
     public void SetTroopInfo(TroopBase troop) {
