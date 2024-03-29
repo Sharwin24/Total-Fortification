@@ -18,7 +18,7 @@ MonoBehaviour:
   attackRangeModifier: 7
   moveRangeModifier: 0
   speedModifier: 0
-  equipmentIcon: {fileID: 21300000, guid: 6e4d6dcd84478294bbb0850c77f83e16, type: 3}
+  equipmentIcon: {fileID: 21300000, guid: 9c432166f9db2be4585371147dd885ff, type: 3}
   equipmentType: 4
   equipmentName: Sabre
   equipmentDescription: 

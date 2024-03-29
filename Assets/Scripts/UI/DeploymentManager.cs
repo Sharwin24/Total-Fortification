@@ -274,15 +274,6 @@ public class DeploymentManager : MonoBehaviour {
         ClearSelectedEquipment();
     }
 
-    private void ClearSelectedEquipment() {
-        EquipmentTypeSelected = EquipmentType.None;
-        SetTypeText();
-        foreach (var btn in equipmentSlotButtons) {
-            Image i = btn.GetComponent<Image>();
-            i.color = Color.white;
-        }
-    }
-
     public EquipmentType GetEquipmentTypeSelected() {
         return EquipmentTypeSelected;
     }
@@ -292,6 +283,16 @@ public class DeploymentManager : MonoBehaviour {
             equipmentTypeText.text = "Select Equipment Type";
         } else {
             equipmentTypeText.text = this.EquipmentTypeSelected.ToString();
+        }
+    }
+
+    private void ClearSelectedEquipment() {
+        EquipmentTypeSelected = EquipmentType.None;
+        SetTypeText();
+        foreach (var btn in equipmentSlotButtons) {
+            Image i = btn.GetComponent<Image>();
+            i.color = Color.white;
+            i.sprite = equipmentTypeToSprite[tagToEquipmentType[btn.tag]];
         }
     }
 
@@ -321,6 +322,7 @@ public class DeploymentManager : MonoBehaviour {
         if (troopEquipmentMemory.ContainsKey(troop)) {
             this.troopEquipmentMemory[troop] = troop.equippedItems;
         } else this.troopEquipmentMemory.Add(troop, new());
+        // Update equipment items to show the correct icons and slots to show equipped items
         UpdateEquipmentSelected();
     }
 
@@ -330,6 +332,10 @@ public class DeploymentManager : MonoBehaviour {
             if (ebb.equipmentObject == null) continue;
             if (this.SelectedTroopHasEquipment(ebb.equipmentObject)) {
                 ebb.SetColor(selectedIconColor);
+                // Find slot for this equipment and assign it to the slot
+                AssignEquippedSlot(ebb.equipmentObject.EquipmentType, ebb.equipmentObject);
+            } else {
+                ebb.SetColor(Color.white);
             }
         }
     }
