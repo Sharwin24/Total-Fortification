@@ -12,26 +12,30 @@ public class EquipmentButtonBehavior : MonoBehaviour {
     public int count = 0;
 
     private TextMeshProUGUI countText;
-    private Color selectedColor = new(0, 1, 0, 0.5f);
+    private Color selectedIconColor = new(0, 1, 0, 0.5f);
     private DeploymentManager deploymentManager;
     private Button resetEquipmentButton;
 
 
     private void Awake() {
         if (!TryGetComponent<DeploymentManager>(out deploymentManager)) deploymentManager = GameObject.FindGameObjectWithTag("DeploymentManager").GetComponent<DeploymentManager>();
+        if (deploymentManager == null) Debug.LogError("DeploymentManager not found");
     }
 
     void Start() {
         if (deploymentManager != null && equipmentObject != null) {
             if (deploymentManager.EquipmentInventory.ContainsKey(equipmentObject)) count = deploymentManager.EquipmentInventory[equipmentObject];
             else deploymentManager.EquipmentInventory[equipmentObject] = count;
-        } else return;
+        } else if (equipmentObject == null) {
+            count = 0;
+        }
         // Assign the button component OnClick handler
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(OnEquipmentButtonClicked);
         resetEquipmentButton = GameObject.FindGameObjectWithTag("ResetEquipmentButton").GetComponent<Button>();
         resetEquipmentButton.onClick.AddListener(() => OnResetEquipmentButtonClicked());
         countText = GetComponentInChildren<TextMeshProUGUI>();
+        countText.text = count.ToString();
     }
 
     void Update() {
@@ -39,7 +43,9 @@ public class EquipmentButtonBehavior : MonoBehaviour {
     }
 
     public void EnableByType(EquipmentType type) {
-        if (type == EquipmentType.None || this.equipmentObject == null) this.gameObject.SetActive(true);
+        if (this.equipmentObject == null) this.gameObject.SetActive(false);
+        else if (type == EquipmentType.None) this.gameObject.SetActive(true);
+        else if ((type == EquipmentType.LeftArm || type == EquipmentType.RightArm) && this.equipmentObject.EquipmentType == EquipmentType.TwoHanded) this.gameObject.SetActive(true);
         else if (type != this.equipmentObject.EquipmentType) this.gameObject.SetActive(false);
         else this.gameObject.SetActive(true);
     }
@@ -48,11 +54,11 @@ public class EquipmentButtonBehavior : MonoBehaviour {
         // Assign the image to the icon inside the equipmentObject
         if (equipmentObject == null) return;
         if (TryGetComponent<Image>(out var i)) i.sprite = equipmentObject.EquipmentIcon;
-        if (deploymentManager.SelectedTroopHasEquipment(this.equipmentObject)) SetColor(selectedColor);
+        if (deploymentManager.SelectedTroopHasEquipment(this.equipmentObject)) SetColor(selectedIconColor);
         else SetColor(Color.white);
     }
 
-    private void SetColor(Color color) {
+    public void SetColor(Color color) {
         GetComponent<Image>().color = color;
     }
 
@@ -61,15 +67,16 @@ public class EquipmentButtonBehavior : MonoBehaviour {
     }
 
     private void OnEquipmentButtonClicked() {
+        if (this.equipmentObject == null) return;
         Debug.Log("EquipmentButtonBehavior.OnEquipmentButtonClicked " + equipmentObject.EquipmentName);
         // Equip to Troop and set icon in equipment slot
         TroopBase troop = deploymentManager.GetSelectedTroop;
         deploymentManager.SetTroopInfo(troop);
         if (troop == null) return;
-        if (deploymentManager.GetEquipmentTypeSelected() != equipmentObject.EquipmentType) {
-            Debug.LogWarning("Cannot equip " + equipmentObject + " to " + equipmentObject.EquipmentType);
-            return;
-        }
+        //if (deploymentManager.GetEquipmentTypeSelected() != equipmentObject.EquipmentType) {
+        //    Debug.LogWarning("Cannot equip " + equipmentObject + " to " + equipmentObject.EquipmentType);
+        //    return;
+        //}
         // If the troop already has this item equipped, then clicking this button should remove it
         if (troop.equippedItems.Contains(this.equipmentObject)) {
             troop.RemoveItem(this.equipmentObject.EquipmentType);
@@ -86,7 +93,7 @@ public class EquipmentButtonBehavior : MonoBehaviour {
             troop.EquipItem(this.equipmentObject);
             deploymentManager.SetTroopInfo(troop);
             deploymentManager.AssignEquippedSlot(this.equipmentObject.EquipmentType, this.equipmentObject);
-            SetColor(selectedColor);
+            SetColor(selectedIconColor);
             this.count--;
             Debug.Log("Equipped " + this.equipmentObject.EquipmentName + " to " + troop.name);
         }

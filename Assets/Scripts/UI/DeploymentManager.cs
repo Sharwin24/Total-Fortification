@@ -2,33 +2,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEditor.ShaderData;
 
 public class DeploymentManager : MonoBehaviour {
 
-    /// TODO: Deploy Troop on different places by Player(drag or drop, or clicking)
     public GameObject troopInfoPanel;
     public TextMeshProUGUI troopInfoContent;
     public List<Button> troopButtons;
-    public List<Button> equipmentButtons;
+    public List<Button> equipmentSlotButtons;
     public Image equipmentWindowManager;
+    public TextMeshProUGUI equipmentTypeText;
     public Image equipmentItemsWindow;
     public Button resetEquipmentButton;
-    public EquipmentType equipmentTypeSelected = EquipmentType.None;
+    public EquipmentType EquipmentTypeSelected = EquipmentType.None;
     public TroopBase GetSelectedTroop => currentlySelectedTroopIndex != -1 && allies.Count > 0 ? allies[currentlySelectedTroopIndex] : null;
-    //[Tooltip("Needs to be Populated with EquipmentBase Prefabs and count")]
     public Dictionary<EquipmentBase, int> EquipmentInventory = new();
 
-    public Sprite emptySlotSprite;
-    private String troopInfoTemplate;
-    private MouseSelector mouseSelector;
+    // Empty Slot Sprites
+    public Sprite headEmptySlotSprite;
+    public Sprite chestEmptySlotSprite;
+    public Sprite rightArmEmptySlotSprite;
+    public Sprite leftArmEmptySlotSprite;
+    public Sprite legsEmptySlotSprite;
+
+    public GameObject troopToDeployPrefab;
 
     private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
@@ -52,11 +52,21 @@ public class DeploymentManager : MonoBehaviour {
         { "LegsEquipmentBtn", EquipmentType.Legs }
     };
 
+    private readonly Dictionary<EquipmentType, Sprite> equipmentTypeToSprite = new() {
+        { EquipmentType.Head, null },
+        { EquipmentType.Chest, null },
+        { EquipmentType.LeftArm, null },
+        { EquipmentType.RightArm, null },
+        { EquipmentType.Legs, null}
+    };
+
+    private String troopInfoTemplate;
     private List<EquipmentButtonBehavior> equipmentBtnBehaviors;
     private List<TroopBase> allies = new();
     private Dictionary<TroopBase, List<IEquipment>> troopEquipmentMemory = new();
-    private Color selectedColor = new(0, 1, 0, 0.5f);
+    private Color selectedIconColor = new(0, 1, 0, 0.5f);
     private int currentlySelectedTroopIndex;
+    private MouseSelector mouseSelector;
 
     private void Awake() {
     }
@@ -82,8 +92,8 @@ public class DeploymentManager : MonoBehaviour {
             if (go != null) {
                 Button button = go.GetComponent<Button>();
                 if (button != null) {
-                    equipmentButtons.Add(button);
-                    equipmentButtons[^1].onClick.AddListener(() => OnEquipmentSlotButtonClicked(button));
+                    equipmentSlotButtons.Add(button);
+                    equipmentSlotButtons[^1].onClick.AddListener(() => OnEquipmentSlotButtonClicked(button));
                 }
             }
         }
@@ -93,7 +103,6 @@ public class DeploymentManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        mouseSelector = Camera.main.GetComponent<MouseSelector>();
         troopInfoTemplate = "Health: {0} \nArmor: {1} \nSpeed: {2} \nMove Range: {3} \nAttack Range: {4} \nAttack Power: {5}";
         troopInfoPanel.SetActive(false);
         // Populate icons with buttons and add listeners
@@ -103,10 +112,34 @@ public class DeploymentManager : MonoBehaviour {
         allies = GameObject.FindGameObjectsWithTag("Ally").Select(go => go.GetComponent<TroopBase>()).ToList();
         Debug.Log("DeploymentManager found " + allies.Count + " allies");
         CloseEquipmentManager();
+        // Setup Equipment Types
+        equipmentTypeToSprite[EquipmentType.Head] = headEmptySlotSprite;
+        equipmentTypeToSprite[EquipmentType.Chest] = chestEmptySlotSprite;
+        equipmentTypeToSprite[EquipmentType.LeftArm] = leftArmEmptySlotSprite;
+        equipmentTypeToSprite[EquipmentType.RightArm] = rightArmEmptySlotSprite;
+        equipmentTypeToSprite[EquipmentType.Legs] = legsEmptySlotSprite;
+        // Clear all equipment slots
+        foreach (var type in Enum.GetValues(typeof(EquipmentType))) {
+            ClearEquippedSlot((EquipmentType)type);
+        }
+        // Find Mouse Selector
+        if (!Camera.main.TryGetComponent<MouseSelector>(out mouseSelector)) Debug.LogError("MouseSelector not found");
     }
 
     // Update is called once per frame
     void Update() {
+        // If right click is pressed, deploy the selected troop
+        if (Input.GetMouseButtonDown(1)) DeployTroopOnMap();
+    }
+
+    private void DeployTroopOnMap() {
+        // Deploys the selected troop on the map at the selected position
+        Vector3 pos = mouseSelector.GetSelectedPosition();
+        if (this.GetSelectedTroop == null || mouseSelector == null || troopToDeployPrefab == null || pos == null) return;
+        // Instantiate the selected troop at the selected position
+        GameObject go = Instantiate(troopToDeployPrefab, pos, Quaternion.identity);
+        TroopBase troop = go.GetComponent<TroopBase>();
+        if (troop == null) return;
     }
 
     public void SetTroopInfo(TroopBase troop) {
@@ -116,31 +149,42 @@ public class DeploymentManager : MonoBehaviour {
             return;
         } else if (troop.CompareTag("Ally") || troop.CompareTag("Enemy")) {
             troopInfoPanel.SetActive(true);
-
-            Transform healthBarCanvas = troop.transform.Find("HealthBar Canvas");
-            healthBarCanvas.Find("Star").gameObject.SetActive(true);
-
             String content = String.Format(
                 troopInfoTemplate, troop.Health, troop.Armor,
                 troop.Speed, troop.MoveRange, troop.AttackRange,
                 troop.AttackPower);
-
             troopInfoContent.text = content;
         }
     }
 
     public void AssignEquippedSlot(EquipmentType type, IEquipment item) {
         if (type == EquipmentType.None || item == null) return;
-        Image i = equipmentButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
-        // Set image to item
-        i.sprite = item.EquipmentIcon;
+        // If type is TwoHanded, assign to both LeftArm and RightArm
+        if (type == EquipmentType.TwoHanded) {
+            Image leftImage = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == EquipmentType.LeftArm).GetComponent<Image>();
+            Image rightImage = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == EquipmentType.RightArm).GetComponent<Image>();
+            leftImage.sprite = item.EquipmentIcon;
+            rightImage.sprite = item.EquipmentIcon;
+        } else {
+            Image i = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
+            // Set image to item
+            i.sprite = item.EquipmentIcon;
+        }
     }
 
     public void ClearEquippedSlot(EquipmentType type) {
-        if (type == EquipmentType.None) return;
-        Image i = equipmentButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
-        // Set image to item
-        i.sprite = emptySlotSprite;
+        if (type == EquipmentType.None || !this.equipmentWindowManager.IsActive()) return;
+        if (type == EquipmentType.TwoHanded) {
+            // Find left and right arm buttons
+            Image leftImage = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == EquipmentType.LeftArm).GetComponent<Image>();
+            Image rightImage = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == EquipmentType.RightArm).GetComponent<Image>();
+            leftImage.sprite = equipmentTypeToSprite[EquipmentType.LeftArm];
+            rightImage.sprite = equipmentTypeToSprite[EquipmentType.RightArm];
+        } else {
+            Image i = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
+            // Set image to item
+            i.sprite = equipmentTypeToSprite[type];
+        }
     }
 
     private void HighlightSelectedTroop(bool enable) {
@@ -148,8 +192,7 @@ public class DeploymentManager : MonoBehaviour {
         var selectedTroop = allies[currentlySelectedTroopIndex];
         // Get the SelectedIndicatorGem object
         // Find child object of selectedTroop with tag "SelectionIndicatorGem"
-        GameObject gem = selectedTroop.transform.Find("SelectionIndicatorGem")?.gameObject;
-        //GameObject gem = selectedTroop.GetComponentInChildren<GemIndicator>()?.gameObject;
+        GameObject gem = selectedTroop.transform.Find("SelectionIndicatorGem").gameObject;
         if (gem == null) return;
         // Enable the GemIndicator
         gem.SetActive(enable);
@@ -160,12 +203,12 @@ public class DeploymentManager : MonoBehaviour {
         if (image == null) return;
         currentlySelectedTroopIndex = tagToTroopIndex[btn.tag];
         // If the icon is already selected, unselect it
-        if (image.color == selectedColor) {
+        if (image.color == selectedIconColor) {
             image.color = Color.white;
             HighlightSelectedTroop(false);
         } else {
             // Change to green with transparency so image can be seen
-            image.color = selectedColor;
+            image.color = selectedIconColor;
             HighlightSelectedTroop(true);
         }
     }
@@ -198,25 +241,32 @@ public class DeploymentManager : MonoBehaviour {
             SelectTroopIcon(btn); // Select this troops
             TroopBase troop = GetTroopFromIcon(btn);
             if (troop == null) return;
-            print("Selected troop: " + troop.name); // Troop should visually appear selected somehow
+            Debug.Log("Troop Button Clicked: " + troop.name); // Troop should visually appear selected somehow
             OpenEquipmentManager(troop); // Open this troop's equipment Manager
         }
     }
     public void OnEquipmentSlotButtonClicked(Button btn) {
         // Find the Icon
         Image image = btn.GetComponent<Image>();
-        if (image.color == selectedColor) {
+        if (image.color == selectedIconColor) {
             image.color = Color.white;
-            equipmentTypeSelected = EquipmentType.None;
+            EquipmentTypeSelected = EquipmentType.None;
         } else {
+            // Check if any other slots are already selected and if so, clear them
+            foreach (var b in equipmentSlotButtons) {
+                Image i = b.GetComponent<Image>();
+                if (i.color == selectedIconColor) i.color = Color.white;
+            }
             // Change to green with transparency so image can be seen
-            image.color = selectedColor;
-            equipmentTypeSelected = tagToEquipmentType[btn.tag];
-            Debug.Log("Equipment Type: " + equipmentTypeSelected + " selected");
+            image.color = selectedIconColor;
+            EquipmentTypeSelected = tagToEquipmentType[btn.tag];
+            Debug.Log("Equipment Type: " + EquipmentTypeSelected + " selected");
         }
+        SetTypeText();
         foreach (var ebb in this.equipmentBtnBehaviors) {
-            ebb.EnableByType(equipmentTypeSelected);
+            ebb.EnableByType(EquipmentTypeSelected);
         }
+        UpdateEquipmentSelected();
     }
 
     private void OnResetEquipmentButtonClicked() {
@@ -224,18 +274,28 @@ public class DeploymentManager : MonoBehaviour {
     }
 
     private void ClearSelectedEquipment() {
-        foreach (var btn in equipmentButtons) {
+        EquipmentTypeSelected = EquipmentType.None;
+        SetTypeText();
+        foreach (var btn in equipmentSlotButtons) {
             Image i = btn.GetComponent<Image>();
             i.color = Color.white;
         }
     }
 
     public EquipmentType GetEquipmentTypeSelected() {
-        return equipmentTypeSelected;
+        return EquipmentTypeSelected;
+    }
+
+    private void SetTypeText() {
+        if (this.EquipmentTypeSelected == EquipmentType.None) {
+            equipmentTypeText.text = "Select Equipment Type";
+        } else {
+            equipmentTypeText.text = this.EquipmentTypeSelected.ToString();
+        }
     }
 
     private void OpenEquipmentManager(TroopBase allyTroop) {
-        print("Open EquipmentManager for troop " + allyTroop.name);
+        Debug.Log("Open EquipmentManager for troop " + allyTroop.name);
         SetTroopInfo(allyTroop);
         // Load the equipment for the selected troop
         ClearSelectedEquipment();
@@ -246,7 +306,9 @@ public class DeploymentManager : MonoBehaviour {
     }
 
     private void CloseEquipmentManager() {
-        print("Close EquipmentManager");
+        Debug.Log("Close EquipmentManager");
+        EquipmentTypeSelected = EquipmentType.None;
+        SetTypeText();
         SetTroopInfo(null);
         equipmentWindowManager.gameObject.SetActive(false);
         equipmentItemsWindow.gameObject.SetActive(false);
@@ -258,7 +320,17 @@ public class DeploymentManager : MonoBehaviour {
         if (troopEquipmentMemory.ContainsKey(troop)) {
             this.troopEquipmentMemory[troop] = troop.equippedItems;
         } else this.troopEquipmentMemory.Add(troop, new());
-        // TODO: Highlight the selected equipment buttons if they are equipped to this troop
+        UpdateEquipmentSelected();
+    }
+
+    private void UpdateEquipmentSelected() {
+        // For each equipment button, check if the troop has this equipment
+        foreach (var ebb in this.equipmentBtnBehaviors) {
+            if (ebb.equipmentObject == null) continue;
+            if (this.SelectedTroopHasEquipment(ebb.equipmentObject)) {
+                ebb.SetColor(selectedIconColor);
+            }
+        }
     }
 
     public bool SelectedTroopHasEquipment(IEquipment equipment) {

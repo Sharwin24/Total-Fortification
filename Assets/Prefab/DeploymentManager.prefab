@@ -44,10 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9c0ecdaa8c66c49b111e7a7d07d2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  troopInfoPanel: {fileID: 0}
+  troopInfoContent: {fileID: 0}
   troopButtons: []
-  equipmentButtons: []
+  equipmentSlotButtons: []
   equipmentWindowManager: {fileID: 0}
+  equipmentTypeText: {fileID: 0}
   equipmentItemsWindow: {fileID: 0}
   resetEquipmentButton: {fileID: 0}
   equipmentTypeSelected: 0
-  emptySlotSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  headEmptySlotSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  chestEmptySlotSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  rightArmEmptySlotSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  leftArmEmptySlotSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  legsEmptySlotSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  troopToDeployPrefab: {fileID: 0}

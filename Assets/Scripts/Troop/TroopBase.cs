@@ -63,6 +63,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         BodyParts.Add(EquipmentType.LeftArm, new BodyPart(EquipmentType.LeftArm));
         BodyParts.Add(EquipmentType.RightArm, new BodyPart(EquipmentType.RightArm));
         BodyParts.Add(EquipmentType.Legs, new BodyPart(EquipmentType.Legs));
+        BodyParts.Add(EquipmentType.TwoHanded, new BodyPart(EquipmentType.TwoHanded));
 
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);

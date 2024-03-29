@@ -136,13 +136,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1682263970}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: emptySlotSprite
-      value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: troopInfoContent
       value: 
       objectReference: {fileID: 2010808661}
+    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+      propertyPath: equipmentTypeText
+      value: 
+      objectReference: {fileID: 570959130}
+    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+      propertyPath: headEmptySlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 62f0ecbe3d09cd247a98af8b31fd8702, type: 3}
+    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+      propertyPath: legsEmptySlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 369ac45e8537d3942983fc8095209607, type: 3}
+    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+      propertyPath: troopToDeployPrefab
+      value: 
+      objectReference: {fileID: 153806618}
+    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+      propertyPath: chestEmptySlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5958837ce636bc94eacabf5ad4533a7c, type: 3}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: equipmentItemsWindow
       value: 
@@ -155,6 +171,14 @@ PrefabInstance:
       propertyPath: equipmentWindowManager
       value: 
       objectReference: {fileID: 1769085702}
+    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+      propertyPath: leftArmEmptySlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc64079f761aec440a0a98e5d4cb1e3e, type: 3}
+    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+      propertyPath: rightArmEmptySlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06b98cc6074a2b74fb0ef5ffe68d16c2, type: 3}
     - target: {fileID: 4807628374768431183, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: m_Name
       value: DeploymentManager
@@ -204,6 +228,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
+--- !u!1 &153806618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+  m_PrefabInstance: {fileID: 631912098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &154739775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -425,6 +454,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
   m_PrefabInstance: {fileID: 517812912}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &570959130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3864738148609848225, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+  m_PrefabInstance: {fileID: 1769085699}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &593872758
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2085,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 328731556144646950, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766546540362115913, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06b98cc6074a2b74fb0ef5ffe68d16c2, type: 3}
     - target: {fileID: 3545323667027141130, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2125,10 +2173,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4046954193725598930, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039232242466510695, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 369ac45e8537d3942983fc8095209607, type: 3}
     - target: {fileID: 5811465153176853689, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
       propertyPath: m_Name
       value: DeploymentUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6538308161019725035, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5958837ce636bc94eacabf5ad4533a7c, type: 3}
+    - target: {fileID: 6570527202188377173, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc64079f761aec440a0a98e5d4cb1e3e, type: 3}
+    - target: {fileID: 7692129966641057825, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 62f0ecbe3d09cd247a98af8b31fd8702, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
