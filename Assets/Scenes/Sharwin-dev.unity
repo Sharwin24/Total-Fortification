@@ -2177,10 +2177,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -31
       objectReference: {fileID: 0}
+    - target: {fileID: 4347725648529513197, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347725648529513197, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: equipmentObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 446a9dcceb76f9247b84c917efcc1576, type: 2}
     - target: {fileID: 5039232242466510695, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 369ac45e8537d3942983fc8095209607, type: 3}
+    - target: {fileID: 5807584654929124543, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5807584654929124543, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: equipmentObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 27fcb22b45dedf54ca2f991a097bd705, type: 2}
     - target: {fileID: 5811465153176853689, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
       propertyPath: m_Name
       value: DeploymentUI
