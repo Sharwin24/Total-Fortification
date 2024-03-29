@@ -18,8 +18,7 @@ public class EquipmentButtonBehavior : MonoBehaviour {
 
 
     private void Awake() {
-        deploymentManager = GetComponent<DeploymentManager>();
-        if (deploymentManager == null) deploymentManager = GameObject.FindGameObjectWithTag("DeploymentManager").GetComponent<DeploymentManager>();
+        if (!TryGetComponent<DeploymentManager>(out deploymentManager)) deploymentManager = GameObject.FindGameObjectWithTag("DeploymentManager").GetComponent<DeploymentManager>();
     }
 
     void Start() {
