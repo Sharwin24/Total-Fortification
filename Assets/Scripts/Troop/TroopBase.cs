@@ -167,8 +167,10 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         {
             RemoveItem(EquipmentType.LeftArm);
             RemoveItem(EquipmentType.RightArm);
+            RemoveItem(EquipmentType.TwoHanded);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
+            BodyParts[EquipmentType.TwoHanded].equippedItem = item;
 
             equipped = true;
         }
@@ -209,6 +211,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
                 equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 BodyParts[EquipmentType.LeftArm].equippedItem = null;
                 BodyParts[EquipmentType.RightArm].equippedItem = null;
+                BodyParts[EquipmentType.TwoHanded].equippedItem = null;
                 removed = true;
             }
             else

@@ -86,6 +86,11 @@ public class EquipmentButtonBehavior : MonoBehaviour {
                 Debug.LogWarning("Cannot equip " + this.equipmentObject.name + ", none remaining");
                 return;
             }
+            else if (troop.equippedItems.Exists(e => e.EquipmentType == this.equipmentObject.EquipmentType)) {
+                // If the troop has an item equipped in the body part where this item should go, don't equip it and show a warning
+                Debug.LogWarning("Cannot equip " + this.equipmentObject.name + ", " + troop.name + " already has an item equipped in the " + this.equipmentObject.EquipmentType + " slot");
+                return;
+            }
             troop.EquipItem(this.equipmentObject);
             deploymentManager.SetTroopInfo(troop);
             deploymentManager.AssignEquippedSlot(this.equipmentObject.EquipmentType, this.equipmentObject);
