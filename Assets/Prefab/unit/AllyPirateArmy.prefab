@@ -71,6 +71,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 39a6809444535f84392aed63028472f2, type: 3}
   moveSound: {fileID: 8300000, guid: fcaaf50d0aa687a4e980b1168e9652ab, type: 3}
   mainCamera: {fileID: 0}
+  ScoreMultiplier: 5
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
   rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
@@ -114,7 +115,7 @@ MonoBehaviour:
   speed: 1
   attackRange: 5
   attackPower: 10
-  isRange: 0
+  isRange: 1
   defaultEquipments: []
   healthBar: {fileID: 5375754419733436611}
   AppearanceRange: 2
@@ -125,6 +126,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 39a6809444535f84392aed63028472f2, type: 3}
   moveSound: {fileID: 8300000, guid: fcaaf50d0aa687a4e980b1168e9652ab, type: 3}
   mainCamera: {fileID: 0}
+  ScoreMultiplier: 5
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: 0c5cf63be0bd0d74893fd0a1d447ceb0, type: 2}
   rangeController: {fileID: 9100000, guid: 672f986ce47e97149b934e27bc8968dc, type: 2}
