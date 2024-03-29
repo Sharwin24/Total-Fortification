@@ -60,7 +60,7 @@ MonoBehaviour:
   attackRange: 1
   attackPower: 10
   isRange: 0
-  equipments: []
+  defaultEquipments: []
   healthBar: {fileID: 5375754419733436611}
   AppearanceRange: 4
   MoveSpeed: 2
@@ -93,8 +93,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 4, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 1}
+  m_Size: {x: 5.65, y: 2, z: 5.27}
+  m_Center: {x: 0, y: 0.88, z: 0.04}
 --- !u!1 &19768550295358874
 GameObject:
   m_ObjectHideFlags: 0

@@ -886,8 +886,16 @@ MonoBehaviour:
   attackRange: 1
   attackPower: 10
   isRange: 0
-  equipments: []
+  defaultEquipments: []
   healthBar: {fileID: 0}
+  AppearanceRange: 2
+  MoveSpeed: 2
+  rangedAttackSound: {fileID: 0}
+  meleeAttackSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  hitSound: {fileID: 0}
+  moveSound: {fileID: 0}
+  mainCamera: {fileID: 0}
   HeavyArmorMinimum: 5
   meleeController: {fileID: 0}
   rangeController: {fileID: 0}
