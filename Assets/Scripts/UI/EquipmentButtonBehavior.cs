@@ -65,6 +65,7 @@ public class EquipmentButtonBehavior : MonoBehaviour {
         Debug.Log("EquipmentButtonBehavior.OnEquipmentButtonClicked " + equipmentObject.EquipmentName);
         // Equip to Troop and set icon in equipment slot
         TroopBase troop = deploymentManager.GetSelectedTroop;
+        deploymentManager.SetTroopInfo(troop);
         if (troop == null) return;
         if (deploymentManager.GetEquipmentTypeSelected() != equipmentObject.EquipmentType) {
             Debug.LogWarning("Cannot equip " + equipmentObject + " to " + equipmentObject.EquipmentType);
@@ -73,6 +74,7 @@ public class EquipmentButtonBehavior : MonoBehaviour {
         // If the troop already has this item equipped, then clicking this button should remove it
         if (troop.equippedItems.Contains(this.equipmentObject)) {
             troop.RemoveItem(this.equipmentObject.EquipmentType);
+            deploymentManager.SetTroopInfo(troop);
             deploymentManager.ClearEquippedSlot(this.equipmentObject.EquipmentType);
             SetColor(Color.white);
             this.count++;
@@ -83,6 +85,7 @@ public class EquipmentButtonBehavior : MonoBehaviour {
                 return;
             }
             troop.EquipItem(this.equipmentObject);
+            deploymentManager.SetTroopInfo(troop);
             deploymentManager.AssignEquippedSlot(this.equipmentObject.EquipmentType, this.equipmentObject);
             SetColor(selectedColor);
             this.count--;
@@ -92,6 +95,7 @@ public class EquipmentButtonBehavior : MonoBehaviour {
 
     private void OnResetEquipmentButtonClicked() {
         TroopBase troop = deploymentManager.GetSelectedTroop;
+        deploymentManager.SetTroopInfo(troop);
         if (troop == null) return;
         troop.RemoveItem(equipmentObject.EquipmentType);
         count++;

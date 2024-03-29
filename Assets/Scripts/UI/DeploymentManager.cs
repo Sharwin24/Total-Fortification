@@ -14,7 +14,8 @@ using static UnityEditor.ShaderData;
 public class DeploymentManager : MonoBehaviour {
 
     /// TODO: Deploy Troop on different places by Player(drag or drop, or clicking)
-
+    public GameObject troopInfoPanel;
+    public TextMeshProUGUI troopInfoContent;
     public List<Button> troopButtons;
     public List<Button> equipmentButtons;
     public Image equipmentWindowManager;
@@ -26,6 +27,9 @@ public class DeploymentManager : MonoBehaviour {
     public Dictionary<EquipmentBase, int> EquipmentInventory = new();
 
     public Sprite emptySlotSprite;
+    private String troopInfoTemplate;
+    private MouseSelector mouseSelector;
+
     private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
         { "TroopBtn2", 1 },
@@ -89,6 +93,9 @@ public class DeploymentManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        mouseSelector = Camera.main.GetComponent<MouseSelector>();
+        troopInfoTemplate = "Health: {0} \nArmor: {1} \nSpeed: {2} \nMove Range: {3} \nAttack Range: {4} \nAttack Power: {5}";
+        troopInfoPanel.SetActive(false);
         // Populate icons with buttons and add listeners
         SetupButtons();
         this.equipmentBtnBehaviors = GameObject.FindObjectsByType<EquipmentButtonBehavior>(FindObjectsSortMode.None).Where((ebb) => ebb.equipmentObject != null).ToList();
@@ -100,7 +107,26 @@ public class DeploymentManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+    }
 
+    public void SetTroopInfo(TroopBase troop) {
+        // non-troop objects selected
+        if (troop == null) {
+            troopInfoPanel.SetActive(false);
+            return;
+        } else if (troop.CompareTag("Ally") || troop.CompareTag("Enemy")) {
+            troopInfoPanel.SetActive(true);
+
+            Transform healthBarCanvas = troop.transform.Find("HealthBar Canvas");
+            healthBarCanvas.Find("Star").gameObject.SetActive(true);
+
+            String content = String.Format(
+                troopInfoTemplate, troop.Health, troop.Armor,
+                troop.Speed, troop.MoveRange, troop.AttackRange,
+                troop.AttackPower);
+
+            troopInfoContent.text = content;
+        }
     }
 
     public void AssignEquippedSlot(EquipmentType type, IEquipment item) {
@@ -170,7 +196,7 @@ public class DeploymentManager : MonoBehaviour {
         } else { // If the icon is not the currently selected one
             UnselectAllTroopIcons(); // Unselect all
             SelectTroopIcon(btn); // Select this troops
-            var troop = GetTroopFromIcon(btn);
+            TroopBase troop = GetTroopFromIcon(btn);
             if (troop == null) return;
             print("Selected troop: " + troop.name); // Troop should visually appear selected somehow
             OpenEquipmentManager(troop); // Open this troop's equipment Manager
@@ -210,6 +236,7 @@ public class DeploymentManager : MonoBehaviour {
 
     private void OpenEquipmentManager(TroopBase allyTroop) {
         print("Open EquipmentManager for troop " + allyTroop.name);
+        SetTroopInfo(allyTroop);
         // Load the equipment for the selected troop
         ClearSelectedEquipment();
         equipmentWindowManager.gameObject.SetActive(true);
@@ -220,6 +247,7 @@ public class DeploymentManager : MonoBehaviour {
 
     private void CloseEquipmentManager() {
         print("Close EquipmentManager");
+        SetTroopInfo(null);
         equipmentWindowManager.gameObject.SetActive(false);
         equipmentItemsWindow.gameObject.SetActive(false);
         resetEquipmentButton.gameObject.SetActive(false);
@@ -230,7 +258,7 @@ public class DeploymentManager : MonoBehaviour {
         if (troopEquipmentMemory.ContainsKey(troop)) {
             this.troopEquipmentMemory[troop] = troop.equippedItems;
         } else this.troopEquipmentMemory.Add(troop, new());
-        // Highlight the selected equipment buttons if they are equipped to this troop
+        // TODO: Highlight the selected equipment buttons if they are equipped to this troop
     }
 
     public bool SelectedTroopHasEquipment(IEquipment equipment) {
@@ -241,40 +269,4 @@ public class DeploymentManager : MonoBehaviour {
         }
         return false;
     }
-
-    //private void RemoveEquipment(TroopBase troop, int equipmentIndex) {
-    //    print("Removing equipment equipped to " + troop.name + " on " + equipmentIndexToBodyPart[equipmentIndex]);
-    //    troop.RemoveItem(equipmentIndexToBodyPart[equipmentIndex]);
-    //}
-
-    //private void OnApplyEquipmentButtonClicked() {
-    //    // Obtain the current selected troop's gameobject and get the BasicSoldier reference from that GameObject
-    //    TroopBase selectedAlly = allies[currentlySelectedTroopIndex];
-    //    for (int i = 0; i < equipmentIcons.Count; i++) {
-    //        if (!troopIndexToEquipmentSelected[currentlySelectedTroopIndex][i]) continue;//RemoveEquipment(selectedAlly, i);
-    //        var equipmentGameObject = equipmentObjects[i];
-    //        if (equipmentGameObject != null) {
-    //            if (equipmentGameObject == null) {
-    //                Debug.LogError("EquipmentBase object is null, cannot apply");
-    //                return;
-    //            }
-    //            selectedAlly.EquipItem(equipmentGameObject);
-    //            print("Applied " + equipmentGameObject.EquipmentName + " to " + selectedAlly.name);
-    //        }
-    //    }
-    //}
-
-    //private void UpdateEquipmentPolicies(int equipmentIndex) {
-    //    var currentEquipments = troopIndexToEquipmentSelected[currentlySelectedTroopIndex];
-    //    // If it is already selected, unselect it
-    //    if (currentEquipments[equipmentIndex]) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][equipmentIndex] = false;
-    //    else troopIndexToEquipmentSelected[currentlySelectedTroopIndex][equipmentIndex] = true;
-    //    // If the opposing equipment was selected, unselect that one
-    //    if (troopIndexToEquipmentSelected[currentlySelectedTroopIndex][equipmentIndex]) {
-    //        if (equipmentIndex == 0) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][1] = false;
-    //        else if (equipmentIndex == 1) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][0] = false;
-    //        else if (equipmentIndex == 2) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][3] = false;
-    //        else if (equipmentIndex == 3) troopIndexToEquipmentSelected[currentlySelectedTroopIndex][2] = false;
-    //    }
-    //}
 }
