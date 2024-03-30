@@ -1727,10 +1727,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7312439623799100896, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: isRange
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 192002, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_Name
       value: AllyPirateTroop
@@ -1775,14 +1771,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9521282, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 672f986ce47e97149b934e27bc8968dc, type: 2}
-    - target: {fileID: 275152358015124633, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1790,38 +1778,6 @@ PrefabInstance:
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8388555952544268586, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394098125353224010, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8348921
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394098125353224010, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.32012227
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394098125353224010, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.14994246
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394098125353224010, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.42189375
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394098125353224010, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 155.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394098125353224010, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 214.757
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394098125353224010, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 241.255
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
