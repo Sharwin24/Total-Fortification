@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour {
     void Start() {
 
         Initialize();
+        DisplayUI(gameState);
 
         if (deploymentUI == null) {
             deploymentUI = GameObject.FindWithTag("DeploymentUI");
@@ -84,7 +85,7 @@ public class LevelManager : MonoBehaviour {
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
 
             print("Troop Queue Size: " + troopQueue.Count);
-            
+
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
@@ -139,7 +140,7 @@ public class LevelManager : MonoBehaviour {
             }
         }
 
-    
+
         yield return new WaitForSeconds(0);
     }
 
@@ -179,7 +180,7 @@ public class LevelManager : MonoBehaviour {
         turnMessage.text = "";
         scoreMessage.text = "";
         actionDone = false;
-        gameState = GameState.DEPLOYMENT; 
+        gameState = GameState.DEPLOYMENT;
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
     }
 
@@ -187,9 +188,9 @@ public class LevelManager : MonoBehaviour {
         return playerManagement.GetComponent<PlayerBehavior>().playerScore;
     }
     public void PlayMusic(AudioClip clip) {
-        cameraAudioSource.Stop(); 
-        cameraAudioSource.clip = clip; 
-        cameraAudioSource.Play(); 
+        cameraAudioSource.Stop();
+        cameraAudioSource.clip = clip;
+        cameraAudioSource.Play();
     }
 
 

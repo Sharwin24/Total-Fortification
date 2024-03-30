@@ -63,6 +63,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         BodyParts.Add(EquipmentType.LeftArm, new BodyPart(EquipmentType.LeftArm));
         BodyParts.Add(EquipmentType.RightArm, new BodyPart(EquipmentType.RightArm));
         BodyParts.Add(EquipmentType.Legs, new BodyPart(EquipmentType.Legs));
+        BodyParts.Add(EquipmentType.TwoHanded, new BodyPart(EquipmentType.TwoHanded));
 
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);
@@ -166,8 +167,10 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         {
             RemoveItem(EquipmentType.LeftArm);
             RemoveItem(EquipmentType.RightArm);
+            RemoveItem(EquipmentType.TwoHanded);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
+            BodyParts[EquipmentType.TwoHanded].equippedItem = item;
 
             equipped = true;
         }
@@ -208,6 +211,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
                 equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 BodyParts[EquipmentType.LeftArm].equippedItem = null;
                 BodyParts[EquipmentType.RightArm].equippedItem = null;
+                BodyParts[EquipmentType.TwoHanded].equippedItem = null;
                 removed = true;
             }
             else
