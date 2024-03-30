@@ -28,21 +28,18 @@ public class LevelManager : MonoBehaviour {
     private AudioSource cameraAudioSource;
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
+    // Feature flags
+    public bool skipDeployment = false;
+
     void Start() {
 
         Initialize();
-        DisplayUI(gameState);
 
-        if (deploymentUI == null) {
-            deploymentUI = GameObject.FindWithTag("DeploymentUI");
-        }
-        if (combatUI == null) {
-            combatUI = GameObject.FindWithTag("CombatUI");
-        }
-        if (enterBattleButton == null) {
-            enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
-        }
+        DisplayUI(gameState);
+        AssignUIComponents();
+
         enterBattleButton.onClick.AddListener(TaskOnClick);
+
         StartCoroutine(TakeTurnsCoroutine());
     }
 
@@ -56,22 +53,40 @@ public class LevelManager : MonoBehaviour {
 
     }
 
+    void AssignUIComponents() {
+        if (deploymentUI == null) {
+            deploymentUI = GameObject.FindWithTag("DeploymentUI");
+        }
+        if (combatUI == null) {
+            combatUI = GameObject.FindWithTag("CombatUI");
+        }
+        if (enterBattleButton == null) {
+            enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
+        }
+    }
+
     IEnumerator TakeTurnsCoroutine() {
-        print("TakeTurnsCoroutine triggered");
-
-        PlayMusic(deploymentMusic);
-
-        DisplayUI(gameState);
-        // Start in Deployment Phase and when button is triggered, switch to Combat Phase
-        // DisplayUI(gameState);
-        while (gameState == GameState.DEPLOYMENT) {
-
-            // Allow Deployment Phase to run
-            // Squares can be clicked and troops can be selected from inventory
-
-            yield return new WaitForSeconds(2);
+        
+        if (!skipDeployment) {
+            AwaitDeploymentCompletion();
         }
 
+        StartCombat();
+
+        yield return new WaitForSeconds(0);
+    }
+
+    IEnumerator AwaitDeploymentCompletion() {
+
+        PlayMusic(deploymentMusic);
+        DisplayUI(gameState);
+
+        while (gameState == GameState.DEPLOYMENT) {
+            yield return new WaitForSeconds(2);
+        }
+    }
+
+    IEnumerator StartCombat() {
         gameState = GameState.COMBAT;
         PlayMusic(combatMusic);
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
@@ -84,15 +99,12 @@ public class LevelManager : MonoBehaviour {
         DisplayUI(gameState);
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
 
-            print("Troop Queue Size: " + troopQueue.Count);
-
             GameObject troopGameObject = troopQueue.Dequeue();
             print(troopGameObject);
 
             scoreMessage.text = "Score: " + playerBehavior.playerScore;
 
             if (troopGameObject == null) {
-                Debug.Log("In Game Troop Length " + troopQueue.Count);
                 troopsInTurn--;
                 continue;
             }
@@ -140,8 +152,6 @@ public class LevelManager : MonoBehaviour {
             }
         }
 
-
-        yield return new WaitForSeconds(0);
     }
 
     void LoadNextLevel() {
