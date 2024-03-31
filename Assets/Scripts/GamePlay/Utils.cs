@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 
 public class PriorityQueue<T> {
@@ -50,5 +51,12 @@ public class PriorityQueue<T> {
             result.Add(pair.Key);
         }
         return result;
+    }
+
+    public void PrintElements() {
+        Debug.Log("Queue Contents:");
+        foreach (var element in elements) {
+            Debug.Log($"Item: {element.Key}, Priority: {element.Value}");
+        }
     }
 }
