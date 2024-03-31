@@ -47,8 +47,6 @@ public class PlayerBehavior : MonoBehaviour
         moveButton.onClick.RemoveAllListeners();
         attackButton.onClick.RemoveAllListeners();
 
-        print("Current Ally Troop Position: " + current.transform.position);
-
         Destroy(moveRendererObject);
         Destroy(attackRendererObject);
         LevelManager.actionDone = true;
