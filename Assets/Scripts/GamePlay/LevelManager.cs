@@ -66,17 +66,22 @@ public class LevelManager : MonoBehaviour {
     }
 
     IEnumerator TakeTurnsCoroutine() {
+
+        print("Starting Game State: " + gameState);
         
         if (!skipDeployment) {
-            AwaitDeploymentCompletion();
+            print("Deployment Phase Started");
+            yield return AwaitDeploymentCompletion();
         }
-
-        StartCombat();
+        print("Deployment Phase Skipped");
+        yield return StartCombat();
 
         yield return new WaitForSeconds(0);
     }
 
     IEnumerator AwaitDeploymentCompletion() {
+
+        print("Awaiting Deployment Completion");
 
         PlayMusic(deploymentMusic);
         DisplayUI(gameState);
@@ -87,8 +92,11 @@ public class LevelManager : MonoBehaviour {
     }
 
     IEnumerator StartCombat() {
+        print("Starting Combat");
+
         gameState = GameState.COMBAT;
         PlayMusic(combatMusic);
+
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
@@ -100,7 +108,8 @@ public class LevelManager : MonoBehaviour {
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
 
             GameObject troopGameObject = troopQueue.Dequeue();
-            print(troopGameObject);
+            print("Attacking Troop: " + troopGameObject);
+            print("Attacking Troop Tag: " + troopGameObject.tag);
 
             scoreMessage.text = "Score: " + playerBehavior.playerScore;
 
@@ -110,9 +119,6 @@ public class LevelManager : MonoBehaviour {
             }
 
             TroopBase currentTroop = troopGameObject.GetComponent<TroopBase>();
-
-            print(troopGameObject.tag);
-            Vector3 currentTroopPosition = troopGameObject.transform.position;
 
             if (currentTroop.tag == "Ally") {
                 print(playerBehavior);
@@ -152,6 +158,8 @@ public class LevelManager : MonoBehaviour {
             }
         }
 
+        print("Combat Ended");
+
     }
 
     void LoadNextLevel() {
@@ -190,7 +198,9 @@ public class LevelManager : MonoBehaviour {
         turnMessage.text = "";
         scoreMessage.text = "";
         actionDone = false;
-        gameState = GameState.DEPLOYMENT;
+        if (!skipDeployment) {
+            gameState = GameState.DEPLOYMENT;
+        } 
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
     }
 
