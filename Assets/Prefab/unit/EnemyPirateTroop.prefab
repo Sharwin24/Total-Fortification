@@ -5673,8 +5673,6 @@ GameObject:
   m_Component:
   - component: {fileID: 441856}
   - component: {fileID: 9521282}
-  - component: {fileID: 2987664406878536243}
-  - component: {fileID: 4291401249924780505}
   - component: {fileID: -7561208415582257036}
   m_Layer: 0
   m_Name: EnemyPirateTroop
@@ -5738,62 +5736,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2987664406878536243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f08a5fdd5bb24ef4bd706bb4cc06f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  armor: 0
-  moveRange: 7
-  speed: 1
-  attackRange: 5
-  attackPower: 10
-  isRange: 0
-  defaultEquipments: []
-  healthBar: {fileID: 0}
-  AppearanceRange: 2
-  MoveSpeed: 2
-  rangedAttackSound: {fileID: 0}
-  meleeAttackSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  hitSound: {fileID: 0}
-  moveSound: {fileID: 0}
-  mainCamera: {fileID: 0}
-  ScoreMultiplier: 5
-  HeavyArmorMinimum: 5
-  meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
-  rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
-  rigBuilders: []
---- !u!64 &4291401249924780505
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192002}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &-7561208415582257036
 MonoBehaviour:
   m_ObjectHideFlags: 0
