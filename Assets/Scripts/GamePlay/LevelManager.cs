@@ -151,6 +151,7 @@ public class LevelManager : MonoBehaviour {
                 break;
             } else if (CheckIfTagExists(allTroops, "Ally")) {
                 levelMessage.text = "You lost!";
+                Invoke("ReloadCurrentLevel", 3);
                 break;
             }
 
@@ -171,6 +172,10 @@ public class LevelManager : MonoBehaviour {
         if (nextLevel != null) {
             SceneManager.LoadScene(nextLevel);
         }
+    }
+
+    void ReloadCurrentLevel() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void DisplayUI(GameState gameState) {
