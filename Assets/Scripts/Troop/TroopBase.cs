@@ -128,10 +128,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             transform.position = Vector3.MoveTowards(transform.position, position, MoveSpeed * Time.deltaTime);
             yield return new WaitForSeconds(0f);
         }
+        UpdateAnimationState(0);// Switch to idle animation
         cameraAudioSource.Stop();
         transform.position = new Vector3(position.x, transform.position.y, position.z);
-
-        UpdateAnimationState(0);// Switch to idle animation
 
         yield return new WaitForSeconds(0f);
     }
@@ -150,7 +149,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             Destroy(gameObject, 5);
         }
     }
-    private void UpdateAnimationState(int state = 0, bool applyRootMotion = true)
+    private void UpdateAnimationState(int state = 0, bool applyRootMotion = false)
     {
         Debug.Log("UpdateAnimationState" + state);
         foreach (var childAnimator in animators)
