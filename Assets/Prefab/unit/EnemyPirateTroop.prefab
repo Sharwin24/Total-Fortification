@@ -5727,7 +5727,7 @@ Animator:
   m_GameObject: {fileID: 192002}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 409520c9226982345a49c9803624f208, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9b5f3dc79387670409bc8aac8597ddd2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 672f986ce47e97149b934e27bc8968dc, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -5745,7 +5745,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f08a5fdd5bb24ef4bd706bb4cc06f6d, type: 3}
   m_Name: 
@@ -5767,6 +5767,7 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   moveSound: {fileID: 0}
   mainCamera: {fileID: 0}
+  ScoreMultiplier: 5
   HeavyArmorMinimum: 5
   meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
   rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
