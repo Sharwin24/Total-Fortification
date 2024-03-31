@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3225997992946805508}
+  - {fileID: 3052792029483159874}
   - {fileID: 5236358499825939621}
   - {fileID: 8584237637889163651}
   - {fileID: 7214435681772993415}
@@ -62,7 +62,7 @@ MonoBehaviour:
   attackPower: 10
   isRange: 0
   defaultEquipments: []
-  healthBar: {fileID: 5375754419733436611}
+  healthBar: {fileID: 0}
   AppearanceRange: 4
   MoveSpeed: 2
   rangedAttackSound: {fileID: 8300000, guid: d22b1f389ba7d3140ade174e859e896b, type: 3}
@@ -117,7 +117,7 @@ MonoBehaviour:
   attackPower: 10
   isRange: 1
   defaultEquipments: []
-  healthBar: {fileID: 5375754419733436611}
+  healthBar: {fileID: 0}
   AppearanceRange: 2
   MoveSpeed: 2
   rangedAttackSound: {fileID: 8300000, guid: 8602b7d5cd15c1943a50aa53f171c8cf, type: 3}
@@ -185,10 +185,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826673433144053181, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -203,7 +207,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441856, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
   m_PrefabInstance: {fileID: 2275508687258163662}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3700741350553674090
+--- !u!1001 &3873960576708418348
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -312,22 +316,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
---- !u!224 &3225997992946805508 stripped
+--- !u!224 &3052792029483159874 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
-  m_PrefabInstance: {fileID: 3700741350553674090}
+  m_PrefabInstance: {fileID: 3873960576708418348}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5375754419733436611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8773338143985990057, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
-  m_PrefabInstance: {fileID: 3700741350553674090}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3edc0092709af474d9209fddf0b03fd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5234728347187921649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,10 +473,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826673433144053181, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -552,10 +549,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826673433144053181, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -624,10 +625,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826673433144053181, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -696,10 +701,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826673433144053181, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -768,10 +777,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6076469436550883352, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826673433144053181, guid: 703726d55521c474cb5f789d3611fb62, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
