@@ -5674,10 +5674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 441856}
   - component: {fileID: 9521282}
-  - component: {fileID: 2987664406878536243}
-  - component: {fileID: 4291401249924780505}
   - component: {fileID: -7561208415582257036}
-  - component: {fileID: -7312439623799100896}
   m_Layer: 0
   m_Name: AllyPirateTroop
   m_TagString: Untagged
@@ -5740,62 +5737,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2987664406878536243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f08a5fdd5bb24ef4bd706bb4cc06f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  armor: 0
-  moveRange: 7
-  speed: 1
-  attackRange: 5
-  attackPower: 10
-  isRange: 0
-  defaultEquipments: []
-  healthBar: {fileID: 0}
-  AppearanceRange: 2
-  MoveSpeed: 2
-  rangedAttackSound: {fileID: 0}
-  meleeAttackSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  hitSound: {fileID: 0}
-  moveSound: {fileID: 0}
-  mainCamera: {fileID: 0}
-  ScoreMultiplier: 5
-  HeavyArmorMinimum: 5
-  meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
-  rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
-  rigBuilders: []
---- !u!64 &4291401249924780505
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192002}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &-7561208415582257036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5814,40 +5755,6 @@ MonoBehaviour:
   - m_Rig: {fileID: 1539459773419340498}
     m_Active: 1
   m_Effectors: []
---- !u!114 &-7312439623799100896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624aceebc5ff95a43b009adb16635d9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  armor: 0
-  moveRange: 7
-  speed: 1
-  attackRange: 5
-  attackPower: 10
-  isRange: 1
-  defaultEquipments: []
-  healthBar: {fileID: 9121444419260803874}
-  AppearanceRange: 2
-  MoveSpeed: 2
-  rangedAttackSound: {fileID: 8300000, guid: 8602b7d5cd15c1943a50aa53f171c8cf, type: 3}
-  meleeAttackSound: {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
-  deathSound: {fileID: 8300000, guid: 038051689133d4a4e910f1813ec3c242, type: 3}
-  hitSound: {fileID: 8300000, guid: 39a6809444535f84392aed63028472f2, type: 3}
-  moveSound: {fileID: 8300000, guid: fcaaf50d0aa687a4e980b1168e9652ab, type: 3}
-  mainCamera: {fileID: 0}
-  ScoreMultiplier: 5
-  HeavyArmorMinimum: 5
-  meleeController: {fileID: 9100000, guid: 0c5cf63be0bd0d74893fd0a1d447ceb0, type: 2}
-  rangeController: {fileID: 9100000, guid: 672f986ce47e97149b934e27bc8968dc, type: 2}
-  rigBuilders: []
 --- !u!1 &192628
 GameObject:
   m_ObjectHideFlags: 0
@@ -6922,17 +6829,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2278435155291818606, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
   m_PrefabInstance: {fileID: 528268952542450315}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9121444419260803874 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8773338143985990057, guid: 17e5b9b37ffc35a44bd39a0a189a4826, type: 3}
-  m_PrefabInstance: {fileID: 528268952542450315}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3edc0092709af474d9209fddf0b03fd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8388555952544123198
 PrefabInstance:
   m_ObjectHideFlags: 0
