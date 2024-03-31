@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour {
     public GameObject combatUI;
     public AudioClip deploymentMusic;
     public AudioClip combatMusic;
+    public int enemyCount = 0;
+    public int allyCount = 0;
     private AudioSource cameraAudioSource;
     private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
 
@@ -49,6 +51,11 @@ public class LevelManager : MonoBehaviour {
 
         foreach (var troop in allTroops) {
             troopQueue.Enqueue(troop.gameObject, troop.Speed);
+            if (troop.gameObject.tag == "Enemy") {
+                enemyCount++;
+            } else if (troop.gameObject.tag == "Ally") {
+                allyCount++;
+            }
         }
 
     }
@@ -142,19 +149,6 @@ public class LevelManager : MonoBehaviour {
 
             troopQueue.Enqueue(troopGameObject, -1 * currentTroop.Speed);
 
-            // Check Game End
-            List<GameObject> allTroops = troopQueue.ToList();
-
-            if (CheckIfTagExists(allTroops, "Enemy")) {
-                levelMessage.text = "You win!";
-                Invoke("LoadNextLevel", 3);
-                break;
-            } else if (CheckIfTagExists(allTroops, "Ally")) {
-                levelMessage.text = "You lost!";
-                Invoke("ReloadCurrentLevel", 3);
-                break;
-            }
-
             troopsInTurn--;
             if (troopsInTurn <= 0) {
                 turnCount++;
@@ -163,6 +157,8 @@ public class LevelManager : MonoBehaviour {
                 troopQueue.Reverse();
             }
         }
+
+        EndLevel();
 
         print("Combat Ended");
 
@@ -223,7 +219,17 @@ public class LevelManager : MonoBehaviour {
         cameraAudioSource.Play();
     }
 
-
+    public void EndLevel() {
+        print("Enemy Count: " + enemyCount);
+        print("Aly Count: " + allyCount);
+        if (enemyCount == 0) {
+            levelMessage.text = "You win!";
+            Invoke("LoadNextLevel", 3);
+        } else {
+            levelMessage.text = "You lost!";
+            Invoke("ReloadCurrentLevel", 3);
+        }
+    }
 
 
 }

@@ -143,7 +143,18 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         healthBar.SetHealth(Health);
 
         if (Health <= 0)
-        {
+        {   
+            LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+            levelManager.gameState = LevelManager.GameState.END;
+
+            if (gameObject.tag == "Ally") {
+                levelManager.allyCount--;
+            } else if (gameObject.tag == "Enemy"){
+                levelManager.enemyCount--;
+            } else {
+                throw new Exception("Invalid tag for troop");
+            }
+
             UpdateAnimationState(3);
             AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
             Destroy(gameObject, 5);
