@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 479756}
-  - component: {fileID: -6986695461307080538}
   - component: {fileID: 6786047213649879871}
   - component: {fileID: 1858069044839523670}
   m_Layer: 0
@@ -41,40 +40,6 @@ Transform:
   - {fileID: 4968563883068309033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6986695461307080538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118096}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f08a5fdd5bb24ef4bd706bb4cc06f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  armor: 0
-  moveRange: 3
-  speed: 1
-  attackRange: 1
-  attackPower: 10
-  isRange: 0
-  defaultEquipments: []
-  healthBar: {fileID: 0}
-  AppearanceRange: 4
-  MoveSpeed: 2
-  rangedAttackSound: {fileID: 8300000, guid: d22b1f389ba7d3140ade174e859e896b, type: 3}
-  meleeAttackSound: {fileID: 8300000, guid: fbd58e13a5b44fb4890617af2f84a33f, type: 3}
-  deathSound: {fileID: 8300000, guid: 038051689133d4a4e910f1813ec3c242, type: 3}
-  hitSound: {fileID: 8300000, guid: 39a6809444535f84392aed63028472f2, type: 3}
-  moveSound: {fileID: 8300000, guid: fcaaf50d0aa687a4e980b1168e9652ab, type: 3}
-  mainCamera: {fileID: 0}
-  ScoreMultiplier: 5
-  HeavyArmorMinimum: 5
-  meleeController: {fileID: 9100000, guid: a8c1d39b3b2a9c546ac5f77a4f84885e, type: 2}
-  rangeController: {fileID: 9100000, guid: 62d49e1b71ccc6c40aa5040d19ab7c59, type: 2}
-  rigBuilders: []
 --- !u!65 &6786047213649879871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114,7 +79,7 @@ MonoBehaviour:
   speed: 1
   attackRange: 5
   attackPower: 10
-  isRange: 0
+  isRange: 1
   defaultEquipments: []
   healthBar: {fileID: 0}
   AppearanceRange: 2
