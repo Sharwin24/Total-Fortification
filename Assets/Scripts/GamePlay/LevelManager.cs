@@ -110,7 +110,7 @@ public class LevelManager : MonoBehaviour {
             GameObject troopGameObject = troopQueue.Dequeue();
             print("Attacking Troop: " + troopGameObject);
             print("Attacking Troop Tag: " + troopGameObject.tag);
-            print("Attack Troop Y-Position: " + troopGameObject.transform.position.y);
+            print("Attack Troop Position: " + troopGameObject.transform.position);
 
             scoreMessage.text = "Score: " + playerBehavior.playerScore;
 

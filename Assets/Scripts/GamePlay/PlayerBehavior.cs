@@ -31,7 +31,6 @@ public class PlayerBehavior : MonoBehaviour
         print("Player Taking Action!");
 
         Vector3 currentPosition = current.transform.position;
-        current.transform.position = new Vector3(currentPosition.x, 1f, currentPosition.z);
 
         // Render move range and attack range circle
         (GameObject moveRendererObject, GameObject attackRendererObject) = RenderRanges(current);
@@ -47,6 +46,8 @@ public class PlayerBehavior : MonoBehaviour
 
         moveButton.onClick.RemoveAllListeners();
         attackButton.onClick.RemoveAllListeners();
+
+        print("Current Ally Troop Position: " + current.transform.position);
 
         Destroy(moveRendererObject);
         Destroy(attackRendererObject);
