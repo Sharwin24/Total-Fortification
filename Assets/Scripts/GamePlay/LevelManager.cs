@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour {
     IEnumerator TakeTurnsCoroutine() {
 
         print("Starting Game State: " + gameState);
-        
+
         if (!skipDeployment) {
             print("Deployment Phase Started");
             yield return AwaitDeploymentCompletion();
@@ -121,7 +121,6 @@ public class LevelManager : MonoBehaviour {
 
             GameObject troopGameObject = troopQueue.Dequeue();
             print("Attacking Troop: " + troopGameObject);
-            print("Attacking Troop Tag: " + troopGameObject.tag);
 
             scoreMessage.text = "Score: " + playerBehavior.playerScore;
 
@@ -156,8 +155,10 @@ public class LevelManager : MonoBehaviour {
                 troopsInTurn = troopQueue.Count; // Reset the counter for the next cycle of turns
                 troopQueue.Reverse();
             }
-        }
 
+            // If allycont or enemycount is 0, end the level
+            if (this.allyCount == 0 || this.enemyCount == 0) this.gameState = GameState.END;
+        }
         EndLevel();
 
         print("Combat Ended");
@@ -181,6 +182,9 @@ public class LevelManager : MonoBehaviour {
         } else if (gameState == GameState.COMBAT) {
             deploymentUI.SetActive(false);
             combatUI.SetActive(true);
+        } else {
+            deploymentUI.SetActive(false);
+            combatUI.SetActive(false);
         }
     }
 
@@ -206,7 +210,7 @@ public class LevelManager : MonoBehaviour {
         actionDone = false;
         if (!skipDeployment) {
             gameState = GameState.DEPLOYMENT;
-        } 
+        }
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
     }
 

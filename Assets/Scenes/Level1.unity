@@ -132,17 +132,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: emptySlotSprite
+      propertyPath: troopInfoPanel
       value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 1473796632}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: equipmentManager
+      propertyPath: troopInfoContent
       value: 
-      objectReference: {fileID: 1769085702}
+      objectReference: {fileID: 1198611580}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: applyEquipmentButton
+      propertyPath: equipmentTypeText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1260052373}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: equipmentItemsWindow
       value: 
@@ -155,66 +155,6 @@ PrefabInstance:
       propertyPath: equipmentWindowManager
       value: 
       objectReference: {fileID: 1769085702}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[6]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[7]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[8]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[9]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: troopIcons.Array.data[10]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: equipmentIcons.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: equipmentIcons.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: equipmentIcons.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
-      propertyPath: equipmentIcons.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4807628374768431183, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: m_Name
       value: DeploymentManager
@@ -275,6 +215,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -353,9 +297,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 10b146db91df6be4b99a4eb62c566f7c, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -426,6 +386,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -621,6 +585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.85
@@ -687,6 +655,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 692292030}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy
@@ -962,6 +938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.16
@@ -1032,6 +1012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.17
@@ -1098,9 +1082,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1184,6 +1184,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (6)
@@ -1246,6 +1258,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
   m_PrefabInstance: {fileID: 1051001415}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1198611580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6529966356552966888, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+  m_PrefabInstance: {fileID: 1769085699}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1224394239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1310,17 @@ Transform:
   - {fileID: 432389648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1260052373 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3864738148609848225, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+  m_PrefabInstance: {fileID: 1769085699}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1387789274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1295,9 +1329,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1365,9 +1415,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: de6a4dddfcd52b54dbd9f8c9774f9fa6, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1439,6 +1505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.005169
@@ -1508,6 +1578,10 @@ PrefabInstance:
     - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_Name
       value: AllyBasicTroopArmy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1579,6 +1653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.64
@@ -1649,6 +1727,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.28
@@ -1706,6 +1788,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
   m_PrefabInstance: {fileID: 1468736994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1473796632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7768506981929650521, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+  m_PrefabInstance: {fileID: 1769085699}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1517599456
 PrefabInstance:
@@ -1955,9 +2042,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: de6a4dddfcd52b54dbd9f8c9774f9fa6, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2025,9 +2128,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2174,6 +2293,10 @@ PrefabInstance:
     - target: {fileID: 3545323667027141130, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347725648529513197, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
+      propertyPath: equipmentObject
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5811465153176853689, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
       propertyPath: m_Name
@@ -2343,9 +2466,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2413,9 +2552,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 10b146db91df6be4b99a4eb62c566f7c, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2475,6 +2630,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
   m_PrefabInstance: {fileID: 1858624217}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1872876245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6394548066841224359, guid: 9884863d109bc5442a8ceaa8ca9da628, type: 3}
+  m_PrefabInstance: {fileID: 1517599456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1905342784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2623,6 +2789,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1517599457}
     - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+      propertyPath: nextLevel
+      value: Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: turnMessage
       value: 
       objectReference: {fileID: 1517599458}
@@ -2634,6 +2804,10 @@ PrefabInstance:
       propertyPath: levelMessage
       value: 
       objectReference: {fileID: 1517599459}
+    - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+      propertyPath: scoreMessage
+      value: 
+      objectReference: {fileID: 1872876245}
     - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: enemyManagement
       value: 
@@ -2842,6 +3016,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyBasicTroopArmy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.37
@@ -2908,9 +3086,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_LocalPosition.x
