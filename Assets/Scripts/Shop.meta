@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Shop.meta
 guid: 57d0fd865ff5822478f3dc8494fecc71
 folderAsset: yes
 DefaultImporter:
+========
+guid: 4f4baf4ec69a8db48ba08f39ff70981d
+NativeFormatImporter:
+>>>>>>>> main:Assets/Prefab/Equipments/LevelTwo Equipment/Light Chestplate.asset.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

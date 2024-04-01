@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefab/Shop.meta
 guid: ee0faab9977f68c4db43b9800ee083db
 folderAsset: yes
 DefaultImporter:
+========
+guid: ab8b87ed91564b94da137a8752a9c0a0
+NativeFormatImporter:
+>>>>>>>> main:Assets/Prefab/Equipments/LevelTwo Equipment/Chestplate.asset.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

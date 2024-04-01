@@ -45,6 +45,9 @@ TagManager:
   - ShopUI
   - ShopCloseButton
   - RightHandPistol
+  - TroopBtn12
+  - TroopBtn13
+  - TroopBtn14
   layers:
   - Default
   - TransparentFX
