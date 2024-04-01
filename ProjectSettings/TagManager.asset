@@ -43,6 +43,9 @@ TagManager:
   - LegsEquipmentBtn
   - DeploymentManager
   - RightHandPistol
+  - TroopBtn12
+  - TroopBtn13
+  - TroopBtn14
   layers:
   - Default
   - TransparentFX

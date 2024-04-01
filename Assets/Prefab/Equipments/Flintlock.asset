@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthModifier: 0
   armorModifier: 0
-  attackPowerModifier: 0
+  attackPowerModifier: 2
   attackRangeModifier: 2
   moveRangeModifier: 0
   speedModifier: 0

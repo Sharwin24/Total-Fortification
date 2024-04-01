@@ -42,6 +42,9 @@ public class DeploymentManager : MonoBehaviour {
         { "TroopBtn9", 8 },
         { "TroopBtn10", 9 },
         { "TroopBtn11", 10 },
+        { "TroopBtn12", 11 },
+        { "TroopBtn13", 12 },
+        { "TroopBtn14", 13 },
     };
 
     private readonly Dictionary<string, EquipmentType> tagToEquipmentType = new() {
@@ -104,13 +107,14 @@ public class DeploymentManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         troopInfoTemplate = "Health: {0} \nArmor: {1} \nSpeed: {2} \nMove Range: {3} \nAttack Range: {4} \nAttack Power: {5}";
-        troopInfoPanel.SetActive(false);
-        // Populate icons with buttons and add listeners
-        SetupButtons();
-        this.equipmentBtnBehaviors = GameObject.FindObjectsByType<EquipmentButtonBehavior>(FindObjectsSortMode.None).Where((ebb) => ebb.equipmentObject != null).ToList();
+        if (troopInfoPanel != null) troopInfoPanel.SetActive(false);
+        else Debug.LogError("Troop Info Panel not found");
         // Collect all TroopBase objects with Ally tag
         allies = GameObject.FindGameObjectsWithTag("Ally").Select(go => go.GetComponent<TroopBase>()).ToList();
         Debug.Log("DeploymentManager found " + allies.Count + " allies");
+        // Populate icons with buttons and add listeners
+        SetupButtons();
+        this.equipmentBtnBehaviors = GameObject.FindObjectsByType<EquipmentButtonBehavior>(FindObjectsSortMode.None).Where((ebb) => ebb.equipmentObject != null).ToList();
         CloseEquipmentManager();
         // Setup Equipment Types
         equipmentTypeToSprite[EquipmentType.Head] = headEmptySlotSprite;
