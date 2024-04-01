@@ -143,9 +143,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         healthBar.SetHealth(Health);
 
         if (Health <= 0)
-        {   
+        {
             LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-            levelManager.gameState = LevelManager.GameState.END;
+            
 
             if (gameObject.tag == "Ally") {
                 levelManager.allyCount--;
