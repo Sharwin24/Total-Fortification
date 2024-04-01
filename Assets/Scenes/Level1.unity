@@ -2709,6 +2709,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1517599457}
     - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+      propertyPath: nextLevel
+      value: Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: turnMessage
       value: 
       objectReference: {fileID: 1517599458}
