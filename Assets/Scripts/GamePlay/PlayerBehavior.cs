@@ -17,6 +17,7 @@ public class PlayerBehavior : MonoBehaviour
     MouseSelector selector;
     Button moveButton;
     Button attackButton;
+    bool actionInProgress = false;
 
     void Awake() {
         graphicUIRaycast = GetComponent<PlayerUIInteraction>();
@@ -32,7 +33,6 @@ public class PlayerBehavior : MonoBehaviour
         print("Player Taking Action!");
 
         Vector3 currentPosition = current.transform.position;
-        current.transform.position = new Vector3(currentPosition.x, 1f, currentPosition.z);
 
         // Render move range and attack range circle
         (GameObject moveRendererObject, GameObject attackRendererObject) = RenderRanges(current);
@@ -57,6 +57,10 @@ public class PlayerBehavior : MonoBehaviour
     private IEnumerator MovePlayer(GameObject player, Action onComplete) {
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
 
+        if (actionInProgress) {
+            yield break;
+        }
+
         Vector3 selectedPosition = selector.GetSelectedPosition();
         Vector3 intendedPosition = new Vector3(selectedPosition.x, player.transform.position.y, selectedPosition.z);
         float intendedMoveDistance = Vector3.Distance(player.transform.position, intendedPosition);
@@ -70,6 +74,7 @@ public class PlayerBehavior : MonoBehaviour
             yield return new WaitForSeconds(1);
             warningMessage.text = "";
         } else if (intendedMoveDistance <= playerTroop.MoveRange) {
+            actionInProgress = true;
             StartCoroutine(playerTroop.MoveTo(intendedPosition));
             yield return new WaitForSeconds(timeNeeded);
             onComplete();
@@ -78,11 +83,17 @@ public class PlayerBehavior : MonoBehaviour
             yield return new WaitForSeconds(1);
             warningMessage.text = "";
         }
+
+        actionInProgress = false;   
     }
 
     private IEnumerator AttackEnemy(GameObject player, Action onComplete) {
         yield return new WaitUntil(
             () => Input.GetMouseButtonDown(0) && selector.GetSelectedObject() != null);
+
+        if (actionInProgress) {
+            yield break;
+        }
 
         GameObject targetEnemy = selector.GetSelectedObject();
 
@@ -96,6 +107,7 @@ public class PlayerBehavior : MonoBehaviour
             float intendedAttackDistance = Vector3.Distance(player.transform.position, enemyPosition);
 
             if (intendedAttackDistance <= playerTroop.AttackRange) {
+                actionInProgress = true;
                 StartCoroutine(playerTroop.Attack(enemyTroop));
                 yield return new WaitForSeconds(4);
                 if(enemyTroop.Health <= 0) {
@@ -111,7 +123,9 @@ public class PlayerBehavior : MonoBehaviour
             warningMessage.text = "Can only attack troop";
             yield return new WaitForSeconds(1);
             warningMessage.text = "";
-        }    
+        }
+
+        actionInProgress = false;    
     }
 
     private (GameObject moveRendererObject, GameObject attackRendererObject) RenderRanges(GameObject current) {

@@ -63,6 +63,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         BodyParts.Add(EquipmentType.LeftArm, new BodyPart(EquipmentType.LeftArm));
         BodyParts.Add(EquipmentType.RightArm, new BodyPart(EquipmentType.RightArm));
         BodyParts.Add(EquipmentType.Legs, new BodyPart(EquipmentType.Legs));
+        BodyParts.Add(EquipmentType.TwoHanded, new BodyPart(EquipmentType.TwoHanded));
 
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);
@@ -127,10 +128,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             transform.position = Vector3.MoveTowards(transform.position, position, MoveSpeed * Time.deltaTime);
             yield return new WaitForSeconds(0f);
         }
+        UpdateAnimationState(0);// Switch to idle animation
         cameraAudioSource.Stop();
         transform.position = new Vector3(position.x, transform.position.y, position.z);
-
-        UpdateAnimationState(0);// Switch to idle animation
 
         yield return new WaitForSeconds(0f);
     }
@@ -143,13 +143,24 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         healthBar.SetHealth(Health);
 
         if (Health <= 0)
-        {
+        {   
+            LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+            levelManager.gameState = LevelManager.GameState.END;
+
+            if (gameObject.tag == "Ally") {
+                levelManager.allyCount--;
+            } else if (gameObject.tag == "Enemy"){
+                levelManager.enemyCount--;
+            } else {
+                throw new Exception("Invalid tag for troop");
+            }
+
             UpdateAnimationState(3);
             AudioSource.PlayClipAtPoint(deathSound, mainCamera.transform.position);
             Destroy(gameObject, 5);
         }
     }
-    private void UpdateAnimationState(int state = 0, bool applyRootMotion = true)
+    private void UpdateAnimationState(int state = 0, bool applyRootMotion = false)
     {
         Debug.Log("UpdateAnimationState" + state);
         foreach (var childAnimator in animators)
@@ -166,8 +177,10 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         {
             RemoveItem(EquipmentType.LeftArm);
             RemoveItem(EquipmentType.RightArm);
+            RemoveItem(EquipmentType.TwoHanded);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
+            BodyParts[EquipmentType.TwoHanded].equippedItem = item;
 
             equipped = true;
         }
@@ -208,6 +221,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
                 equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 BodyParts[EquipmentType.LeftArm].equippedItem = null;
                 BodyParts[EquipmentType.RightArm].equippedItem = null;
+                BodyParts[EquipmentType.TwoHanded].equippedItem = null;
                 removed = true;
             }
             else

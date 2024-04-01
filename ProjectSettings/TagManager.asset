@@ -44,6 +44,7 @@ TagManager:
   - DeploymentManager
   - ShopUI
   - ShopCloseButton
+  - RightHandPistol
   layers:
   - Default
   - TransparentFX
