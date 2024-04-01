@@ -293,6 +293,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 10b146db91df6be4b99a4eb62c566f7c, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (2)
@@ -1038,6 +1050,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy
@@ -1124,6 +1148,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (6)
@@ -1257,6 +1293,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (9)
@@ -1327,6 +1375,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: de6a4dddfcd52b54dbd9f8c9774f9fa6, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (4)
@@ -1922,6 +1982,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: de6a4dddfcd52b54dbd9f8c9774f9fa6, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (11)
@@ -1992,6 +2064,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (8)
@@ -2310,6 +2394,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (1)
@@ -2380,6 +2476,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 10b146db91df6be4b99a4eb62c566f7c, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (10)
@@ -2890,6 +2998,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224394240}
     m_Modifications:
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986695461307080538, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
+      propertyPath: defaultEquipments.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
     - target: {fileID: 118096, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
       propertyPath: m_Name
       value: EnemyBasicTroopArmy (7)
