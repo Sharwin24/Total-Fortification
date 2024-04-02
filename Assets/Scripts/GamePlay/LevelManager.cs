@@ -94,8 +94,6 @@ public class LevelManager : MonoBehaviour
         {
             shopUI = GameObject.FindWithTag("ShopUI");
         }
-
-        enterBattleButton.onClick.AddListener(TaskOnClick);
         shopCloseButton.onClick.AddListener(ShopFinishOnClick);
         scoreManager = ScoreManager.Instance;
         StartCoroutine(TakeTurnsCoroutine());

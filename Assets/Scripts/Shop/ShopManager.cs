@@ -65,7 +65,7 @@ public class ShopManager : MonoBehaviour
         Transform content = scrollRect.content;
         content.Find("Header").Find("Name").GetComponent<TextMeshProUGUI>().text = equipment.name;
         content.Find("Header").Find("Image").GetComponent<Image>().sprite = equipment.EquipmentIcon;
-        content.Find("Description").GetComponent<TextMeshProUGUI>().text = equipment.EquipmentDescription;
+        content.Find("Type").GetComponent<TextMeshProUGUI>().text = equipment.EquipmentType.ToString();
         content.Find("Status").GetComponent<TextMeshProUGUI>().text = GenerateEquipmentStatus(equipment);
 
         equipmentPurchasePanel.SetActive(true);

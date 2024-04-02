@@ -103,7 +103,7 @@ public class DeploymentManager : MonoBehaviour {
     }
 
     // Start is called before the first frame update
-    void Awake() {
+    void Start() {
         troopInfoTemplate = "Health: {0} \nArmor: {1} \nSpeed: {2} \nMove Range: {3} \nAttack Range: {4} \nAttack Power: {5}";
         if (troopInfoPanel != null) troopInfoPanel.SetActive(false);
         else Debug.LogError("Troop Info Panel not found");

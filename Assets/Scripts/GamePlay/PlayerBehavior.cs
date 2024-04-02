@@ -12,23 +12,25 @@ public class PlayerBehavior : MonoBehaviour
     public TextMeshProUGUI warningMessage;
     public float verticalMovementLimit = 3f;
 
-    public ScoreManager scoreManager;
+
     PlayerUIInteraction graphicUIRaycast;
     MouseSelector selector;
     Button moveButton;
     Button attackButton;
     bool actionInProgress = false;
 
-    void Awake() {
+    void Awake()
+    {
         graphicUIRaycast = GetComponent<PlayerUIInteraction>();
         selector = Camera.main.GetComponent<MouseSelector>();
         moveButton = GameObject.FindGameObjectWithTag("MoveButton").GetComponent<Button>();
         attackButton = GameObject.FindGameObjectWithTag("AttackButton").GetComponent<Button>();
         warningMessage.text = "";
-        scoreManager = ScoreManager.Instance;
+
     }
 
-   public IEnumerator TakeAction(GameObject current) {
+    public IEnumerator TakeAction(GameObject current)
+    {
 
         print("Player Taking Action!");
 
@@ -37,7 +39,7 @@ public class PlayerBehavior : MonoBehaviour
         // Render move range and attack range circle
         (GameObject moveRendererObject, GameObject attackRendererObject) = RenderRanges(current);
 
-    
+
         bool actionTaken = false;
 
         moveButton.onClick.AddListener(() => StartCoroutine(MovePlayer(current, () => actionTaken = true)));
@@ -54,51 +56,61 @@ public class PlayerBehavior : MonoBehaviour
         LevelManager.actionDone = true;
     }
 
-    private IEnumerator MovePlayer(GameObject player, Action onComplete) {
+    private IEnumerator MovePlayer(GameObject player, Action onComplete)
+    {
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
 
-        if (actionInProgress) {
+        if (actionInProgress)
+        {
             yield break;
         }
 
         Vector3 selectedPosition = selector.GetSelectedPosition();
         Vector3 intendedPosition = new Vector3(selectedPosition.x, player.transform.position.y, selectedPosition.z);
         float intendedMoveDistance = Vector3.Distance(player.transform.position, intendedPosition);
-        
+
         TroopBase playerTroop = player.GetComponent<TroopBase>();
         // Time needed to move to the intended position
         float timeNeeded = intendedMoveDistance / playerTroop.MoveSpeed;
 
-        if (selectedPosition.y >= verticalMovementLimit) {
+        if (selectedPosition.y >= verticalMovementLimit)
+        {
             warningMessage.text = "Intended Move too high.";
             yield return new WaitForSeconds(1);
             warningMessage.text = "";
-        } else if (intendedMoveDistance <= playerTroop.MoveRange) {
+        }
+        else if (intendedMoveDistance <= playerTroop.MoveRange)
+        {
             actionInProgress = true;
             StartCoroutine(playerTroop.MoveTo(intendedPosition));
             yield return new WaitForSeconds(timeNeeded);
             onComplete();
-        } else {
+        }
+        else
+        {
             warningMessage.text = "Can't Move Beyond Move Range";
             yield return new WaitForSeconds(1);
             warningMessage.text = "";
         }
 
-        actionInProgress = false;   
+        actionInProgress = false;
     }
 
-    private IEnumerator AttackEnemy(GameObject player, Action onComplete) {
+    private IEnumerator AttackEnemy(GameObject player, Action onComplete)
+    {
         yield return new WaitUntil(
             () => Input.GetMouseButtonDown(0) && selector.GetSelectedObject() != null);
 
-        if (actionInProgress) {
+        if (actionInProgress)
+        {
             yield break;
         }
 
         GameObject targetEnemy = selector.GetSelectedObject();
 
-        if (targetEnemy.tag == "Enemy") {
-        
+        if (targetEnemy.tag == "Enemy")
+        {
+
             Vector3 enemyPosition = targetEnemy.transform.position;
 
             TroopBase playerTroop = player.GetComponent<TroopBase>();
@@ -106,29 +118,33 @@ public class PlayerBehavior : MonoBehaviour
 
             float intendedAttackDistance = Vector3.Distance(player.transform.position, enemyPosition);
 
-            if (intendedAttackDistance <= playerTroop.AttackRange) {
+            if (intendedAttackDistance <= playerTroop.AttackRange)
+            {
                 actionInProgress = true;
                 StartCoroutine(playerTroop.Attack(enemyTroop));
                 yield return new WaitForSeconds(4);
-                if(enemyTroop.Health <= 0) {
-                    scoreManager.AddScore(enemyTroop.GetTroopScore());
-                }
+
                 onComplete();
-            } else {
+            }
+            else
+            {
                 warningMessage.text = "Can't Attack Beyond Attack Range";
                 yield return new WaitForSeconds(1);
                 warningMessage.text = "";
             }
-        } else {
+        }
+        else
+        {
             warningMessage.text = "Can only attack troop";
             yield return new WaitForSeconds(1);
             warningMessage.text = "";
         }
 
-        actionInProgress = false;    
+        actionInProgress = false;
     }
 
-    private (GameObject moveRendererObject, GameObject attackRendererObject) RenderRanges(GameObject current) {
+    private (GameObject moveRendererObject, GameObject attackRendererObject) RenderRanges(GameObject current)
+    {
         GameObject moveRendererObject = new GameObject(name);
         GameObject attackRendererObject = new GameObject(name);
 
@@ -146,11 +162,12 @@ public class PlayerBehavior : MonoBehaviour
         return (moveRendererObject, attackRendererObject);
     }
 
-    private void SetupRenderer(LineRenderer renderer, Vector3 center, float radius, int segments, Color color) {
+    private void SetupRenderer(LineRenderer renderer, Vector3 center, float radius, int segments, Color color)
+    {
         renderer.startWidth = 0.05f;
         renderer.endWidth = 0.05f;
         renderer.positionCount = segments + 1;
-        renderer.useWorldSpace = true; 
+        renderer.useWorldSpace = true;
         renderer.material = new Material(Shader.Find("Sprites/Default"));
         renderer.startColor = color;
         renderer.endColor = color;
@@ -158,7 +175,8 @@ public class PlayerBehavior : MonoBehaviour
         float deltaTheta = (2f * Mathf.PI) / segments;
         float theta = 0f;
 
-        for (int i = 0; i < segments + 1; i++) {
+        for (int i = 0; i < segments + 1; i++)
+        {
             float x = center.x + radius * Mathf.Cos(theta);
             float z = center.z + radius * Mathf.Sin(theta);
             Vector3 pos = new Vector3(x, center.y, z); // Adjust for the center position

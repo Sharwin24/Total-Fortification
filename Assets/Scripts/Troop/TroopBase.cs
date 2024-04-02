@@ -49,6 +49,8 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public int ScoreMultiplier = 5;
 
+    public ScoreManager scoreManager;
+
     private AudioSource cameraAudioSource;
 
     protected virtual void Awake()
@@ -70,6 +72,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         EquipItemInList();
         mainCamera = Camera.main;
         cameraAudioSource = mainCamera.GetComponent<AudioSource>();
+        scoreManager = ScoreManager.Instance;
     }
     void Start()
     {
@@ -145,13 +148,19 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         if (Health <= 0)
         {
             LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-            
 
-            if (gameObject.tag == "Ally") {
+
+            if (gameObject.tag == "Ally")
+            {
                 levelManager.allyCount--;
-            } else if (gameObject.tag == "Enemy"){
+            }
+            else if (gameObject.tag == "Enemy")
+            {
                 levelManager.enemyCount--;
-            } else {
+                ScoreManager.Instance.AddScore(GetTroopScore());
+            }
+            else
+            {
                 throw new Exception("Invalid tag for troop");
             }
 
