@@ -42,6 +42,8 @@ TagManager:
   - RightArmEquipmentBtn
   - LegsEquipmentBtn
   - DeploymentManager
+  - ShopUI
+  - ShopCloseButton
   - RightHandPistol
   - TroopBtn12
   - TroopBtn13

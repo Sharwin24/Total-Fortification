@@ -71,8 +71,6 @@ public class DeploymentManager : MonoBehaviour {
     private int currentlySelectedTroopIndex;
     private MouseSelector mouseSelector;
 
-    private void Awake() {
-    }
 
     void SetupButtons() {
         // The troop buttons are tagged TroopBtn1, TroopBtn2, etc.

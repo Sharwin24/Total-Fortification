@@ -6,11 +6,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public static bool actionDone = false; // need to be updated when player/enemy completes combat action.
-    public enum GameState {
-        DEPLOYMENT, COMBAT, END
+    public enum GameState
+    {
+        SHOP, DEPLOYMENT, COMBAT, END
     }
 
     public GameState gameState;
@@ -18,9 +20,12 @@ public class LevelManager : MonoBehaviour {
     public GameObject enemyManagement;
     public GameObject playerManagement;
     public Button enterBattleButton;
+    public Button shopCloseButton;
     public TextMeshProUGUI levelMessage;
     public TextMeshProUGUI turnMessage;
     public TextMeshProUGUI scoreMessage;
+    public ScoreManager scoreManager;
+    public GameObject shopUI;
     public GameObject deploymentUI;
     public GameObject combatUI;
     public AudioClip deploymentMusic;
@@ -28,12 +33,14 @@ public class LevelManager : MonoBehaviour {
     public int enemyCount = 0;
     public int allyCount = 0;
     private AudioSource cameraAudioSource;
-    private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
+    private PriorityQueue<GameObject> troopQueue;
+
 
     // Feature flags
     public bool skipDeployment = false;
 
-    void Start() {
+    void Start()
+    {
 
         Initialize();
 
@@ -45,38 +52,62 @@ public class LevelManager : MonoBehaviour {
         StartCoroutine(TakeTurnsCoroutine());
     }
 
-    private void InitializeTroops() {
+    private void InitializeTroops()
+    {
         print("Level Manager initializing");
         TroopBase[] allTroops = FindObjectsOfType<TroopBase>();
+        enemyCount = 0;
+        allyCount = 0;
+        troopQueue = new PriorityQueue<GameObject>();
 
-        foreach (var troop in allTroops) {
+        for (int i = 0; i < allTroops.Length; i++) {
+            var troop = allTroops[i];
             troopQueue.Enqueue(troop.gameObject, troop.Speed);
-            if (troop.gameObject.tag == "Enemy") {
+            if (troop.gameObject.tag == "Enemy")
+            {
                 enemyCount++;
-            } else if (troop.gameObject.tag == "Ally") {
+            }
+            else if (troop.gameObject.tag == "Ally")
+            {
                 allyCount++;
             }
         }
-
     }
 
-    void AssignUIComponents() {
-        if (deploymentUI == null) {
+    void AssignUIComponents()
+    {
+        if (deploymentUI == null)
+        {
             deploymentUI = GameObject.FindWithTag("DeploymentUI");
         }
-        if (combatUI == null) {
+        if (combatUI == null)
+        {
             combatUI = GameObject.FindWithTag("CombatUI");
         }
-        if (enterBattleButton == null) {
+        if (enterBattleButton == null)
+        {
             enterBattleButton = GameObject.FindWithTag("EnterBattleButton").GetComponent<Button>();
         }
+        if (shopCloseButton == null)
+        {
+            shopCloseButton = GameObject.FindWithTag("ShopCloseButton").GetComponent<Button>();
+        }
+        if (shopUI == null)
+        {
+            shopUI = GameObject.FindWithTag("ShopUI");
+        }
+        shopCloseButton.onClick.AddListener(ShopFinishOnClick);
+        scoreManager = ScoreManager.Instance;
+        StartCoroutine(TakeTurnsCoroutine());
     }
 
-    IEnumerator TakeTurnsCoroutine() {
+    IEnumerator TakeTurnsCoroutine()
+    {
 
         print("Starting Game State: " + gameState);
 
-        if (!skipDeployment) {
+        if (!skipDeployment)
+        {
             print("Deployment Phase Started");
             yield return AwaitDeploymentCompletion();
         }
@@ -86,35 +117,50 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(0);
     }
 
-    IEnumerator AwaitDeploymentCompletion() {
+    IEnumerator AwaitDeploymentCompletion()
+    {
 
         print("Awaiting Deployment Completion");
 
         PlayMusic(deploymentMusic);
         DisplayUI(gameState);
+        while (gameState == GameState.SHOP)
+        {
 
-        while (gameState == GameState.DEPLOYMENT) {
+            yield return new WaitForSeconds(2);
+        }
+        DisplayUI(gameState);
+        // Start in Deployment Phase and when button is triggered, switch to Combat Phase
+        // DisplayUI(gameState);
+        gameState = GameState.DEPLOYMENT;
+        // Allow Deployment Phase to run
+        // Squares can be clicked and troops can be selected from inventory
+
+        while (gameState == GameState.DEPLOYMENT)
+        {
             yield return new WaitForSeconds(2);
         }
     }
 
-    IEnumerator StartCombat() {
+    IEnumerator StartCombat()
+    {
         print("Starting Combat");
-
+        
         gameState = GameState.COMBAT;
+        DisplayUI(gameState);
         PlayMusic(combatMusic);
 
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
         PlayerBehavior playerBehavior = playerManagement.GetComponent<PlayerBehavior>();
         int turnCount = 1;
         turnMessage.text = "Turn: " + turnCount;
-        scoreMessage.text = "Score: " + playerBehavior.playerScore;
+        scoreMessage.text = "Score: " + scoreManager.GetScore();
         InitializeTroops();
         int troopsInTurn = troopQueue.Count;
-        DisplayUI(gameState);
 
-        print("Troop Queue Length: " + troopQueue.Count);
-        while (gameState == GameState.COMBAT && !troopQueue.IsEmpty()) {
+        troopQueue.PrintElements();
+        while (gameState == GameState.COMBAT && !troopQueue.IsEmpty())
+        {
 
             print("Troop Queue Length: " + troopQueue.Count);
             troopQueue.PrintElements();
@@ -122,34 +168,41 @@ public class LevelManager : MonoBehaviour {
             GameObject troopGameObject = troopQueue.Dequeue();
             print("Attacking Troop: " + troopGameObject);
 
-            scoreMessage.text = "Score: " + playerBehavior.playerScore;
+            scoreMessage.text = "Score: " + scoreManager.GetScore();
 
-            if (troopGameObject == null) {
+            if (troopGameObject == null)
+            {
                 troopsInTurn--;
                 continue;
             }
 
             TroopBase currentTroop = troopGameObject.GetComponent<TroopBase>();
 
-            if (currentTroop.tag == "Ally") {
+            if (currentTroop.tag == "Ally")
+            {
                 print(playerBehavior);
                 StartCoroutine(playerBehavior.TakeAction(troopGameObject));
-            } else if (currentTroop.tag == "Enemy") {
+            }
+            else if (currentTroop.tag == "Enemy")
+            {
                 StartCoroutine(enemyBehavior.TakeAction(troopGameObject));
-            } else {
+            }
+            else
+            {
                 throw new ArgumentException("Troop tag no recognized. Given: " + currentTroop.tag);
             }
 
-            while (!actionDone) {
+            while (!actionDone)
+            {
                 // Wait for action to complete...
                 yield return new WaitForSeconds(2);
             }
             actionDone = false;
 
             troopQueue.Enqueue(troopGameObject, -1 * currentTroop.Speed);
-
             troopsInTurn--;
-            if (troopsInTurn <= 0) {
+            if (troopsInTurn <= 0)
+            {
                 turnCount++;
                 turnMessage.text = "Turn: " + turnCount;
                 troopsInTurn = troopQueue.Count; // Reset the counter for the next cycle of turns
@@ -163,73 +216,93 @@ public class LevelManager : MonoBehaviour {
 
         print("Combat Ended");
 
+
     }
 
-    void LoadNextLevel() {
-        if (nextLevel != null) {
+    void LoadNextLevel()
+    {
+        if (nextLevel != null)
+        {
             SceneManager.LoadScene(nextLevel);
         }
     }
 
-    void ReloadCurrentLevel() {
+    void ReloadCurrentLevel()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void DisplayUI(GameState gameState) {
-        if (gameState == GameState.DEPLOYMENT) {
-            combatUI.SetActive(false);
-            deploymentUI.SetActive(true);
-        } else if (gameState == GameState.COMBAT) {
-            deploymentUI.SetActive(false);
-            combatUI.SetActive(true);
-        } else {
+    void DisplayUI(GameState gameState)
+    {
+        if (gameState == GameState.SHOP)
+        {
+            shopUI.SetActive(true);
             deploymentUI.SetActive(false);
             combatUI.SetActive(false);
         }
+        else if (gameState == GameState.DEPLOYMENT)
+        {
+            combatUI.SetActive(false);
+            deploymentUI.SetActive(true);
+            shopUI.SetActive(false);
+        }
+        else if (gameState == GameState.COMBAT)
+        {
+            deploymentUI.SetActive(false);
+            combatUI.SetActive(true);
+            shopUI.SetActive(false);
+        }
+        else
+        {
+            deploymentUI.SetActive(false);
+            combatUI.SetActive(false);
+            shopUI.SetActive(false);
+        }
     }
 
-    public void TaskOnClick() {
+    public void TaskOnClick()
+    {
         gameState = GameState.COMBAT;
     }
 
-    bool CheckIfTagExists(List<GameObject> allTroops, string tag) {
-        int count = 0;
-        foreach (GameObject troop in allTroops) {
-            if (troop != null && troop.tag == tag) {
-                count++;
-            }
-        }
-
-        return count == 0;
+    public void ShopFinishOnClick()
+    {
+        gameState = GameState.DEPLOYMENT;
+        Debug.Log("Player Purchased Following Equipments: " +
+        shopUI.GetComponent<ShopManager>().printEquipmentList());
     }
 
-    void Initialize() {
+    void Initialize()
+    {
         levelMessage.text = "";
         turnMessage.text = "";
         scoreMessage.text = "";
         actionDone = false;
-        if (!skipDeployment) {
-            gameState = GameState.DEPLOYMENT;
+        if (!skipDeployment)
+        {
+            //Change to shop here
+            gameState = GameState.SHOP;
         }
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
     }
-
-    public int GetPlayerScore() {
-        return playerManagement.GetComponent<PlayerBehavior>().playerScore;
-    }
-    public void PlayMusic(AudioClip clip) {
+    public void PlayMusic(AudioClip clip)
+    {
         cameraAudioSource.Stop();
         cameraAudioSource.clip = clip;
         cameraAudioSource.Play();
     }
 
-    public void EndLevel() {
+    public void EndLevel()
+    {
         print("Enemy Count: " + enemyCount);
         print("Aly Count: " + allyCount);
-        if (enemyCount == 0) {
+        if (enemyCount == 0)
+        {
             levelMessage.text = "You win!";
             Invoke("LoadNextLevel", 3);
-        } else {
+        }
+        else
+        {
             levelMessage.text = "You lost!";
             Invoke("ReloadCurrentLevel", 3);
         }
