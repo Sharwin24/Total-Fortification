@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
     public int enemyCount = 0;
     public int allyCount = 0;
     private AudioSource cameraAudioSource;
-    private PriorityQueue<GameObject> troopQueue = new PriorityQueue<GameObject>();
+    private PriorityQueue<GameObject> troopQueue;
 
 
     // Feature flags
@@ -56,9 +56,12 @@ public class LevelManager : MonoBehaviour
     {
         print("Level Manager initializing");
         TroopBase[] allTroops = FindObjectsOfType<TroopBase>();
+        enemyCount = 0;
+        allyCount = 0;
+        troopQueue = new PriorityQueue<GameObject>();
 
-        foreach (var troop in allTroops)
-        {
+        for (int i = 0; i < allTroops.Length; i++) {
+            var troop = allTroops[i];
             troopQueue.Enqueue(troop.gameObject, troop.Speed);
             if (troop.gameObject.tag == "Enemy")
             {
@@ -69,7 +72,6 @@ public class LevelManager : MonoBehaviour
                 allyCount++;
             }
         }
-
     }
 
     void AssignUIComponents()
@@ -143,8 +145,9 @@ public class LevelManager : MonoBehaviour
     IEnumerator StartCombat()
     {
         print("Starting Combat");
-
+        
         gameState = GameState.COMBAT;
+        DisplayUI(gameState);
         PlayMusic(combatMusic);
 
         EnemyBehavior enemyBehavior = enemyManagement.GetComponent<EnemyBehavior>();
@@ -154,9 +157,8 @@ public class LevelManager : MonoBehaviour
         scoreMessage.text = "Score: " + scoreManager.GetScore();
         InitializeTroops();
         int troopsInTurn = troopQueue.Count;
-        DisplayUI(gameState);
 
-        print("Troop Queue Length: " + troopQueue.Count);
+        troopQueue.PrintElements();
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty())
         {
 
@@ -268,20 +270,6 @@ public class LevelManager : MonoBehaviour
         gameState = GameState.DEPLOYMENT;
         Debug.Log("Player Purchased Following Equipments: " +
         shopUI.GetComponent<ShopManager>().printEquipmentList());
-    }
-
-    bool CheckIfTagExists(List<GameObject> allTroops, string tag)
-    {
-        int count = 0;
-        foreach (GameObject troop in allTroops)
-        {
-            if (troop != null && troop.tag == tag)
-            {
-                count++;
-            }
-        }
-
-        return count == 0;
     }
 
     void Initialize()
