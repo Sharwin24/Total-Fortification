@@ -4244,8 +4244,8 @@ MonoBehaviour:
   scoreMultiplierDisplayText: {fileID: 659019811}
   equipmentPriceMultiplierSlider: {fileID: 358762991}
   equipmentPriceMultiplierText: {fileID: 731213334}
-  volumeSlider: {fileID: 0}
-  userSetVolumeText: {fileID: 0}
+  volumeSlider: {fileID: 96212682}
+  userSetVolumeText: {fileID: 490467557}
 --- !u!1 &794639626
 GameObject:
   m_ObjectHideFlags: 0
