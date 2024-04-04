@@ -47,7 +47,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public Camera mainCamera;
 
-    public int ScoreMultiplier = 5;
+    public int ScoreMultiplier = 1;
 
     public ScoreManager scoreManager;
 
@@ -72,7 +72,10 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         EquipItemInList();
         mainCamera = Camera.main;
         cameraAudioSource = mainCamera.GetComponent<AudioSource>();
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        cameraAudioSource.volume = volume;
         scoreManager = ScoreManager.Instance;
+        ScoreMultiplier = scoreManager.GetScoreMultiplier();
     }
     void Start()
     {

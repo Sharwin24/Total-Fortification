@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI levelMessage;
     public TextMeshProUGUI turnMessage;
     public TextMeshProUGUI scoreMessage;
+    public TextMeshProUGUI scoreMultiplierMessage;
     public ScoreManager scoreManager;
     public GameObject shopUI;
     public GameObject deploymentUI;
@@ -38,6 +39,8 @@ public class LevelManager : MonoBehaviour
 
     // Feature flags
     public bool skipDeployment = false;
+
+    private int scoreMultiplier;
 
     void Start()
     {
@@ -60,7 +63,8 @@ public class LevelManager : MonoBehaviour
         allyCount = 0;
         troopQueue = new PriorityQueue<GameObject>();
 
-        for (int i = 0; i < allTroops.Length; i++) {
+        for (int i = 0; i < allTroops.Length; i++)
+        {
             var troop = allTroops[i];
             troopQueue.Enqueue(troop.gameObject, troop.Speed);
             if (troop.gameObject.tag == "Enemy")
@@ -98,6 +102,8 @@ public class LevelManager : MonoBehaviour
         }
         shopCloseButton.onClick.AddListener(ShopFinishOnClick);
         scoreManager = ScoreManager.Instance;
+        //Display the user setting.
+        scoreMultiplier = scoreManager.GetScoreMultiplier();
         StartCoroutine(TakeTurnsCoroutine());
     }
 
@@ -145,7 +151,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator StartCombat()
     {
         print("Starting Combat");
-        
+
         gameState = GameState.COMBAT;
         DisplayUI(gameState);
         PlayMusic(combatMusic);
@@ -155,6 +161,7 @@ public class LevelManager : MonoBehaviour
         int turnCount = 1;
         turnMessage.text = "Turn: " + turnCount;
         scoreMessage.text = "Score: " + scoreManager.GetScore();
+        scoreMultiplierMessage.text = "Score Multiplier: " + scoreManager.GetScoreMultiplier() + "x";
         InitializeTroops();
         int troopsInTurn = troopQueue.Count;
 
@@ -223,6 +230,10 @@ public class LevelManager : MonoBehaviour
     {
         if (nextLevel != null)
         {
+            // Save the current level and score
+            PlayerPrefs.SetString("CurrentLevel", nextLevel);
+            PlayerPrefs.SetInt("CurrentScore", ScoreManager.Instance.GetScore());
+            PlayerPrefs.Save();
             SceneManager.LoadScene(nextLevel);
         }
     }
@@ -284,6 +295,8 @@ public class LevelManager : MonoBehaviour
             gameState = GameState.SHOP;
         }
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        cameraAudioSource.volume = volume;
     }
     public void PlayMusic(AudioClip clip)
     {
