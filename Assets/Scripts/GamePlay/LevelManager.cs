@@ -233,7 +233,6 @@ public class LevelManager : MonoBehaviour
             // Save the current level and score
             PlayerPrefs.SetString("CurrentLevel", nextLevel);
             PlayerPrefs.SetInt("CurrentScore", ScoreManager.Instance.GetScore());
-
             PlayerPrefs.Save();
             SceneManager.LoadScene(nextLevel);
         }
@@ -296,6 +295,8 @@ public class LevelManager : MonoBehaviour
             gameState = GameState.SHOP;
         }
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        cameraAudioSource.volume = volume;
     }
     public void PlayMusic(AudioClip clip)
     {

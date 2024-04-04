@@ -35,9 +35,11 @@ public class ShopManager : MonoBehaviour
             scoreManager = ScoreManager.Instance;
         }
         scoreText.text = "Score: " + scoreManager.GetScore();
+        PriceMultiplier = scoreManager.GetPriceMultiplier();
         equipmentInfoScroll.SetActive(false);
         equipmentPurchasePanel.SetActive(false);
         GenerateEquipmentButtons();
+        
     }
 
     void GenerateEquipmentButtons()
@@ -77,13 +79,14 @@ public class ShopManager : MonoBehaviour
 
     private int GetEquipmentPrice(EquipmentBase equipment)
     {
+        PriceMultiplier = scoreManager.GetPriceMultiplier();
         var price = 0;
         price += (int)equipment.AttackPowerModifier;
-        price += (int)equipment.AttackRangeModifier;
+        price += (int)equipment.AttackRangeModifier / 10;
         price += (int)equipment.ArmorModifier;
-        price += (int)equipment.MoveRangeModifier;
+        price += (int)equipment.MoveRangeModifier / 2;
         price += (int)equipment.SpeedModifier;
-        price += (int)equipment.HealthModifier / 2;
+        price += (int)equipment.HealthModifier / 5;
         return price * PriceMultiplier;
 
     }
@@ -100,6 +103,7 @@ public class ShopManager : MonoBehaviour
 
     public void BuyEquipment(EquipmentBase equipment)
     {
+        //I could save this into a list to make the price faster, it is redundant here.
         int price = GetEquipmentPrice(equipment);
         if (scoreManager.GetScore() >= price)
         {

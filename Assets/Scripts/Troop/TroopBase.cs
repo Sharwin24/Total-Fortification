@@ -72,6 +72,8 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         EquipItemInList();
         mainCamera = Camera.main;
         cameraAudioSource = mainCamera.GetComponent<AudioSource>();
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        cameraAudioSource.volume = volume;
         scoreManager = ScoreManager.Instance;
         ScoreMultiplier = scoreManager.GetScoreMultiplier();
     }
