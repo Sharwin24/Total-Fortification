@@ -7,6 +7,8 @@ public class ScoreManager : MonoBehaviour
 
     public int playerScore = 0;
 
+    public int scoreMultiplier = 1;
+
     void Awake()
     {
         if (Instance == null)
@@ -32,5 +34,15 @@ public class ScoreManager : MonoBehaviour
     public int GetScore()
     {
         return playerScore;
+    }
+
+    public void SetScoreMultiplier(int multiplier)
+    {
+        scoreMultiplier = multiplier;
+    }
+
+    public int GetScoreMultiplier()
+    {
+        return scoreMultiplier;
     }
 }
