@@ -156,7 +156,7 @@ public class MainMenuManager : MonoBehaviour
     {
         // Update the text to show the current value of the slider
         userSetScoreMultiplier = (int)value;
-        scoreMultiplierDisplayText.text = "Initial Score:" + userSetScoreMultiplier.ToString();
+        scoreMultiplierDisplayText.text = "Score Multiplier:" + userSetScoreMultiplier.ToString();
     }
 
     public void UserSetEquipmentPriceMultiplier(float value)
