@@ -165,12 +165,10 @@ public class LevelManager : MonoBehaviour
         InitializeTroops();
         int troopsInTurn = troopQueue.Count;
 
-        troopQueue.PrintElements();
         while (gameState == GameState.COMBAT && !troopQueue.IsEmpty())
         {
 
             print("Troop Queue Length: " + troopQueue.Count);
-            troopQueue.PrintElements();
 
             GameObject troopGameObject = troopQueue.Dequeue();
             print("Attacking Troop: " + troopGameObject);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
 
+    public static bool actionTaken = false; // need to be updated when player/enemy completes combat action.
     enum EnmyFSM {
         IDLE,
         MOVING,
@@ -38,16 +39,17 @@ public class EnemyBehavior : MonoBehaviour
         if (enemyState == EnmyFSM.MOVING) {
             print("Ally troop not in range");
             //Wait for the move time to complete
-            float moveTime = MoveTowardTarget(current, currentTroop, closestTarget); 
-            yield return new WaitForSeconds(moveTime);
+            MoveTowardTarget(current, currentTroop, closestTarget); 
 
         } else if (enemyState == EnmyFSM.ATTACKING) {
             print("Ally troop in range");
             Attack(currentTroop, closestTargetTroop);
-            yield return new WaitForSeconds(3); // wait for animation to complete
         } else {
             throw new InvalidOperationException("Enemy state not recognized");
         }
+
+        yield return new WaitUntil(() => actionTaken);
+        actionTaken = false;
 
         // Mark action as done
         print("Enemy Action done");
@@ -68,7 +70,7 @@ public class EnemyBehavior : MonoBehaviour
         return Vector3.Distance(target.transform.position, current.transform.position) <= currentTroop.AttackRange;
     }
 
-    private float MoveTowardTarget(GameObject current, TroopBase currentTroop, GameObject target) {
+    private void MoveTowardTarget(GameObject current, TroopBase currentTroop, GameObject target) {
         Vector3 moverPosition = current.transform.position;
         Vector3 targetPosition = target.transform.position;
         float moveDistance = currentTroop.MoveRange;
@@ -81,8 +83,6 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 finalPosition = moverPosition + direction * moveDistanceAdjusted;
 
         StartCoroutine(currentTroop.MoveTo(finalPosition));
-
-        return moveDistanceAdjusted / currentTroop.MoveSpeed;
     }
 
 

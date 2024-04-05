@@ -18,6 +18,7 @@ public class PlayerBehavior : MonoBehaviour
     Button moveButton;
     Button attackButton;
     bool actionInProgress = false;
+    public static bool actionTaken = false;
 
     void Awake()
     {
@@ -40,10 +41,10 @@ public class PlayerBehavior : MonoBehaviour
         (GameObject moveRendererObject, GameObject attackRendererObject) = RenderRanges(current);
 
 
-        bool actionTaken = false;
+        actionTaken = false;
 
-        moveButton.onClick.AddListener(() => StartCoroutine(MovePlayer(current, () => actionTaken = true)));
-        attackButton.onClick.AddListener(() => StartCoroutine(AttackEnemy(current, () => actionTaken = true)));
+        moveButton.onClick.AddListener(() => StartCoroutine(MovePlayer(current)));
+        attackButton.onClick.AddListener(() => StartCoroutine(AttackEnemy(current)));
 
         // Wait for action to be taken
         yield return new WaitUntil(() => actionTaken);
@@ -56,7 +57,7 @@ public class PlayerBehavior : MonoBehaviour
         LevelManager.actionDone = true;
     }
 
-    private IEnumerator MovePlayer(GameObject player, Action onComplete)
+    private IEnumerator MovePlayer(GameObject player)
     {
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
 
@@ -84,7 +85,6 @@ public class PlayerBehavior : MonoBehaviour
             actionInProgress = true;
             StartCoroutine(playerTroop.MoveTo(intendedPosition));
             yield return new WaitForSeconds(timeNeeded);
-            onComplete();
         }
         else
         {
@@ -96,7 +96,7 @@ public class PlayerBehavior : MonoBehaviour
         actionInProgress = false;
     }
 
-    private IEnumerator AttackEnemy(GameObject player, Action onComplete)
+    private IEnumerator AttackEnemy(GameObject player)
     {
         yield return new WaitUntil(
             () => Input.GetMouseButtonDown(0) && selector.GetSelectedObject() != null);
@@ -124,7 +124,6 @@ public class PlayerBehavior : MonoBehaviour
                 StartCoroutine(playerTroop.Attack(enemyTroop));
                 yield return new WaitForSeconds(4);
 
-                onComplete();
             }
             else
             {

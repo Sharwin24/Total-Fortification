@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4000012689552980}
   - component: {fileID: 33000010259202392}
   - component: {fileID: 23000011097900018}
+  - component: {fileID: 5408790679552287122}
   m_Layer: 0
   m_Name: Hexgon
-  m_TagString: Untagged
+  m_TagString: SelectionIndicatorGem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -3.6322575, y: -3.6176517, z: 0.00073288614}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.50000006, y: 0.50000006, z: 0.50000006}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5408790679552287122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013356204050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa575e4b639493b438bf70753cec9df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
