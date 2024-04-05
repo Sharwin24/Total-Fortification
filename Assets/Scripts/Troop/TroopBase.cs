@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public abstract class TroopBase : MonoBehaviour, ITroop
 {
@@ -52,6 +51,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public ScoreManager scoreManager;
 
     private AudioSource cameraAudioSource;
+    private NavMeshAgent agent;
 
     protected virtual void Awake()
     {
@@ -74,8 +74,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         cameraAudioSource = mainCamera.GetComponent<AudioSource>();
         float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         cameraAudioSource.volume = volume;
+
+        agent = GetComponent<NavMeshAgent>();
+
         scoreManager = ScoreManager.Instance;
         ScoreMultiplier = scoreManager.GetScoreMultiplier();
+
+
+        
     }
     void Start()
     {
@@ -118,7 +124,11 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             Debug.Log("Attacking");
 
             UpdateAnimationState(0);
+
+            
         }
+
+        OnActionComplete();
 
     }
 
@@ -129,14 +139,35 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         UpdateAnimationState(1, false); // Start walking/running animation
         cameraAudioSource.clip = moveSound;
         cameraAudioSource.Play();
-        while (Vector3.Distance(transform.position, position) > 0.1f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, position, MoveSpeed * Time.deltaTime);
-            yield return new WaitForSeconds(0f);
+
+        agent.SetDestination(position);
+
+        float stationaryTime = 0f;
+
+        while (Vector3.Distance(transform.position, position) > agent.stoppingDistance) {
+            
+            if (agent.velocity.sqrMagnitude < 0.03f) {
+                stationaryTime += Time.deltaTime; 
+            } else {
+                stationaryTime = 0f; 
+            }
+
+            // Check if the agent has been stationary for more than 3 seconds
+            if (stationaryTime >= 1f) {
+                print("Agent has been stationary for too long - exiting loop");
+                break;
+            }
+            
+            yield return null;
         }
+
+        print("reached destination - reset");
+        agent.ResetPath();
+
         UpdateAnimationState(0);// Switch to idle animation
         cameraAudioSource.Stop();
-        transform.position = new Vector3(position.x, transform.position.y, position.z);
+
+        OnActionComplete();
 
         yield return new WaitForSeconds(0f);
     }
@@ -293,5 +324,15 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public int GetTroopScore()
     {
         return (int)Math.Floor((Armor + AttackPower + AttackRange + MoveRange + Speed) * ScoreMultiplier);
+    }
+
+    private void OnActionComplete() {
+        if (gameObject.tag == "Ally") {
+            PlayerBehavior.actionTaken = true;
+        } else if (gameObject.tag == "Enemy") {
+            EnemyBehavior.actionTaken = true;
+        } else {
+            throw new InvalidOperationException("Invalid tag for troop");
+        }
     }
 }
