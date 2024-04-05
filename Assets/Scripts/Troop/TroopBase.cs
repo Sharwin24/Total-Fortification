@@ -76,9 +76,6 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         cameraAudioSource.volume = volume;
         agent = GetComponent<NavMeshAgent>();
 
-        scoreManager = ScoreManager.Instance;
-        ScoreMultiplier = scoreManager.GetScoreMultiplier();
-
     }
     void Start()
     {
