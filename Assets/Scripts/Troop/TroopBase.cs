@@ -74,18 +74,16 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         cameraAudioSource = mainCamera.GetComponent<AudioSource>();
         float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         cameraAudioSource.volume = volume;
-
         agent = GetComponent<NavMeshAgent>();
 
         scoreManager = ScoreManager.Instance;
         ScoreMultiplier = scoreManager.GetScoreMultiplier();
 
-
-        
     }
     void Start()
     {
-
+        scoreManager = ScoreManager.Instance;
+        ScoreMultiplier = scoreManager.GetScoreMultiplier();
     }
 
     //Only called for enemy troops.
