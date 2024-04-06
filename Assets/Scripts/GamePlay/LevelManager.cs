@@ -293,7 +293,7 @@ public class LevelManager : MonoBehaviour
             gameState = GameState.SHOP;
         }
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
-        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         cameraAudioSource.volume = volume;
     }
     public void PlayMusic(AudioClip clip)

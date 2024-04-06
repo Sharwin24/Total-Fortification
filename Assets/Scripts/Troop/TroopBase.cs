@@ -72,7 +72,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         EquipItemInList();
         mainCamera = Camera.main;
         cameraAudioSource = mainCamera.GetComponent<AudioSource>();
-        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         cameraAudioSource.volume = volume;
         agent = GetComponent<NavMeshAgent>();
 
