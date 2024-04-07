@@ -104,7 +104,6 @@ public class LevelManager : MonoBehaviour
         scoreManager = ScoreManager.Instance;
         //Display the user setting.
         scoreMultiplier = scoreManager.GetScoreMultiplier();
-        StartCoroutine(TakeTurnsCoroutine());
     }
 
     IEnumerator TakeTurnsCoroutine()
@@ -112,12 +111,11 @@ public class LevelManager : MonoBehaviour
 
         print("Starting Game State: " + gameState);
 
-        if (!skipDeployment)
-        {
+        if (!skipDeployment) {
             print("Deployment Phase Started");
             yield return AwaitDeploymentCompletion();
         }
-        print("Deployment Phase Skipped");
+
         yield return StartCombat();
 
         yield return new WaitForSeconds(0);
