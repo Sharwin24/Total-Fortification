@@ -154,7 +154,7 @@ PrefabInstance:
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: resetEquipmentButton
       value: 
-      objectReference: {fileID: 1769085701}
+      objectReference: {fileID: 0}
     - target: {fileID: 247910701591441937, guid: f2407f2d1a49742409b950daed838ac1, type: 3}
       propertyPath: equipmentWindowManager
       value: 
@@ -1093,17 +1093,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 9711d03ef23cd3c4bbe6aa2011b39734, type: 3}
   m_PrefabInstance: {fileID: 782409241}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &958670868 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8753639163019908535, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &958670869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5811465153176853689, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
@@ -1766,7 +1755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6540202074983745200, guid: 9884863d109bc5442a8ceaa8ca9da628, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7372451168716141969, guid: 9884863d109bc5442a8ceaa8ca9da628, type: 3}
       propertyPath: m_Pivot.x
@@ -2154,17 +2143,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
---- !u!114 &1769085701 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7344422829970459593, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
-  m_PrefabInstance: {fileID: 1769085699}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1769085702 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4155249652856082894, guid: e9bc5b65c4688b549ac3bf9bb9057e3f, type: 3}
@@ -2486,7 +2464,7 @@ PrefabInstance:
     - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: enterBattleButton
       value: 
-      objectReference: {fileID: 958670868}
+      objectReference: {fileID: 0}
     - target: {fileID: 8989158174608238202, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: m_Name
       value: LevelManager
