@@ -6,15 +6,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopManager : MonoBehaviour
-{
+public class ShopManager : MonoBehaviour {
     // Assign in inspector
-    public GameObject equipmentButtonPrefab; 
+    public GameObject equipmentButtonPrefab;
     public Transform equipmentHolder; // Equipment Scroll content.
 
-    public GameObject equipmentInfoScroll; 
+    public GameObject equipmentInfoScroll;
 
-    public GameObject equipmentPurchasePanel; 
+    public GameObject equipmentPurchasePanel;
     public List<EquipmentBase> equipmentList; // Populate this list with current level equipment
 
     public int PriceMultiplier = 4;
@@ -25,13 +24,12 @@ public class ShopManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
-    public Dictionary<EquipmentBase, int> playerEquipment = new Dictionary<EquipmentBase, int>();
+    private Dictionary<EquipmentBase, int> playerEquipment = new Dictionary<EquipmentBase, int>();
 
+    public Dictionary<EquipmentBase, int> GetEquipmentCounts => playerEquipment;
 
-    void Start()
-    {
-        if (scoreManager == null)
-        {
+    void Start() {
+        if (scoreManager == null) {
             scoreManager = ScoreManager.Instance;
         }
         scoreText.text = "Score: " + scoreManager.GetScore();
@@ -39,13 +37,11 @@ public class ShopManager : MonoBehaviour
         equipmentInfoScroll.SetActive(false);
         equipmentPurchasePanel.SetActive(false);
         GenerateEquipmentButtons();
-        
+
     }
 
-    void GenerateEquipmentButtons()
-    {
-        foreach (EquipmentBase equipment in equipmentList)
-        {
+    void GenerateEquipmentButtons() {
+        foreach (EquipmentBase equipment in equipmentList) {
             // Instantiate a new button for each piece of equipment
             GameObject buttonObj = Instantiate(equipmentButtonPrefab, equipmentHolder);
             buttonObj.GetComponentInChildren<Image>().sprite = equipment.EquipmentIcon;
@@ -56,8 +52,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    void OnEquipmentButtonClicked(EquipmentBase equipment)
-    {
+    void OnEquipmentButtonClicked(EquipmentBase equipment) {
         equipmentPurchasePanel.transform.Find("Purchase").GetComponent<Button>().onClick.RemoveAllListeners();
         equipmentPurchasePanel.transform.Find("Sell").GetComponent<Button>().onClick.RemoveAllListeners();
 
@@ -77,8 +72,7 @@ public class ShopManager : MonoBehaviour
     }
 
 
-    private int GetEquipmentPrice(EquipmentBase equipment)
-    {
+    private int GetEquipmentPrice(EquipmentBase equipment) {
         PriceMultiplier = scoreManager.GetPriceMultiplier();
         var price = 0;
         price += (int)equipment.AttackPowerModifier;
@@ -91,8 +85,7 @@ public class ShopManager : MonoBehaviour
 
     }
 
-    private String GenerateEquipmentStatus(EquipmentBase equipment)
-    {
+    private String GenerateEquipmentStatus(EquipmentBase equipment) {
         return "Helth: " + equipment.HealthModifier + "\n" +
                 "Attack Power: " + equipment.AttackPowerModifier + "\n" +
                "Attack Range: " + equipment.AttackRangeModifier + "\n" +
@@ -101,69 +94,54 @@ public class ShopManager : MonoBehaviour
                "Speed: " + equipment.SpeedModifier;
     }
 
-    public void BuyEquipment(EquipmentBase equipment)
-    {
+    public void BuyEquipment(EquipmentBase equipment) {
         //I could save this into a list to make the price faster, it is redundant here.
         int price = GetEquipmentPrice(equipment);
-        if (scoreManager.GetScore() >= price)
-        {
+        if (scoreManager.GetScore() >= price) {
             scoreManager.SubtractScore(price);
-            if (playerEquipment.ContainsKey(equipment))
-            {
+            if (playerEquipment.ContainsKey(equipment)) {
                 playerEquipment[equipment] += 1;
-            }
-            else
-            {
+            } else {
                 playerEquipment[equipment] = 1;
             }
             UpdateEquipmentPanel("Owned " + GetEquipmentQuantity(equipment));
-        }
-        else
-        {
+        } else {
             UpdateEquipmentPanel("Insufficient Funds");
         }
 
     }
 
-    public void SellEquipment(EquipmentBase equipment)
-    {
+    public void SellEquipment(EquipmentBase equipment) {
         int price = GetEquipmentPrice(equipment);
         scoreManager.AddScore(price);
-        if (playerEquipment.ContainsKey(equipment))
-        {
+        if (playerEquipment.ContainsKey(equipment)) {
             playerEquipment[equipment] -= 1;
-            if (playerEquipment[equipment] <= 0)
-            {
+            if (playerEquipment[equipment] <= 0) {
                 playerEquipment.Remove(equipment); // Remove equipment from inventory if quantity is 0
             }
         }
         UpdateEquipmentPanel("Owned " + GetEquipmentQuantity(equipment));
     }
 
-    public int GetEquipmentQuantity(EquipmentBase equipment)
-    {
-        if (playerEquipment.ContainsKey(equipment))
-        {
+    public int GetEquipmentQuantity(EquipmentBase equipment) {
+        if (playerEquipment.ContainsKey(equipment)) {
             return playerEquipment[equipment];
         }
         return 0;
     }
 
-    public Dictionary<EquipmentBase, int> GetInventory()
-    {
+    public Dictionary<EquipmentBase, int> GetInventory() {
         return playerEquipment;
     }
     //Score update is here since no matter buy or sell, the score will be updated.
-    void UpdateEquipmentPanel(string text)
-    {
+    void UpdateEquipmentPanel(string text) {
         equipmentPurchasePanel.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = text;
         scoreText.text = "Score: " + scoreManager.GetScore();
     }
 
-    public string printEquipmentList(){
+    public string printEquipmentList() {
         string result = "";
-        foreach (var equipment in playerEquipment)
-        {
+        foreach (var equipment in playerEquipment) {
             result += equipment.Key.name + " : " + equipment.Value + "\n";
         }
         return result;

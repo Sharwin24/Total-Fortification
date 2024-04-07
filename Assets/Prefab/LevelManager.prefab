@@ -45,14 +45,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  nextLevel: 
+  nextLevel: Level2
   enemyManagement: {fileID: 0}
   playerManagement: {fileID: 0}
   enterBattleButton: {fileID: 0}
+  shopCloseButton: {fileID: 0}
   levelMessage: {fileID: 0}
   turnMessage: {fileID: 0}
+  scoreMessage: {fileID: 0}
+  scoreMultiplierMessage: {fileID: 0}
+  scoreManager: {fileID: 0}
+  shopUI: {fileID: 0}
   deploymentUI: {fileID: 0}
   combatUI: {fileID: 0}
   deploymentMusic: {fileID: 8300000, guid: d2ea5576ee19c4fc1bb3b9a8704851b0, type: 3}
   combatMusic: {fileID: 8300000, guid: 465331bb26400417ab306298f1107bbf, type: 3}
-  cameraAudioSource: {fileID: 0}
+  enemyCount: 0
+  allyCount: 0
+  skipDeployment: 0

@@ -48,6 +48,7 @@ TagManager:
   - TroopBtn12
   - TroopBtn13
   - TroopBtn14
+  - HelpPanel
   layers:
   - Default
   - TransparentFX
