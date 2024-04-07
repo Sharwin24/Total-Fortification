@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     public int allyCount = 0;
     private AudioSource cameraAudioSource;
     private PriorityQueue<GameObject> troopQueue;
+    private DeploymentManager deploymentManager;
 
 
     // Feature flags
@@ -277,6 +278,7 @@ public class LevelManager : MonoBehaviour
         gameState = GameState.DEPLOYMENT;
         Debug.Log("Player Purchased Following Equipments: " +
         shopUI.GetComponent<ShopManager>().printEquipmentList());
+        deploymentManager.SetEquipmentsFromShop(shopUI.GetComponent<ShopManager>().GetEquipmentCounts);
     }
 
     void Initialize()
@@ -293,6 +295,7 @@ public class LevelManager : MonoBehaviour
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
         float volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         cameraAudioSource.volume = volume;
+        this.deploymentManager = GameObject.FindGameObjectWithTag("DeploymentManager").GetComponent<DeploymentManager>();
     }
     public void PlayMusic(AudioClip clip)
     {

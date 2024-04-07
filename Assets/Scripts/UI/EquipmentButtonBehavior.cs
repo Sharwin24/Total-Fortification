@@ -42,6 +42,17 @@ public class EquipmentButtonBehavior : MonoBehaviour {
         DisplayCount();
     }
 
+    public void SetEquipment(EquipmentBase item, int count) {
+        this.equipmentObject = item;
+        this.count = count;
+    }
+
+    public void ResetEquipment() {
+        this.equipmentObject = null;
+        this.count = 0;
+        if (TryGetComponent<Image>(out var i)) i.sprite = null;
+    }
+
     public void EnableByType(EquipmentType type) {
         if (this.equipmentObject == null) this.gameObject.SetActive(false);
         else if (type == EquipmentType.None) this.gameObject.SetActive(true);

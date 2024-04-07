@@ -350,4 +350,13 @@ public class DeploymentManager : MonoBehaviour {
         }
         return false;
     }
+
+    public void SetEquipmentsFromShop(Dictionary<EquipmentBase, int> equipmentToCount) {
+        this.equipmentBtnBehaviors.ForEach(ebb => ebb.ResetEquipment());
+        // Start filling equipment slots
+        int ebIndex = 0;
+        foreach (var kvp in equipmentToCount) {
+            this.equipmentBtnBehaviors[ebIndex++].SetEquipment(kvp.Key, kvp.Value);
+        }
+    }
 }
