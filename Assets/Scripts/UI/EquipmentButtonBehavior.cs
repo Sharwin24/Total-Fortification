@@ -75,8 +75,9 @@ public class EquipmentButtonBehavior : MonoBehaviour {
         if (troop == null) return;
         // If the troop already has this item equipped, then clicking this button should remove it
         if (troop.equippedItems.Contains(this.equipmentObject)) {
-            troop.RemoveItem(this.equipmentObject.EquipmentType);
+            bool removed = troop.RemoveItem(this.equipmentObject.EquipmentType);
             deploymentManager.SetTroopInfo(troop);
+            if (!removed) return;
             deploymentManager.ClearEquippedSlot(this.equipmentObject.EquipmentType);
             SetColor(Color.white);
             this.count++;
@@ -90,8 +91,9 @@ public class EquipmentButtonBehavior : MonoBehaviour {
                 Debug.LogWarning("Cannot equip " + this.equipmentObject.name + ", " + troop.name + " already has an item equipped in the " + this.equipmentObject.EquipmentType + " slot");
                 return;
             }
-            troop.EquipItem(this.equipmentObject);
+            bool equipped = troop.EquipItem(this.equipmentObject);
             deploymentManager.SetTroopInfo(troop);
+            if (!equipped) return;
             deploymentManager.AssignEquippedSlot(this.equipmentObject.EquipmentType, this.equipmentObject);
             SetColor(selectedIconColor);
             this.count--;
