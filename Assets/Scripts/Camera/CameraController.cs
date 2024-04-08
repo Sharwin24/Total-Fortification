@@ -5,6 +5,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
     public float Speed = 10.0f;
     public float RotationSpeed = 100.0f;
+    public float YAxisSpeed = 8.0f; 
+    public float YMin = 3.0f;
+    public float YMax = 50.0f; 
+    
     // Start is called before the first frame update
     void Start() {
       
@@ -27,6 +31,15 @@ public class CameraController : MonoBehaviour {
             transform.Rotate(Vector3.up, -RotationSpeed * Time.deltaTime, Space.World);
         } else if (Input.GetKey(KeyCode.E)) {
             transform.Rotate(Vector3.up, RotationSpeed * Time.deltaTime, Space.World);
+        }
+
+        // Camera Y-axis Adjustment
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
+            float newYPosition = Mathf.Clamp(transform.position.y + (YAxisSpeed * Time.deltaTime), YMin, YMax);
+            transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
+        } else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
+            float newYPosition = Mathf.Clamp(transform.position.y - (YAxisSpeed * Time.deltaTime), YMin, YMax);
+            transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
         }
     }
 }
