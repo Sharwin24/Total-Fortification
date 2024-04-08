@@ -20,6 +20,8 @@ public class DeploymentManager : MonoBehaviour {
     public EquipmentType EquipmentTypeSelected = EquipmentType.None;
     public TroopBase GetSelectedTroop => currentlySelectedTroopIndex != -1 && allies.Count > 0 ? allies[currentlySelectedTroopIndex] : null;
     public Dictionary<EquipmentBase, int> EquipmentInventory = new();
+    public Button shopCloseButton;
+
 
     // Empty Slot Sprites
     public Sprite headEmptySlotSprite;
@@ -28,7 +30,7 @@ public class DeploymentManager : MonoBehaviour {
     public Sprite leftArmEmptySlotSprite;
     public Sprite legsEmptySlotSprite;
 
-    public GameObject troopToDeployPrefab;
+    private GameObject troopToDeployPrefab; // Disabled
 
     private readonly Dictionary<string, int> tagToTroopIndex = new() {
         { "TroopBtn1", 0 },
@@ -64,15 +66,16 @@ public class DeploymentManager : MonoBehaviour {
     };
 
     private String troopInfoTemplate;
-    private List<EquipmentButtonBehavior> equipmentBtnBehaviors;
+    private List<EquipmentButtonBehavior> equipmentBtnBehaviors = new();
     private List<TroopBase> allies = new();
     private Dictionary<TroopBase, List<IEquipment>> troopEquipmentMemory = new();
     private Color selectedIconColor = new(0, 1, 0, 0.5f);
     private int currentlySelectedTroopIndex;
     private MouseSelector mouseSelector;
+    private ShopManager shopManager;
 
 
-    void SetupButtons() {
+    private void SetupButtons() {
         // The troop buttons are tagged TroopBtn1, TroopBtn2, etc.
         // so we can find them by tag and add them to the list
         for (int i = 1; i <= tagToTroopIndex.Count; i++) {
@@ -98,8 +101,12 @@ public class DeploymentManager : MonoBehaviour {
                 }
             }
         }
-        // Reset button
+        // Reset button and ShopCloseButton
         resetEquipmentButton.onClick.AddListener(() => OnResetEquipmentButtonClicked());
+        shopCloseButton.onClick.AddListener(() => OnShopCloseButtonClicked());
+        // Equipment Buttons
+        this.equipmentBtnBehaviors = GameObject.FindObjectsByType<EquipmentButtonBehavior>(FindObjectsSortMode.None).ToList();
+        Debug.Log("Deploymentmanager Found " + equipmentBtnBehaviors.Count + " equipment buttons");
     }
 
     // Start is called before the first frame update
@@ -110,9 +117,6 @@ public class DeploymentManager : MonoBehaviour {
         // Collect all TroopBase objects with Ally tag
         allies = GameObject.FindGameObjectsWithTag("Ally").Select(go => go.GetComponent<TroopBase>()).ToList();
         Debug.Log("DeploymentManager found " + allies.Count + " allies");
-        // Populate icons with buttons and add listeners
-        SetupButtons();
-        this.equipmentBtnBehaviors = GameObject.FindObjectsByType<EquipmentButtonBehavior>(FindObjectsSortMode.None).Where((ebb) => ebb.equipmentObject != null).ToList();
         CloseEquipmentManager();
         // Setup Equipment Types
         equipmentTypeToSprite[EquipmentType.Head] = headEmptySlotSprite;
@@ -126,12 +130,24 @@ public class DeploymentManager : MonoBehaviour {
         }
         // Find Mouse Selector
         if (!Camera.main.TryGetComponent<MouseSelector>(out mouseSelector)) Debug.LogError("MouseSelector not found");
+        // Find ShopManager and shopCloseButton
+        shopManager = GameObject.FindGameObjectWithTag("ShopUI").GetComponent<ShopManager>();
+        shopCloseButton = GameObject.FindGameObjectWithTag("ShopCloseButton").GetComponent<Button>();
     }
 
     // Update is called once per frame
     void Update() {
         // If right click is pressed, deploy the selected troop
         // if (Input.GetMouseButtonDown(1)) DeployTroopOnMap();
+    }
+
+    private void OnEnable() {
+        // Populate icons with buttons and add listeners
+        SetupButtons();
+    }
+
+    private void OnShopCloseButtonClicked() {
+        SetEquipmentsFromShop(shopManager.GetEquipmentCounts);
     }
 
     private void DeployTroopOnMap() {
@@ -350,13 +366,14 @@ public class DeploymentManager : MonoBehaviour {
         }
         return false;
     }
-
     public void SetEquipmentsFromShop(Dictionary<EquipmentBase, int> equipmentToCount) {
         this.equipmentBtnBehaviors.ForEach(ebb => ebb.ResetEquipment());
         // Start filling equipment slots
         int ebIndex = 0;
         foreach (var kvp in equipmentToCount) {
+            if (ebIndex >= this.equipmentBtnBehaviors.Count) break;
             this.equipmentBtnBehaviors[ebIndex++].SetEquipment(kvp.Key, kvp.Value);
         }
+        Debug.Log("Bought " + equipmentToCount.Count + " equipment items and populated " + ebIndex + " equipment slots");
     }
 }

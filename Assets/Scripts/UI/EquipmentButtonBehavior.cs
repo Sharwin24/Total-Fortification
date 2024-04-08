@@ -16,7 +16,6 @@ public class EquipmentButtonBehavior : MonoBehaviour {
     private DeploymentManager deploymentManager;
     private Button resetEquipmentButton;
 
-
     private void Awake() {
         if (!TryGetComponent<DeploymentManager>(out deploymentManager)) deploymentManager = GameObject.FindGameObjectWithTag("DeploymentManager").GetComponent<DeploymentManager>();
         if (deploymentManager == null) Debug.LogError("DeploymentManager not found");
