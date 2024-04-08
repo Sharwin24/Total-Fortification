@@ -2256,7 +2256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799079006994847601, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00019631525
+      value: -0.000016152591
       objectReference: {fileID: 0}
     - target: {fileID: 3919541422355295578, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2384,7 +2384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5012075017498873590, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00019631525
+      value: -0.000016152591
       objectReference: {fileID: 0}
     - target: {fileID: 6210351819827450374, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5581,6 +5581,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7110853738747368653, guid: 13f51a39a60844c76a59a08be8f86b6e, type: 3}
   m_PrefabInstance: {fileID: 1905342784}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1918315730 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5641981068956235406, guid: 9884863d109bc5442a8ceaa8ca9da628, type: 3}
+  m_PrefabInstance: {fileID: 1850006599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1922728705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5714,6 +5725,10 @@ PrefabInstance:
       propertyPath: scoreMultiplierMessage
       value: 
       objectReference: {fileID: 1850006601}
+    - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+      propertyPath: followActiveTroopButton
+      value: 
+      objectReference: {fileID: 1918315730}
     - target: {fileID: 8989158174608238202, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -6355,22 +6370,6 @@ PrefabInstance:
     - target: {fileID: 58063461223605408, guid: 913be024c884949df9628e10fc801d71, type: 3}
       propertyPath: m_Name
       value: Level2 Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 3290061056973350625, guid: 913be024c884949df9628e10fc801d71, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -93.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 3290061056973350625, guid: 913be024c884949df9628e10fc801d71, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -72.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 5364805974022374801, guid: 913be024c884949df9628e10fc801d71, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -38.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5364805974022374801, guid: 913be024c884949df9628e10fc801d71, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -25.3
       objectReference: {fileID: 0}
     - target: {fileID: 7830541906904865728, guid: 913be024c884949df9628e10fc801d71, type: 3}
       propertyPath: m_LocalPosition.x
