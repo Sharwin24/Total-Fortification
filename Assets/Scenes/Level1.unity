@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5408601, g: 0.75044787, b: 0.84539104, a: 1}
+  m_IndirectSpecularColor: {r: 0.54088604, g: 0.75050426, b: 0.8453646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -910,6 +910,10 @@ PrefabInstance:
       propertyPath: scoreMultiplierMessage
       value: 
       objectReference: {fileID: 1517599460}
+    - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+      propertyPath: followActiveTroopButton
+      value: 
+      objectReference: {fileID: 1517599461}
     - target: {fileID: 8989158174608238202, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -2533,6 +2537,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1517599461 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5641981068956235406, guid: 9884863d109bc5442a8ceaa8ca9da628, type: 3}
+  m_PrefabInstance: {fileID: 1517599456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1523163721

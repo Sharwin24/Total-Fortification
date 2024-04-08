@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
@@ -21,6 +20,7 @@ public class LevelManager : MonoBehaviour
     public GameObject playerManagement;
     public Button enterBattleButton;
     public Button shopCloseButton;
+    public Button followActiveTroopButton;
     public TextMeshProUGUI levelMessage;
     public TextMeshProUGUI turnMessage;
     public TextMeshProUGUI scoreMessage;
@@ -35,6 +35,10 @@ public class LevelManager : MonoBehaviour
     public int allyCount = 0;
     private AudioSource cameraAudioSource;
     private PriorityQueue<GameObject> troopQueue;
+    private bool followActiveTroop = false;
+    private GameObject activeTroop;
+    private float cameraDefaultX;
+    private float cameraDefaultZ;
 
 
     // Feature flags
@@ -51,6 +55,7 @@ public class LevelManager : MonoBehaviour
         AssignUIComponents();
 
         enterBattleButton.onClick.AddListener(TaskOnClick);
+        followActiveTroopButton.onClick.AddListener(FollowActiveTroopOnClick);
 
         StartCoroutine(TakeTurnsCoroutine());
     }
@@ -179,6 +184,12 @@ public class LevelManager : MonoBehaviour
                 continue;
             }
 
+            activeTroop = troopGameObject;
+
+            if (followActiveTroop) {
+                MoveCameraToActiveTroop();
+            }
+
             TroopBase currentTroop = troopGameObject.GetComponent<TroopBase>();
 
             if (currentTroop.tag == "Ally")
@@ -272,6 +283,17 @@ public class LevelManager : MonoBehaviour
         gameState = GameState.COMBAT;
     }
 
+    public void FollowActiveTroopOnClick() {
+        followActiveTroop = !followActiveTroop;
+        if (followActiveTroop) {
+            followActiveTroopButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unfollow";
+            MoveCameraToActiveTroop();
+        } else {
+            followActiveTroopButton.GetComponentInChildren<TextMeshProUGUI>().text = "Follow";
+            Camera.main.transform.eulerAngles = new Vector3(cameraDefaultX, Camera.main.transform.eulerAngles.y, cameraDefaultZ);
+        }
+    }
+
     public void ShopFinishOnClick()
     {
         gameState = GameState.DEPLOYMENT;
@@ -293,7 +315,10 @@ public class LevelManager : MonoBehaviour
         cameraAudioSource = Camera.main.transform.Find("BackgroundMusic").GetComponent<AudioSource>();
         float volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         cameraAudioSource.volume = volume;
+        cameraDefaultX = Camera.main.transform.eulerAngles.x;
+        cameraDefaultZ = Camera.main.transform.eulerAngles.z;
     }
+    
     public void PlayMusic(AudioClip clip)
     {
         cameraAudioSource.Stop();
@@ -315,6 +340,14 @@ public class LevelManager : MonoBehaviour
             levelMessage.text = "You lost!";
             Invoke("ReloadCurrentLevel", 3);
         }
+    }
+
+    void MoveCameraToActiveTroop() {
+        float yAxisOffset = 20f;
+        float zAxisOffset = -6f;
+
+        Camera.main.transform.position = new Vector3(activeTroop.transform.position.x, activeTroop.transform.position.y + yAxisOffset, activeTroop.transform.position.z + zAxisOffset);
+        Camera.main.transform.rotation = Quaternion.Euler(60f, 0f, 0f);
     }
 
 
