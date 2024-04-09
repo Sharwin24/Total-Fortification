@@ -50,6 +50,11 @@ TagManager:
   - TroopBtn14
   - HelpPanel
   - FollowButton
+  - Level1StoryText
+  - Level2StoryText
+  - Level3StoryText
+  - CloseStoryButton
+  - StoryPanel
   layers:
   - Default
   - TransparentFX

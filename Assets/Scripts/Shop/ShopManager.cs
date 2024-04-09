@@ -28,6 +28,13 @@ public class ShopManager : MonoBehaviour {
 
     public Dictionary<EquipmentBase, int> GetEquipmentCounts => playerEquipment;
 
+    public Button closeStoryButton;
+
+    private GameObject StoryPanel;
+    private GameObject Level1StoryText;
+    private GameObject Level2StoryText;
+    private GameObject Level3StoryText;
+
     void Start() {
         if (scoreManager == null) {
             scoreManager = ScoreManager.Instance;
@@ -37,7 +44,36 @@ public class ShopManager : MonoBehaviour {
         equipmentInfoScroll.SetActive(false);
         equipmentPurchasePanel.SetActive(false);
         GenerateEquipmentButtons();
+        StoryPanel = GameObject.FindWithTag("StoryPanel");
+        Level1StoryText = GameObject.FindWithTag("Level1StoryText");
+        Level2StoryText = GameObject.FindWithTag("Level2StoryText");
+        Level3StoryText = GameObject.FindWithTag("Level3StoryText");
+        closeStoryButton = GameObject.FindWithTag("CloseStoryButton").GetComponent<Button>();
+        closeStoryButton.onClick.AddListener(() => OnCloseStoryButtonClicked());
+        ShowStory();
+    }
 
+    private void OnCloseStoryButtonClicked() {
+        StoryPanel.SetActive(false);
+    }
+
+    private void ShowStory() {
+        StoryPanel.SetActive(true);
+        // Find current level from SceneManagement
+        string currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (currentLevel == "Level1") {
+            Level1StoryText.SetActive(true);
+            Level2StoryText.SetActive(false);
+            Level3StoryText.SetActive(false);
+        } else if (currentLevel == "Level2") {
+            Level1StoryText.SetActive(false);
+            Level2StoryText.SetActive(true);
+            Level3StoryText.SetActive(false);
+        } else if (currentLevel == "Level3") {
+            Level1StoryText.SetActive(false);
+            Level2StoryText.SetActive(false);
+            Level3StoryText.SetActive(true);
+        }
     }
 
     void GenerateEquipmentButtons() {
