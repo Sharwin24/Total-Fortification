@@ -4993,6 +4993,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1517599457}
     - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
+      propertyPath: nextLevel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4705079639478682149, guid: 6c88a1d90e5db4fad808e359ee28ad0b, type: 3}
       propertyPath: combatMusic
       value: 
       objectReference: {fileID: 8300000, guid: 77b11646e69654617a9c9c6d136f544a, type: 3}

@@ -68,11 +68,9 @@ public class ShopManager : MonoBehaviour {
         // Only show equipment that is unlocked at the current level
         equipmentsForThisLevel.Clear();
         // Allow level 1 AND 2 equipment in level 3
-        if (currentLevel == 3) {
-            equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel <= currentLevel));
-        } else {
-            equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel == currentLevel));
-        }
+        Debug.Log("Current Level: " + currentLevel);
+        if (currentLevel == 3) equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel <= currentLevel));
+        else equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel == currentLevel));
     }
 
     private void ShowStory() {
@@ -95,7 +93,7 @@ public class ShopManager : MonoBehaviour {
     }
 
     void GenerateEquipmentButtons() {
-        foreach (EquipmentBase equipment in equipmentList) {
+        foreach (EquipmentBase equipment in equipmentsForThisLevel) {
             // Instantiate a new button for each piece of equipment
             GameObject buttonObj = Instantiate(equipmentButtonPrefab, equipmentHolder);
             buttonObj.GetComponentInChildren<Image>().sprite = equipment.EquipmentIcon;
