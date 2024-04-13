@@ -48,6 +48,7 @@ public class ShopManager : MonoBehaviour {
         PriceMultiplier = scoreManager.GetPriceMultiplier();
         equipmentInfoScroll.SetActive(false);
         equipmentPurchasePanel.SetActive(false);
+        AssignEquipmentList();
         GenerateEquipmentButtons();
         StoryPanel = GameObject.FindWithTag("StoryPanel");
         Level1StoryText = GameObject.FindWithTag("Level1StoryText");
@@ -56,7 +57,6 @@ public class ShopManager : MonoBehaviour {
         closeStoryButton = GameObject.FindWithTag("CloseStoryButton").GetComponent<Button>();
         closeStoryButton.onClick.AddListener(() => OnCloseStoryButtonClicked());
         ShowStory();
-        AssignEquipmentList();
     }
 
     private void OnCloseStoryButtonClicked() {
@@ -71,6 +71,7 @@ public class ShopManager : MonoBehaviour {
         Debug.Log("Current Level: " + currentLevel);
         if (currentLevel == 3) equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel <= currentLevel));
         else equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel == currentLevel));
+         Debug.Log("Equipment Count: " + equipmentsForThisLevel.Count);
     }
 
     private void ShowStory() {
