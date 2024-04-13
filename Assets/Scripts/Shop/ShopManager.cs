@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class ShopManager : MonoBehaviour {
 
     public GameObject equipmentPurchasePanel;
     public List<EquipmentBase> equipmentList; // Populate this list with current level equipment
+    public List<EquipmentBase> equipmentsForThisLevel = new();
 
     public int PriceMultiplier = 4;
 
@@ -35,6 +37,9 @@ public class ShopManager : MonoBehaviour {
     private GameObject Level2StoryText;
     private GameObject Level3StoryText;
 
+    // Get the current level from SceneManagement (1, 2, 3)
+    private int currentLevel => UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
     void Start() {
         if (scoreManager == null) {
             scoreManager = ScoreManager.Instance;
@@ -43,6 +48,7 @@ public class ShopManager : MonoBehaviour {
         PriceMultiplier = scoreManager.GetPriceMultiplier();
         equipmentInfoScroll.SetActive(false);
         equipmentPurchasePanel.SetActive(false);
+        AssignEquipmentList();
         GenerateEquipmentButtons();
         StoryPanel = GameObject.FindWithTag("StoryPanel");
         Level1StoryText = GameObject.FindWithTag("Level1StoryText");
@@ -55,6 +61,17 @@ public class ShopManager : MonoBehaviour {
 
     private void OnCloseStoryButtonClicked() {
         StoryPanel.SetActive(false);
+    }
+
+    private void AssignEquipmentList() {
+        // Each equipment has a EquipmentLevel property, which is the level it is unlocked at
+        // Only show equipment that is unlocked at the current level
+        equipmentsForThisLevel.Clear();
+        // Allow level 1 AND 2 equipment in level 3
+        Debug.Log("Current Level: " + currentLevel);
+        if (currentLevel == 3) equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel <= currentLevel));
+        else equipmentsForThisLevel.AddRange(equipmentList.Where(equipment => equipment.EquipmentLevel == currentLevel));
+         Debug.Log("Equipment Count: " + equipmentsForThisLevel.Count);
     }
 
     private void ShowStory() {
@@ -77,7 +94,7 @@ public class ShopManager : MonoBehaviour {
     }
 
     void GenerateEquipmentButtons() {
-        foreach (EquipmentBase equipment in equipmentList) {
+        foreach (EquipmentBase equipment in equipmentsForThisLevel) {
             // Instantiate a new button for each piece of equipment
             GameObject buttonObj = Instantiate(equipmentButtonPrefab, equipmentHolder);
             buttonObj.GetComponentInChildren<Image>().sprite = equipment.EquipmentIcon;

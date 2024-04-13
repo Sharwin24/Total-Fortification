@@ -17,7 +17,7 @@ public abstract class EquipmentBase : ScriptableObject, IEquipment
     [SerializeField] protected bool isWeapon = false;
     [SerializeField] protected bool isArmor = false;
     [SerializeField] protected bool isRangeWeapon = false;
-
+    [SerializeField] protected int equipmentLevel = 0;
 
     public float HealthModifier => healthModifier;
     public float ArmorModifier => armorModifier;
@@ -32,4 +32,5 @@ public abstract class EquipmentBase : ScriptableObject, IEquipment
     public bool IsWeapon => isWeapon;
     public bool IsArmor => isArmor;
     public bool IsRangeWeapon => isRangeWeapon;
+    public int EquipmentLevel => equipmentLevel;
 }

@@ -22,6 +22,7 @@ MonoBehaviour:
   equipmentType: 1
   equipmentName: PirateHat
   equipmentDescription: Adds extra armor
-  isWeapon: 0
+  isWeapon: 1
   isArmor: 1
   isRangeWeapon: 0
+  equipmentLevel: 2
