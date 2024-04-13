@@ -16,8 +16,8 @@ MonoBehaviour:
   armorModifier: 0
   attackPowerModifier: 2
   attackRangeModifier: 2
-  moveRangeModifier: 0
-  speedModifier: 0
+  moveRangeModifier: 4
+  speedModifier: 3
   equipmentIcon: {fileID: 21300000, guid: 4e1bae5d17da6f14981a99770a176d0f, type: 3}
   equipmentType: 4
   equipmentName: Flintlock
@@ -25,3 +25,4 @@ MonoBehaviour:
   isWeapon: 1
   isArmor: 0
   isRangeWeapon: 1
+  equipmentLevel: 2

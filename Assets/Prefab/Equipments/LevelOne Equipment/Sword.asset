@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 379c977a1df4ae3409ea69d4782a2d40, type: 3}
-  m_Name: Pants
+  m_Name: Sword
   m_EditorClassIdentifier: 
   healthModifier: 0
-  armorModifier: 5
-  attackPowerModifier: 0
-  attackRangeModifier: 0
+  armorModifier: 0
+  attackPowerModifier: 6
+  attackRangeModifier: 5
   moveRangeModifier: 0
-  speedModifier: 0
-  equipmentIcon: {fileID: 21300000, guid: 47d81e045e1c12446943449ef68a6cc8, type: 3}
-  equipmentType: 5
-  equipmentName: Pants
-  equipmentDescription: 
-  isWeapon: 0
-  isArmor: 1
+  speedModifier: 1
+  equipmentIcon: {fileID: 21300000, guid: 6e4d6dcd84478294bbb0850c77f83e16, type: 3}
+  equipmentType: 4
+  equipmentName: Sword
+  equipmentDescription: 'Melee attack with '
+  isWeapon: 1
+  isArmor: 0
   isRangeWeapon: 0
+  equipmentLevel: 1

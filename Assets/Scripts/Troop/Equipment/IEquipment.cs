@@ -19,5 +19,6 @@ public interface IEquipment
     string EquipmentName { get; }
     string EquipmentDescription { get; }
 
-
+    // The level this equipment is unlocked at
+    int EquipmentLevel { get; } 
 }

@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe765c5e5dd8cc40bea18154a89d5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentObject: {fileID: 11400000, guid: 18d9a05d3c09977439036c4d1e0f0729, type: 2}
+  equipmentObject: {fileID: 0}
   count: 2
 --- !u!1 &218528463760508544
 GameObject:
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentObject: {fileID: 0}
-  count: 0
+  count: 3
 --- !u!1 &1662560799692385247
 GameObject:
   m_ObjectHideFlags: 0
@@ -3534,7 +3534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe765c5e5dd8cc40bea18154a89d5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentObject: {fileID: 11400000, guid: 10b146db91df6be4b99a4eb62c566f7c, type: 2}
+  equipmentObject: {fileID: 0}
   count: 5
 --- !u!1 &4020909587201894735
 GameObject:
@@ -4803,7 +4803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe765c5e5dd8cc40bea18154a89d5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentObject: {fileID: 11400000, guid: 801fa4100dad6124bbda50069c3878ab, type: 2}
+  equipmentObject: {fileID: 0}
   count: 1
 --- !u!1 &5561592195339798623
 GameObject:
@@ -4951,7 +4951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe765c5e5dd8cc40bea18154a89d5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentObject: {fileID: 11400000, guid: de6a4dddfcd52b54dbd9f8c9774f9fa6, type: 2}
+  equipmentObject: {fileID: 0}
   count: 4
 --- !u!1 &5584306121388079691
 GameObject:
@@ -6261,7 +6261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe765c5e5dd8cc40bea18154a89d5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentObject: {fileID: 11400000, guid: 4ae83977251fad74e91d07a160bd2674, type: 2}
+  equipmentObject: {fileID: 0}
   count: 1
 --- !u!1 &7017865805834336983
 GameObject:
@@ -6543,7 +6543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe765c5e5dd8cc40bea18154a89d5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentObject: {fileID: 11400000, guid: c1af9c2868d84df47bdb8500abd36ea7, type: 2}
+  equipmentObject: {fileID: 0}
   count: 1
 --- !u!1 &7446071163409276391
 GameObject:
@@ -6826,7 +6826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentObject: {fileID: 0}
-  count: 0
+  count: 1
 --- !u!1 &7607123309164862467
 GameObject:
   m_ObjectHideFlags: 0
