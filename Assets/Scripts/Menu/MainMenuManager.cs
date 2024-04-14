@@ -25,7 +25,7 @@ public class MainMenuManager : MonoBehaviour
     //setting
     public Slider userScoreSlider;
     public TMP_Text userSetScoreDisplayText;
-    private int userSetScore = 200;
+    private int userSetScore = 1000;
     public Slider scoreMultiplierSlider;
     public TMP_Text scoreMultiplierDisplayText;
     private int userSetScoreMultiplier = 1;

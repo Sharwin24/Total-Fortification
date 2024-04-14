@@ -19,9 +19,6 @@ public class ShopManager : MonoBehaviour {
     public List<EquipmentBase> equipmentsForThisLevel = new();
 
     public int PriceMultiplier = 4;
-
-    public ScoreManager scoreManager;
-
     public Button shopCloseButton;
 
     public TextMeshProUGUI scoreText;
@@ -41,11 +38,9 @@ public class ShopManager : MonoBehaviour {
     private int currentLevel => UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
     void Start() {
-        if (scoreManager == null) {
-            scoreManager = ScoreManager.Instance;
-        }
-        scoreText.text = "Score: " + scoreManager.GetScore();
-        PriceMultiplier = scoreManager.GetPriceMultiplier();
+        scoreText.text = "Score: " + ScoreManager.Instance.GetScore();
+        Debug.Log("Score: " + ScoreManager.Instance.GetScore());
+        PriceMultiplier = ScoreManager.Instance.GetPriceMultiplier();
         equipmentInfoScroll.SetActive(false);
         equipmentPurchasePanel.SetActive(false);
         AssignEquipmentList();
@@ -126,7 +121,7 @@ public class ShopManager : MonoBehaviour {
 
 
     private int GetEquipmentPrice(EquipmentBase equipment) {
-        PriceMultiplier = scoreManager.GetPriceMultiplier();
+        PriceMultiplier = ScoreManager.Instance.GetPriceMultiplier();
         var price = 0;
         price += (int)equipment.AttackPowerModifier;
         price += (int)equipment.AttackRangeModifier / 10;
@@ -150,8 +145,8 @@ public class ShopManager : MonoBehaviour {
     public void BuyEquipment(EquipmentBase equipment) {
         //I could save this into a list to make the price faster, it is redundant here.
         int price = GetEquipmentPrice(equipment);
-        if (scoreManager.GetScore() >= price) {
-            scoreManager.SubtractScore(price);
+        if (ScoreManager.Instance.GetScore() >= price) {
+            ScoreManager.Instance.SubtractScore(price);
             if (playerEquipment.ContainsKey(equipment)) {
                 playerEquipment[equipment] += 1;
             } else {
@@ -166,12 +161,12 @@ public class ShopManager : MonoBehaviour {
 
     public void SellEquipment(EquipmentBase equipment) {
         int price = GetEquipmentPrice(equipment);
-        scoreManager.AddScore(price);
         if (playerEquipment.ContainsKey(equipment)) {
             playerEquipment[equipment] -= 1;
             if (playerEquipment[equipment] <= 0) {
                 playerEquipment.Remove(equipment); // Remove equipment from inventory if quantity is 0
             }
+            ScoreManager.Instance.AddScore(price);
         }
         UpdateEquipmentPanel("Owned " + GetEquipmentQuantity(equipment));
     }
@@ -189,7 +184,7 @@ public class ShopManager : MonoBehaviour {
     //Score update is here since no matter buy or sell, the score will be updated.
     void UpdateEquipmentPanel(string text) {
         equipmentPurchasePanel.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = text;
-        scoreText.text = "Score: " + scoreManager.GetScore();
+        scoreText.text = "Score: " + ScoreManager.Instance.GetScore();
     }
 
     public string printEquipmentList() {

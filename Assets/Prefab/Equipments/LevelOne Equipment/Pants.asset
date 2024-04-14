@@ -22,7 +22,7 @@ MonoBehaviour:
   equipmentType: 5
   equipmentName: Pants
   equipmentDescription: 
-  isWeapon: 1
+  isWeapon: 0
   isArmor: 1
   isRangeWeapon: 0
   equipmentLevel: 1
