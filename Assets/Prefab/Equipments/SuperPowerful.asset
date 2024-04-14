@@ -16,7 +16,7 @@ MonoBehaviour:
   armorModifier: 0
   attackPowerModifier: 1000
   attackRangeModifier: 100
-  moveRangeModifier: 0
+  moveRangeModifier: 200
   speedModifier: 10
   equipmentIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   equipmentType: 4

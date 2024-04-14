@@ -44,8 +44,8 @@ public class BasicSoldier : TroopBase
     public override bool EquipItem(IEquipment item)
     {
         //show shield if the troop has some armor
-        hasShield = item.IsArmor;
-        hasSword = item.IsWeapon;
+        hasShield = hasShield ? hasShield : item.IsArmor;
+        hasSword = hasSword ? hasSword : item.IsWeapon;
 
         return base.EquipItem(item);
     }

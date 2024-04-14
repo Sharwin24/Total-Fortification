@@ -227,6 +227,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             RemoveItem(EquipmentType.TwoHanded);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
+            //Why the following line of code will prevent the ApplyEquipmentModifiers
+            //from adding the modifier to the current status? It is called with correct value, but the addition is not working.
+            //BodyParts[EquipmentType.TwoHanded].equippedItem = item;
 
             equipped = true;
             Debug.Log("Equipped two handed weapon");
@@ -245,7 +248,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             equippedItems.Add(item);
             ApplyEquipmentModifiers(item);
             Debug.Log("Equipped " + attackPower);
-            IsRange = item.IsRangeWeapon;
+            IsRange = IsRange ? IsRange : item.IsRangeWeapon;
             UpdateAppearance();
             UpdateAnimation();
             return true;
