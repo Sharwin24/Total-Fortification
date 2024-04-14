@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.54088604, g: 0.75050426, b: 0.8453646, a: 1}
+  m_IndirectSpecularColor: {r: 0.5408601, g: 0.75044787, b: 0.84539104, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -606,52 +606,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479756, guid: 6b71cf9e35844cb4392bacef52ec033e, type: 3}
   m_PrefabInstance: {fileID: 517812912}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &593872758
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 593872760}
-  - component: {fileID: 593872759}
-  m_Layer: 0
-  m_Name: EquipmentTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &593872759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593872758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c956eba821716a94a97097a02bdc30d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  troop: {fileID: 0}
-  weaponToEquip: {fileID: 11400000, guid: bf6494ba3d379c4459354b6a3ab1791e, type: 2}
---- !u!4 &593872760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593872758}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.0755818, z: -0.3814362}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &605352044
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,7 +4266,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 605352047}
-  - {fileID: 593872760}
   - {fileID: 2009461665}
   - {fileID: 1224394240}
   - {fileID: 692292030}
