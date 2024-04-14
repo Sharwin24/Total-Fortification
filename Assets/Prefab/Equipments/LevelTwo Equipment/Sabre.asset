@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthModifier: 0
   armorModifier: 0
-  attackPowerModifier: 6
-  attackRangeModifier: 1
+  attackPowerModifier: 10
+  attackRangeModifier: 4
   moveRangeModifier: 0
-  speedModifier: 0
+  speedModifier: 1
   equipmentIcon: {fileID: 21300000, guid: 9c432166f9db2be4585371147dd885ff, type: 3}
   equipmentType: 4
   equipmentName: Sabre

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5a29973f917734b9858fd14e578f07, type: 3}
   m_Name: LightArmor
   m_EditorClassIdentifier: 
-  healthModifier: 0
+  healthModifier: 20
   armorModifier: 4
   attackPowerModifier: 0
   attackRangeModifier: 0

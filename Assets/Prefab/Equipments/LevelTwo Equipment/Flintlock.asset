@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthModifier: 0
   armorModifier: 0
-  attackPowerModifier: 2
-  attackRangeModifier: 2
+  attackPowerModifier: 8
+  attackRangeModifier: 25
   moveRangeModifier: 4
   speedModifier: 3
   equipmentIcon: {fileID: 21300000, guid: 4e1bae5d17da6f14981a99770a176d0f, type: 3}

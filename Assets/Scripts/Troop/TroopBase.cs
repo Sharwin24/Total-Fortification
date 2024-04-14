@@ -7,13 +7,13 @@ using UnityEngine.AI;
 public abstract class TroopBase : MonoBehaviour, ITroop
 {
     // Currently the weapons only increase the status, with no effect.
-    [SerializeField] private float health = 100.0f;
-    [SerializeField] private float armor = 0.0f;
-    [SerializeField] private float moveRange = 7;
-    [SerializeField] private float speed = 1;
-    [SerializeField] private float attackRange = 5;
-    [SerializeField] private float attackPower = 10;
-    [SerializeField] private bool isRange = false;
+    [SerializeField] private float health;
+    [SerializeField] private float armor;
+    [SerializeField] private float moveRange;
+    [SerializeField] private float speed;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float attackPower;
+    [SerializeField] private bool isRange;
 
     // Public getters for encapsulation, private setters for controlled modification
     public float Health { get => health; set => health = value; }
@@ -55,6 +55,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     protected virtual void Awake()
     {
+        health = 100;
+        armor = 0;
+        moveRange = 7;
+        speed = 1;
+        attackRange = 5;
+        attackPower = 10;
+        isRange = false;
+
         //Increase the move and attack range by the appearance range
         //So that army won't collide with each other
         MoveRange += AppearanceRange;
@@ -210,6 +218,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual bool EquipItem(IEquipment item)
     {
+        
         bool equipped = false;
         if (item.EquipmentType == EquipmentType.TwoHanded)
         {
@@ -218,9 +227,9 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             RemoveItem(EquipmentType.TwoHanded);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
-            BodyParts[EquipmentType.TwoHanded].equippedItem = item;
 
             equipped = true;
+            Debug.Log("Equipped two handed weapon");
         }
         BodyParts.TryGetValue(item.EquipmentType, out BodyPart a);
         if (BodyParts.TryGetValue(item.EquipmentType, out BodyPart bodyPartToEquip))
@@ -235,6 +244,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         {
             equippedItems.Add(item);
             ApplyEquipmentModifiers(item);
+            Debug.Log("Equipped " + attackPower);
             IsRange = item.IsRangeWeapon;
             UpdateAppearance();
             UpdateAnimation();
@@ -294,22 +304,25 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     private void ApplyEquipmentModifiers(IEquipment item)
     {
-        Health += item.HealthModifier;
-        Armor += item.ArmorModifier;
-        AttackPower += item.AttackPowerModifier;
-        AttackRange += item.AttackRangeModifier;
-        MoveRange += item.MoveRangeModifier;
-        Speed += item.SpeedModifier;
+        Debug.Log(item.EquipmentType);
+        health += item.HealthModifier;
+        armor += item.ArmorModifier;
+        attackPower += item.AttackPowerModifier;
+        attackRange += item.AttackRangeModifier;
+        moveRange += item.MoveRangeModifier;
+        speed += item.SpeedModifier;
+        Debug.Log("Applied " + item.AttackPowerModifier);
+        Debug.Log("After Applied " + AttackPower);
     }
 
     private void RemoveEquipmentModifiers(IEquipment item)
     {
-        Health -= item.HealthModifier;
-        Armor -= item.ArmorModifier;
-        AttackPower -= item.AttackPowerModifier;
-        AttackRange -= item.AttackRangeModifier;
-        MoveRange -= item.MoveRangeModifier;
-        Speed -= item.SpeedModifier;
+        health -= item.HealthModifier;
+        armor -= item.ArmorModifier;
+        attackPower -= item.AttackPowerModifier;
+        attackRange -= item.AttackRangeModifier;
+        moveRange -= item.MoveRangeModifier;
+        speed -= item.SpeedModifier;
     }
 
     public abstract void UpdateAppearance();

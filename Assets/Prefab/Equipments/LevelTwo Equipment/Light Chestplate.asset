@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5a29973f917734b9858fd14e578f07, type: 3}
   m_Name: Light Chestplate
   m_EditorClassIdentifier: 
-  healthModifier: 0
+  healthModifier: 10
   armorModifier: 4
   attackPowerModifier: 0
   attackRangeModifier: 0
-  moveRangeModifier: 0
-  speedModifier: 1
+  moveRangeModifier: 2
+  speedModifier: 3
   equipmentIcon: {fileID: 21300000, guid: 2aa1c950d65f16443b74f7ca8dd35a26, type: 3}
   equipmentType: 2
   equipmentName: LightArmor

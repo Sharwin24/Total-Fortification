@@ -1138,6 +1138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4147327369879603027, guid: 0a27c3cc2acc71c4199b42e2e85f3efc, type: 3}
+      propertyPath: playerScore
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4736796804997775845, guid: 0a27c3cc2acc71c4199b42e2e85f3efc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1093.5

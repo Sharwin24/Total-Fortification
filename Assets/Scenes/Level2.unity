@@ -1491,6 +1491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4147327369879603027, guid: 0a27c3cc2acc71c4199b42e2e85f3efc, type: 3}
+      propertyPath: playerScore
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4736796804997775845, guid: 0a27c3cc2acc71c4199b42e2e85f3efc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1093.5
@@ -2264,7 +2268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799079006994847601, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000014051931
+      value: 0.00021824335
       objectReference: {fileID: 0}
     - target: {fileID: 3919541422355295578, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2392,7 +2396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5012075017498873590, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000014051931
+      value: 0.00021824335
       objectReference: {fileID: 0}
     - target: {fileID: 6210351819827450374, guid: fd12239c28920c04e8d25cfb6d5a7522, type: 3}
       propertyPath: m_AnchorMax.x
