@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5a29973f917734b9858fd14e578f07, type: 3}
   m_Name: Chestplate
   m_EditorClassIdentifier: 
-  healthModifier: 0
-  armorModifier: 10
+  healthModifier: 10
+  armorModifier: 8
   attackPowerModifier: 0
   attackRangeModifier: 0
   moveRangeModifier: 0

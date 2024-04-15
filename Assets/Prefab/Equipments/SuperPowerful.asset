@@ -18,7 +18,7 @@ MonoBehaviour:
   attackRangeModifier: 100
   moveRangeModifier: 200
   speedModifier: 10
-  equipmentIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  equipmentIcon: {fileID: 21300000, guid: e5dd0e704a67272459bb41a3c06113cd, type: 3}
   equipmentType: 4
   equipmentName: SuperPower
   equipmentDescription: 
