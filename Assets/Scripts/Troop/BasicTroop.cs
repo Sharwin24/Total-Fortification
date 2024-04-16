@@ -52,11 +52,11 @@ public class BasicSoldier : TroopBase
 
     public override bool RemoveItem(EquipmentType equipmentType)
     {
-        var equipment = FindBodyPart(equipmentType).equippedItem;
-        if (equipment != null)
+        var equipment = FindBodyPart(equipmentType);
+        if (equipment != null && equipment.equippedItem != null)
         {
-            hasShield = equipment.IsArmor ? false : hasShield;
-            hasSword = equipment.IsWeapon ? false : hasSword;
+            hasShield = equipment.equippedItem.IsArmor ? false : hasShield;
+            hasSword = equipment.equippedItem.IsWeapon ? false : hasSword;
         }
         return base.RemoveItem(equipmentType);
     }
