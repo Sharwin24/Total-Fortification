@@ -73,6 +73,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         BodyParts.Add(EquipmentType.LeftArm, new BodyPart(EquipmentType.LeftArm));
         BodyParts.Add(EquipmentType.RightArm, new BodyPart(EquipmentType.RightArm));
         BodyParts.Add(EquipmentType.Legs, new BodyPart(EquipmentType.Legs));
+        BodyParts.Add(EquipmentType.TwoHanded, new BodyPart(EquipmentType.TwoHanded));
 
         healthBar = GetComponentInChildren<HealthBar>();
         animators = GetComponentsInChildren<Animator>(true);
@@ -127,7 +128,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
             UpdateAnimationState(0);
 
-
+            
         }
 
         OnActionComplete();
@@ -146,25 +147,20 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         float stationaryTime = 0f;
 
-        while (Vector3.Distance(transform.position, position) > agent.stoppingDistance)
-        {
-
-            if (agent.velocity.sqrMagnitude < 0.03f)
-            {
-                stationaryTime += Time.deltaTime;
-            }
-            else
-            {
-                stationaryTime = 0f;
+        while (Vector3.Distance(transform.position, position) > agent.stoppingDistance) {
+            
+            if (agent.velocity.sqrMagnitude < 0.03f) {
+                stationaryTime += Time.deltaTime; 
+            } else {
+                stationaryTime = 0f; 
             }
 
             // Check if the agent has been stationary for more than 3 seconds
-            if (stationaryTime >= 1f)
-            {
+            if (stationaryTime >= 1f) {
                 print("Agent has been stationary for too long - exiting loop");
                 break;
             }
-
+            
             yield return null;
         }
 
@@ -222,13 +218,13 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public virtual bool EquipItem(IEquipment item)
     {
-
+        
         bool equipped = false;
         if (item.EquipmentType == EquipmentType.TwoHanded)
         {
             RemoveItem(EquipmentType.LeftArm);
             RemoveItem(EquipmentType.RightArm);
-            // RemoveItem(EquipmentType.TwoHanded);
+            RemoveItem(EquipmentType.TwoHanded);
             BodyParts[EquipmentType.LeftArm].equippedItem = item;
             BodyParts[EquipmentType.RightArm].equippedItem = item;
             //Why the following line of code will prevent the ApplyEquipmentModifiers
@@ -263,16 +259,6 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     public virtual bool RemoveItem(EquipmentType equipmentType)
     {
         bool removed = false;
-        if (equipmentType == EquipmentType.TwoHanded)
-        {
-            RemoveEquipmentModifiers(BodyParts[EquipmentType.LeftArm].equippedItem);
-            equippedItems.Remove(BodyParts[EquipmentType.LeftArm].equippedItem);
-            equippedItems.Remove(BodyParts[EquipmentType.RightArm].equippedItem);
-            BodyParts[EquipmentType.LeftArm].equippedItem = null;
-            BodyParts[EquipmentType.RightArm].equippedItem = null;
-            // BodyParts[EquipmentType.TwoHanded].equippedItem = null;
-            removed = true;
-        }
         BodyPart bodyPartToUnEquip = FindBodyPart(equipmentType);
         if (bodyPartToUnEquip != null && bodyPartToUnEquip.equippedItem != null)
         {
@@ -280,6 +266,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             if (bodyPartToUnEquip.equippedItem.IsRangeWeapon)
             {
                 IsRange = false;
+            }
+            if (bodyPartToUnEquip.equipmentType == EquipmentType.TwoHanded)
+            {
+                equippedItems.Remove(bodyPartToUnEquip.equippedItem);
+                BodyParts[EquipmentType.LeftArm].equippedItem = null;
+                BodyParts[EquipmentType.RightArm].equippedItem = null;
+                BodyParts[EquipmentType.TwoHanded].equippedItem = null;
+                removed = true;
             }
             else
             {
@@ -343,18 +337,12 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         return (int)Math.Floor((Armor + AttackPower + AttackRange + MoveRange + Speed) * ScoreMultiplier);
     }
 
-    private void OnActionComplete()
-    {
-        if (gameObject.tag == "Ally")
-        {
+    private void OnActionComplete() {
+        if (gameObject.tag == "Ally") {
             PlayerBehavior.actionTaken = true;
-        }
-        else if (gameObject.tag == "Enemy")
-        {
+        } else if (gameObject.tag == "Enemy") {
             EnemyBehavior.actionTaken = true;
-        }
-        else
-        {
+        } else {
             throw new InvalidOperationException("Invalid tag for troop");
         }
     }
