@@ -304,7 +304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00052463706}
+  m_AnchoredPosition: {x: 0, y: 0.00015668465}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3185925571198531701
@@ -2220,15 +2220,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'LEVEL 1 Story Text:
-
-
-    "Welcome to [Game Name], a thrilling adventure
-    awaits you! Explore mysterious realms, battle formidable foes, and uncover ancient
-    secrets as you journey through breathtaking landscapes. Prepare yourself for
-    an epic quest filled with danger and excitement. Are you ready to embark on this
-    epic adventure? Choose your path wisely, for your decisions will shape the fate
-    of the world. Begin your journey now and discover what lies beyond the horizon!"'
+  m_text: Welcome to Total Fortification, a thrilling battle awaits you! Command
+    your army and protect your castle from the enemy troops. Utilize your weapons
+    and equipment wisely to methodically dismantle your opponent. Plan your strategy
+    and deploy your troops with precision. Fortify the castle for victory!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3011,15 +3006,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'LEVEL 2 Story Text:
-
-
-    "Welcome to [Game Name], a thrilling adventure
-    awaits you! Explore mysterious realms, battle formidable foes, and uncover ancient
-    secrets as you journey through breathtaking landscapes. Prepare yourself for
-    an epic quest filled with danger and excitement. Are you ready to embark on this
-    epic adventure? Choose your path wisely, for your decisions will shape the fate
-    of the world. Begin your journey now and discover what lies beyond the horizon!"'
+  m_text: Conquer the pirates that are after your treasure, protect your crew and
+    set sail on the vast archipelago. Explore with caution! Enemy pirates lurk around
+    these waters and are itching for a fight. Use your new equipment and send the
+    enemy to their watery demise. Defeat them all for Victory!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3627,15 +3617,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'LEVEL 3 Story Text:
-
-
-    "Welcome to [Game Name], a thrilling adventure
-    awaits you! Explore mysterious realms, battle formidable foes, and uncover ancient
-    secrets as you journey through breathtaking landscapes. Prepare yourself for
-    an epic quest filled with danger and excitement. Are you ready to embark on this
-    epic adventure? Choose your path wisely, for your decisions will shape the fate
-    of the world. Begin your journey now and discover what lies beyond the horizon!"'
+  m_text: Worlds Collide! The pirates are invading the castle! Conveniently, there
+    is beach for their vessels and the troops are rallied to defend the invasion!
+    Spies have given the allied forces access to the pirate's equipment. Use them
+    wisely to defeat them!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3952,8 +3937,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fe0166aa1815f73469aacb3fa0877ab4, type: 2}
   - {fileID: 11400000, guid: 197eccc1b6e3f064eb82f6699bdb1cd8, type: 2}
   - {fileID: 11400000, guid: 27fcb22b45dedf54ca2f991a097bd705, type: 2}
+  equipmentsForThisLevel: []
   PriceMultiplier: 4
-  scoreManager: {fileID: 0}
   shopCloseButton: {fileID: 1837330640530277360}
   scoreText: {fileID: 5735683174958397469}
   closeStoryButton: {fileID: 592025828575843228}
@@ -3993,7 +3978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00052463706}
+  m_AnchoredPosition: {x: 0, y: 0.00015668465}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &9163103024749143285

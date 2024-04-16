@@ -22,6 +22,7 @@ public class ScoreManager : MonoBehaviour
         {
             Destroy(gameObject); // Ensure only one instance exists
         }
+        this.playerScore = 200; // Default Score
     }
 
     public void AddScore(int amount)
