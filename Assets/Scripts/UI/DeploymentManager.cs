@@ -57,7 +57,7 @@ public class DeploymentManager : MonoBehaviour {
         { "LegsEquipmentBtn", EquipmentType.Legs }
     };
 
-    private readonly Dictionary<EquipmentType, Sprite> equipmentTypeToSprite = new() {
+    private readonly Dictionary<EquipmentType, Sprite> equipmentTypeToEmptySprite = new() {
         { EquipmentType.Head, null },
         { EquipmentType.Chest, null },
         { EquipmentType.LeftArm, null },
@@ -119,11 +119,11 @@ public class DeploymentManager : MonoBehaviour {
         Debug.Log("DeploymentManager found " + allies.Count + " allies");
         CloseEquipmentManager();
         // Setup Equipment Types
-        equipmentTypeToSprite[EquipmentType.Head] = headEmptySlotSprite;
-        equipmentTypeToSprite[EquipmentType.Chest] = chestEmptySlotSprite;
-        equipmentTypeToSprite[EquipmentType.LeftArm] = leftArmEmptySlotSprite;
-        equipmentTypeToSprite[EquipmentType.RightArm] = rightArmEmptySlotSprite;
-        equipmentTypeToSprite[EquipmentType.Legs] = legsEmptySlotSprite;
+        equipmentTypeToEmptySprite[EquipmentType.Head] = headEmptySlotSprite;
+        equipmentTypeToEmptySprite[EquipmentType.Chest] = chestEmptySlotSprite;
+        equipmentTypeToEmptySprite[EquipmentType.LeftArm] = leftArmEmptySlotSprite;
+        equipmentTypeToEmptySprite[EquipmentType.RightArm] = rightArmEmptySlotSprite;
+        equipmentTypeToEmptySprite[EquipmentType.Legs] = legsEmptySlotSprite;
         // Clear all equipment slots
         foreach (var type in Enum.GetValues(typeof(EquipmentType))) {
             ClearEquippedSlot((EquipmentType)type);
@@ -188,6 +188,12 @@ public class DeploymentManager : MonoBehaviour {
             Image i = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
             // Set image to item
             i.sprite = item.EquipmentIcon;
+            if (type == EquipmentType.RightArm || type == EquipmentType.LeftArm) {
+                // Check if the other arm is a two-handed weapon and if so, clear it
+                EquipmentType otherArm = type == EquipmentType.RightArm ? EquipmentType.LeftArm : EquipmentType.RightArm;
+                Image otherImage = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == otherArm).GetComponent<Image>();
+                otherImage.sprite = equipmentTypeToEmptySprite[otherArm];
+            }
         }
     }
 
@@ -197,12 +203,12 @@ public class DeploymentManager : MonoBehaviour {
             // Find left and right arm buttons
             Image leftImage = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == EquipmentType.LeftArm).GetComponent<Image>();
             Image rightImage = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == EquipmentType.RightArm).GetComponent<Image>();
-            leftImage.sprite = equipmentTypeToSprite[EquipmentType.LeftArm];
-            rightImage.sprite = equipmentTypeToSprite[EquipmentType.RightArm];
+            leftImage.sprite = equipmentTypeToEmptySprite[EquipmentType.LeftArm];
+            rightImage.sprite = equipmentTypeToEmptySprite[EquipmentType.RightArm];
         } else {
             Image i = equipmentSlotButtons.Find((btn) => tagToEquipmentType[btn.tag] == type).GetComponent<Image>();
             // Set image to item
-            i.sprite = equipmentTypeToSprite[type];
+            i.sprite = equipmentTypeToEmptySprite[type];
         }
     }
 
@@ -310,7 +316,7 @@ public class DeploymentManager : MonoBehaviour {
         foreach (var btn in equipmentSlotButtons) {
             Image i = btn.GetComponent<Image>();
             i.color = Color.white;
-            i.sprite = equipmentTypeToSprite[tagToEquipmentType[btn.tag]];
+            i.sprite = equipmentTypeToEmptySprite[tagToEquipmentType[btn.tag]];
         }
     }
 

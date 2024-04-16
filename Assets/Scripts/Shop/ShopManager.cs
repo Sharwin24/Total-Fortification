@@ -123,11 +123,11 @@ public class ShopManager : MonoBehaviour {
     private int GetEquipmentPrice(EquipmentBase equipment) {
         PriceMultiplier = ScoreManager.Instance.GetPriceMultiplier();
         var price = 0;
-        price += (int)equipment.AttackPowerModifier;
+        price += (int)equipment.AttackPowerModifier / 2;
         price += (int)equipment.AttackRangeModifier / 10;
-        price += (int)equipment.ArmorModifier;
+        price += (int)equipment.ArmorModifier / 2;
         price += (int)equipment.MoveRangeModifier / 2;
-        price += (int)equipment.SpeedModifier;
+        price += (int)equipment.SpeedModifier / 2;
         price += (int)equipment.HealthModifier / 5;
         return price * PriceMultiplier;
 
