@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class TroopBase : MonoBehaviour, ITroop
-{
+public abstract class TroopBase : MonoBehaviour, ITroop {
     // Currently the weapons only increase the status, with no effect.
     [SerializeField] private float health;
     [SerializeField] private float armor;
@@ -53,8 +52,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     private AudioSource cameraAudioSource;
     private NavMeshAgent agent;
 
-    protected virtual void Awake()
-    {
+    protected virtual void Awake() {
         health = 100;
         armor = 0;
         moveRange = 7;
@@ -85,39 +83,30 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         agent = GetComponent<NavMeshAgent>();
 
     }
-    void Start()
-    {
+    void Start() {
         scoreManager = ScoreManager.Instance;
         ScoreMultiplier = scoreManager.GetScoreMultiplier();
     }
 
     //Only called for enemy troops.
-    private void EquipItemInList()
-    {
-        foreach (var equipment in defaultEquipments)
-        {
+    private void EquipItemInList() {
+        foreach (var equipment in defaultEquipments) {
             EquipItem(equipment);
         }
     }
-    public virtual IEnumerator Attack(ITroop target)
-    {
-        if (target == null)
-        {
+    public virtual IEnumerator Attack(ITroop target) {
+        if (target == null) {
             Debug.Log("No target to attack");
             yield return null;
         }
-        if (Health > 0)
-        {
+        if (Health > 0) {
             Vector3 position = ((TroopBase)target).transform.position;
 
             transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
             UpdateAnimationState(2, false);
-            if (IsRange)
-            {
+            if (IsRange) {
                 cameraAudioSource.clip = rangedAttackSound;
-            }
-            else
-            {
+            } else {
                 cameraAudioSource.clip = meleeAttackSound;
             }
             cameraAudioSource.Play();
@@ -128,15 +117,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
             UpdateAnimationState(0);
 
-            
+
         }
 
         OnActionComplete();
 
     }
 
-    public virtual IEnumerator MoveTo(Vector3 position)
-    {
+    public virtual IEnumerator MoveTo(Vector3 position) {
         print("Moving to " + position);
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
         UpdateAnimationState(1, false); // Start walking/running animation
@@ -148,11 +136,11 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         float stationaryTime = 0f;
 
         while (Vector3.Distance(transform.position, position) > agent.stoppingDistance) {
-            
+
             if (agent.velocity.sqrMagnitude < 0.03f) {
-                stationaryTime += Time.deltaTime; 
+                stationaryTime += Time.deltaTime;
             } else {
-                stationaryTime = 0f; 
+                stationaryTime = 0f;
             }
 
             // Check if the agent has been stationary for more than 3 seconds
@@ -160,7 +148,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
                 print("Agent has been stationary for too long - exiting loop");
                 break;
             }
-            
+
             yield return null;
         }
 
@@ -175,29 +163,22 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         yield return new WaitForSeconds(0f);
     }
 
-    public virtual void TakeDamage(float physicalDamage)
-    {
+    public virtual void TakeDamage(float physicalDamage) {
         AudioSource.PlayClipAtPoint(hitSound, mainCamera.transform.position);
         transform.LookAt(transform);
         Health -= physicalDamage;
         healthBar.SetHealth(Health);
 
-        if (Health <= 0)
-        {
+        if (Health <= 0) {
             LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
 
-            if (gameObject.tag == "Ally")
-            {
+            if (gameObject.tag == "Ally") {
                 levelManager.allyCount--;
-            }
-            else if (gameObject.tag == "Enemy")
-            {
+            } else if (gameObject.tag == "Enemy") {
                 levelManager.enemyCount--;
                 ScoreManager.Instance.AddScore(GetTroopScore());
-            }
-            else
-            {
+            } else {
                 throw new Exception("Invalid tag for troop");
             }
 
@@ -206,22 +187,35 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             Destroy(gameObject, 5);
         }
     }
-    private void UpdateAnimationState(int state = 0, bool applyRootMotion = false)
-    {
+    private void UpdateAnimationState(int state = 0, bool applyRootMotion = false) {
         Debug.Log("UpdateAnimationState" + state);
-        foreach (var childAnimator in animators)
-        {
+        foreach (var childAnimator in animators) {
             childAnimator.SetInteger("animState", state);
             childAnimator.applyRootMotion = applyRootMotion;
         }
     }
 
-    public virtual bool EquipItem(IEquipment item)
-    {
-        
+    public bool HasEquipmentOfType(EquipmentType equipmentType, out IEquipment equipment) {
+        foreach (IEquipment item in equippedItems) {
+            if (item.EquipmentType == equipmentType) {
+                equipment = item;
+                return true;
+            } else if (equipmentType == EquipmentType.TwoHanded && (item.EquipmentType == EquipmentType.LeftArm || item.EquipmentType == EquipmentType.RightArm)) {
+                equipment = item;
+                return true;
+            } else if ((equipmentType == EquipmentType.LeftArm || equipmentType == EquipmentType.RightArm) && item.EquipmentType == EquipmentType.TwoHanded) {
+                equipment = item;
+                return true;
+            }
+        }
+        equipment = null;
+        return false;
+    }
+
+    public virtual bool EquipItem(IEquipment item) {
+
         bool equipped = false;
-        if (item.EquipmentType == EquipmentType.TwoHanded)
-        {
+        if (item.EquipmentType == EquipmentType.TwoHanded) {
             RemoveItem(EquipmentType.LeftArm);
             RemoveItem(EquipmentType.RightArm);
             RemoveItem(EquipmentType.TwoHanded);
@@ -235,16 +229,14 @@ public abstract class TroopBase : MonoBehaviour, ITroop
             Debug.Log("Equipped two handed weapon");
         }
         BodyParts.TryGetValue(item.EquipmentType, out BodyPart a);
-        if (BodyParts.TryGetValue(item.EquipmentType, out BodyPart bodyPartToEquip))
-        {
+        if (BodyParts.TryGetValue(item.EquipmentType, out BodyPart bodyPartToEquip)) {
 
             RemoveItem(item.EquipmentType);
             bodyPartToEquip.equippedItem = item;
 
             equipped = true;
         }
-        if (equipped)
-        {
+        if (equipped) {
             equippedItems.Add(item);
             ApplyEquipmentModifiers(item);
             Debug.Log("Equipped " + attackPower);
@@ -256,27 +248,21 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         return false;
     }
 
-    public virtual bool RemoveItem(EquipmentType equipmentType)
-    {
+    public virtual bool RemoveItem(EquipmentType equipmentType) {
         bool removed = false;
         BodyPart bodyPartToUnEquip = FindBodyPart(equipmentType);
-        if (bodyPartToUnEquip != null && bodyPartToUnEquip.equippedItem != null)
-        {
+        if (bodyPartToUnEquip != null && bodyPartToUnEquip.equippedItem != null) {
             RemoveEquipmentModifiers(bodyPartToUnEquip.equippedItem);
-            if (bodyPartToUnEquip.equippedItem.IsRangeWeapon)
-            {
+            if (bodyPartToUnEquip.equippedItem.IsRangeWeapon) {
                 IsRange = false;
             }
-            if (bodyPartToUnEquip.equipmentType == EquipmentType.TwoHanded)
-            {
+            if (bodyPartToUnEquip.equipmentType == EquipmentType.TwoHanded) {
                 equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 BodyParts[EquipmentType.LeftArm].equippedItem = null;
                 BodyParts[EquipmentType.RightArm].equippedItem = null;
                 BodyParts[EquipmentType.TwoHanded].equippedItem = null;
                 removed = true;
-            }
-            else
-            {
+            } else {
                 equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 bodyPartToUnEquip.equippedItem = null;
                 removed = true;
@@ -284,8 +270,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
         }
 
-        if (removed)
-        {
+        if (removed) {
             UpdateAnimation();
             UpdateAppearance();
             return true;
@@ -295,18 +280,15 @@ public abstract class TroopBase : MonoBehaviour, ITroop
     }
 
     // Helper method to find the body part object by type
-    protected BodyPart FindBodyPart(EquipmentType type)
-    {
+    protected BodyPart FindBodyPart(EquipmentType type) {
         BodyPart bodyPart;
-        if (BodyParts.TryGetValue(type, out bodyPart))
-        {
+        if (BodyParts.TryGetValue(type, out bodyPart)) {
             return bodyPart;
         }
         return null; // No matching body part found
     }
 
-    private void ApplyEquipmentModifiers(IEquipment item)
-    {
+    private void ApplyEquipmentModifiers(IEquipment item) {
         Debug.Log(item.EquipmentType);
         health += item.HealthModifier;
         armor += item.ArmorModifier;
@@ -318,8 +300,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
         Debug.Log("After Applied " + AttackPower);
     }
 
-    private void RemoveEquipmentModifiers(IEquipment item)
-    {
+    private void RemoveEquipmentModifiers(IEquipment item) {
         health -= item.HealthModifier;
         armor -= item.ArmorModifier;
         attackPower -= item.AttackPowerModifier;
@@ -332,8 +313,7 @@ public abstract class TroopBase : MonoBehaviour, ITroop
 
     public abstract void UpdateAnimation();
 
-    public int GetTroopScore()
-    {
+    public int GetTroopScore() {
         return (int)Math.Floor((Armor + AttackPower + AttackRange + MoveRange + Speed) * ScoreMultiplier);
     }
 

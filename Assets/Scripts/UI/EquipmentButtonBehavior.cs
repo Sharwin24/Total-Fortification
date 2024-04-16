@@ -92,23 +92,32 @@ public class EquipmentButtonBehavior : MonoBehaviour {
             SetColor(Color.white);
             this.count++;
             Debug.Log("Removed " + this.equipmentObject.EquipmentName + " from " + troop.name);
-        } else {
-            if (this.count == 0) {
-                Debug.LogWarning("Cannot equip " + this.equipmentObject.name + ", none remaining");
-                return;
-            } else if (troop.equippedItems.Exists(e => e.EquipmentType == this.equipmentObject.EquipmentType)) {
-                // If the troop has an item equipped in the body part where this item should go, don't equip it and show a warning
-                Debug.LogWarning("Cannot equip " + this.equipmentObject.name + ", " + troop.name + " already has an item equipped in the " + this.equipmentObject.EquipmentType + " slot");
-                return;
+            return;
+        } else if (troop.HasEquipmentOfType(this.equipmentObject.EquipmentType, out IEquipment removedItem)) {
+            // If equipping this item requires removing another item, make sure we find that item and update it's count
+            // If we removed an item, update the count so find it among the other equipment buttons
+            if (removedItem != null) {
+                EquipmentButtonBehavior btn = deploymentManager.GetEquipmentButton(removedItem);
+                btn.SetColor(Color.white);
+                btn.count++;
             }
-            bool equipped = troop.EquipItem(this.equipmentObject);
-            deploymentManager.SetTroopInfo(troop);
-            if (!equipped) return;
-            deploymentManager.AssignEquippedSlot(this.equipmentObject.EquipmentType, this.equipmentObject);
-            SetColor(selectedIconColor);
-            this.count--;
-            Debug.Log("Equipped " + this.equipmentObject.EquipmentName + " to " + troop.name);
         }
+        if (this.count == 0) {
+            Debug.LogWarning("Cannot equip " + this.equipmentObject.name + ", none remaining");
+            return;
+        } else if (troop.equippedItems.Exists(e => e.EquipmentType == this.equipmentObject.EquipmentType)) {
+            // If the troop has an item equipped in the body part where this item should go, don't equip it and show a warning
+            Debug.LogWarning("Cannot equip " + this.equipmentObject.name + ", " + troop.name + " already has an item equipped in the " + this.equipmentObject.EquipmentType + " slot");
+            return;
+        }
+        bool equipped = troop.EquipItem(this.equipmentObject);
+        deploymentManager.SetTroopInfo(troop);
+        if (!equipped) return;
+        deploymentManager.AssignEquippedSlot(this.equipmentObject.EquipmentType, this.equipmentObject);
+        SetColor(selectedIconColor);
+        this.count--;
+        Debug.Log("Equipped " + this.equipmentObject.EquipmentName + " to " + troop.name);
+        //this.deploymentManager.UpdateEquipmentSelected();
     }
 
     private void OnResetEquipmentButtonClicked() {
