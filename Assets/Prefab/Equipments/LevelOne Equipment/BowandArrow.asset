@@ -19,7 +19,7 @@ MonoBehaviour:
   moveRangeModifier: 2
   speedModifier: 0
   equipmentIcon: {fileID: 21300000, guid: ca1daa8ee7742fd41a3401e3c97e4868, type: 3}
-  equipmentType: 6
+  equipmentType: 4
   equipmentName: Bow
   equipmentDescription: Gives ranged attack, movement bonus, and slower attack speed
   isWeapon: 1

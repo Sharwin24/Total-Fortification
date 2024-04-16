@@ -350,7 +350,7 @@ public class DeploymentManager : MonoBehaviour {
         UpdateEquipmentSelected();
     }
 
-    private void UpdateEquipmentSelected() {
+    public void UpdateEquipmentSelected() {
         // For each equipment button, check if the troop has this equipment
         foreach (var ebb in this.equipmentBtnBehaviors) {
             if (ebb.equipmentObject == null) continue;
@@ -381,5 +381,10 @@ public class DeploymentManager : MonoBehaviour {
             this.equipmentBtnBehaviors[ebIndex++].SetEquipment(kvp.Key, kvp.Value);
         }
         Debug.Log("Bought " + equipmentToCount.Count + " equipment items and populated " + ebIndex + " equipment slots");
+    }
+
+    public EquipmentButtonBehavior GetEquipmentButton(IEquipment item) {
+        // Find the EBB with the equipment
+        return this.equipmentBtnBehaviors.Find(ebb => ebb.equipmentObject == (EquipmentBase)item);
     }
 }
