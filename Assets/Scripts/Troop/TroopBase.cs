@@ -216,7 +216,6 @@ public abstract class TroopBase : MonoBehaviour, ITroop {
         return false;
     }
 
-    public virtual bool EquipItem(IEquipment item) {
     public virtual bool EquipItem(IEquipment item)
     {
 
