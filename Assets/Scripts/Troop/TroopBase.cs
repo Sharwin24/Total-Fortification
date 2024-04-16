@@ -271,7 +271,13 @@ public abstract class TroopBase : MonoBehaviour, ITroop {
             if (bodyPartToUnEquip.equippedItem.IsRangeWeapon) {
                 IsRange = false;
             }
-            else
+            if (bodyPartToUnEquip.equipmentType == EquipmentType.TwoHanded) {
+                equippedItems.Remove(bodyPartToUnEquip.equippedItem);
+                BodyParts[EquipmentType.LeftArm].equippedItem = null;
+                BodyParts[EquipmentType.RightArm].equippedItem = null;
+                BodyParts[EquipmentType.TwoHanded].equippedItem = null;
+                removed = true;
+            } else
             {
                 equippedItems.Remove(bodyPartToUnEquip.equippedItem);
                 bodyPartToUnEquip.equippedItem = null;
